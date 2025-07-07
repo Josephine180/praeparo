@@ -1,2 +1,2 @@
-# portefolio
-Projet d'application web de course à pied. 
+# praeparo
+Projet application web // portefolio
