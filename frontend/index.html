@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Praeparo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- Section Hero -->
+    <section class="hero-section">
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#programs">Programmes</a></li>
+                <li id="auth-button"><span class="nav-btn">Chargement</span></li>
+            </ul>
+        </nav>
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">PRAEPARO</h1>
+            <p class="hero-subtitle">Dépassez vos limites et réussisez vos objectifs ! </p>
+            <p class="hero-description">
+                Découvrez des programmes d'entraînement personnalisés qui vous mèneront vers vos objectifs. 
+                Que vous soyez débutant ou coureur expérimenté, notre approche vous accompagne à chaque foulée.
+            </p>
+            <button class="cta-button" onclick="scrollToPrograms()">Découvrir nos programmes</button>
+        </div>
+    </section>
+
+    <!-- Section Programmes -->
+    <section class="programs-section" id="programs">
+        <div class="programs-container">
+            <div class="section-header">
+                <h2 class="section-title">Nos Programmes</h2>
+                <p class="section-subtitle">Choisissez votre parcours et franchissez à coups sûrs la ligne d'arrivée.</p>
+            </div>
+
+            <div class="toggle-container">
+                <button class="toggle-btn active" onclick="toggleView('grid')">Grille</button>
+                <button class="toggle-btn" onclick="toggleView('carousel')">Carrousel</button>
+            </div>
+
+            <!-- Vue Grille -->
+            <div class="grid-container" id="gridView">
+                <!-- Cartes dynamiques insérées ici -->
+            </div>
+
+            <!-- Vue Carrousel -->
+            <div class="carousel-container" id="carouselView" style="display:none">
+                <button class="carousel-arrows prev" onclick="changeSlide(-1)">‹</button>
+                <button class="carousel-arrows next" onclick="changeSlide(1)">›</button>
+                <div class="carousel-cards-wrapper">
+                    <!-- Cartes carrousel dynamiques insérées ici -->
+                </div>
+                <div class="carousel-nav" id="carouselNav">
+                    <!-- Dots dynamiques insérées ici -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+  email         String        @unique @db.VarChar(255)
+  name          String
+  firstname     String
+  password_hash String        @db.VarChar(255)
+  role          String        @default("user")
+  created_at    DateTime      @default(now())
+  trainingPlans TrainingPlan[]
+  feedbacks     Feedback[]
+  userTrainingPlans UserTrainingPlan[] 
+}
+
+model TrainingPlan {
+  id         Int       @id @default(autoincrement())
+  goal_type  String    @db.VarChar(100)  // ex: "5K", "10K", "Marathon"
+  goal_time  String    @db.VarChar(50)   // ex: "sub 30min", "sub 4h"
+  created_at DateTime  @default(now())
+  user_id    Int
+  user       User      @relation(fields: [user_id], references: [id])
+  weeks      Week[]    // Un plan contient plusieurs semaines
+  sessions   Session[] // Garde la relation directe aussi
+  users      UserTrainingPlan[]
+}
+
+model UserTrainingPlan {
+  id             Int          @id @default(autoincrement())
+  user_id        Int
+  training_plan_id Int
+  started_at     DateTime     @default(now())
+  user           User         @relation(fields: [user_id], references: [id])
+  trainingPlan   TrainingPlan @relation(fields: [training_plan_id], references: [id])
+
+  @@unique([user_id, training_plan_id])
+}
+
+model Week {
+  id               Int          @id @default(autoincrement())
+  training_plan_id Int
+  week_number      Int          // Numéro de la semaine (1, 2, 3...)
+  description      String?      @db.Text // Description de la semaine
+  trainingPlan     TrainingPlan @relation(fields: [training_plan_id], references: [id])
+  sessions         Session[]    // Une semaine contient plusieurs sessions
+  
+  @@unique([training_plan_id, week_number]) // Éviter les doublons
+}
+
+model Session {
+  id               Int          @id @default(autoincrement())
+  training_plan_id Int
+  week_id          Int          // Nouvelle relation avec Week
+  session_number   Int          // Numéro de la session dans le plan global
+  session_order    Int          // Ordre dans la semaine (1, 2, 3...)
+  date             DateTime     @db.Date
+  title            String       @db.VarChar(255) // Titre de la session
+  description      String       @db.Text         // Description détaillée
+  duree            Int          // Durée en minutes
+  completed        Boolean      @default(false)
+  trainingPlan     TrainingPlan @relation(fields: [training_plan_id], references: [id])
+  week             Week         @relation(fields: [week_id], references: [id])
+  feedback         Feedback?    // Une session = un feedback max
+  nutritionTip     NutritionTip @relation(fields: [nutrition_tip_id], references: [id])
+  nutrition_tip_id Int
+}
+
+model Feedback {
+  id               Int     @id @default(autoincrement())
+  session_id       Int     @unique  // One-to-one avec Session
+  user_id          Int     // Relation directe avec User pour faciliter les requêtes
+  energy_level     Int     @db.SmallInt  // 1-10
+  fatigue_level    Int     @db.SmallInt  // 1-10
+  motivation_level Int     @db.SmallInt  // 1-10
+  comment          String? @db.Text
+  created_at       DateTime @default(now())
+  session          Session @relation(fields: [session_id], references: [id])
+  user             User    @relation(fields: [user_id], references: [id])
+}
+
+model NutritionTip {
+  id          Int       @id @default(autoincrement())
+  week_number Int       // Semaine du programme
+  plan_type   String    @db.VarChar(50)  // Type de plan (5K, 10K, etc.)
+  tip_text    String    @db.Text
+  sessions    Session[] // Un tip peut être utilisé par plusieurs sessions
+}

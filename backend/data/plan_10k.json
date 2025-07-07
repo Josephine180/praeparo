@@ -1,0 +1,272 @@
+{
+  "type": "10km",
+  "duration": "8 weeks",
+  "description": "Ce programme contient 3 séances hebdomadaires. Une séance par semaine sera dédiée au travail de vitesse pour permettre davantage de confort et de progrès sur le 10km. La préparation est découpée en 2 cycles de 3 semaines et une semaine allégée pour se préserver avant la course.",
+  "weeks": [
+    {
+      "week_number": 1,
+      "description": "1ère semaine du cycle.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 45 min",
+          "description": "Effectuer 45 min d'effort en aisance respiratoire. Courir moins vite si besoin.",
+          "advice": "L’objectif n’est pas la vitesse, mais de courir en aisance respiratoire. Pour ceux qui utilisent un capteur cardiaque, il est suggéré de rester autour de 70 % de la fréquence cardiaque maximale.",
+          "advice_post_session": "Faire 5 à 10 min d'étirements légers.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 2,
+          "title": "VMA courte 10x(30s - 30s)",
+          "distance_km": 2,
+          "description": "Après échauffement (20 min de footing, PPG et 3 accélérations), effort maximal pendant 30 secondes et ensuite 30 secondes de récupération active. A répéter 10 fois. Finir la séance par 10 min de footing pour détendre les muscles et baisser les pulsations cardiaques.",
+          "advice": "Intensité à 105% de la VMA.",
+          "advice_post_session": "Faire 5 à 10 min d'étirements légers pour favoriser la récupération.",
+          "duration": 55,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 3,
+          "title": "1h footing",
+          "description": "1h en aisance respiratoire. Ne pas hésiter à courir moins vite si besoin.",
+          "advice": "Courir en aisance respiratoire, autour de 70 % de la fréquence cardiaque maximale.",
+          "advice_post_session": "Étirements classiques.",
+          "duration": 60,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        }
+      ]
+    },
+    {
+      "week_number": 2,
+      "description": "2ème semaine du 1er cycle",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "VMA courte 10x(45s - 45s)",
+          "description": "Après échauffement (20 min de footing, PPG et 3 accélérations), effort maximal pendant 45 secondes et ensuite 45 secondes de récupération active. A répéter 10 fois. Finir la séance par 10 min de footing pour détendre les muscles et baisser les pulsations cardiaques.",
+          "advice": "Courir à 105% de sa VMA.",
+          "advice_post_session": "Faire des étirements légers pour favoriser la récupération.",
+          "duration": 60,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 45 min",
+          "description": "Courir 45 min en aisance respiratoire. Ne pas hésiter à courir moins vite si besoin.",
+          "advice": "Courir confortablement, sans forcer, dans une zone d'effort modérée.",
+          "advice_post_session": "Étirements aussitôt terminés.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 3,
+          "title": "1h de footing sur terrain vallonné",
+          "description": "Courir 1h en aisance respiratoire sur un terrain vallonné.",
+          "advice": "Rester dans sa zone d’endurance fondamentale. Garder une respiration aisée. Un terrain vallonné permet le renforcement musculaire naturel.",
+          "advice_post_session": "Étirements, puis hydratation, puis collation riche en glucides complexes.",
+          "duration": 60,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        }
+      ]
+    },
+    {
+      "week_number": 3,
+      "description": "3ème semaine du 1er cycle.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "VMA 10x(1min - 1min)",
+          "description": "Après échauffement (20 min de footing, PPG et 3 accélérations), effort maximal pendant 1 minute et ensuite 1 minute allure lente. A répéter 10 fois. Finir la séance par 10 min de footing pour détendre les muscles et baisser les pulsations cardiaques.",
+          "advice": "Essayer de trouver le rythme qui permette de réaliser la dernière répétition aussi vite que la première.",
+          "advice_post_session": "Étirements après la séance, pas trop amples pour ne pas casser les fibres musculaires déjà bien sollicitées.",
+          "duration": 65,
+          "nutrition_tips": ["Hydratation, fruit ou compote en récupération."]
+        },
+        {
+          "session_order": 2,
+          "title": "1h de footing",
+          "description": "Effectuer une heure d'effort en aisance respiratoire. Courir moins vite si besoin.",
+          "advice": "Essayer de courir plus longtemps sans se focaliser sur la vitesse.",
+          "advice_post_session": "Étirements doux, jambes surélevées pendant 10 minutes.",
+          "duration": 60,
+          "nutrition_tips": ["Hydratation, éviter les sucres rapides."]
+        },
+        {
+          "session_order": 3,
+          "title": "1h15 de footing sur terrain vallonné",
+          "description": "Effectuer 1 heure 15 minutes de course en aisance respiratoire. Vous devez pouvoir parler en courant.",
+          "advice": "Rester dans sa zone d’endurance fondamentale (70% de la fréquence cardiaque maximale). Garder une respiration aisée. Un terrain vallonné permet le renforcement musculaire naturel.",
+          "advice_post_session": "Douche fraîche sur les jambes, étirements + hydratation.",
+          "duration": 75,
+          "nutrition_tips": ["Hydratation et collation post-effort."]
+        }
+      ]
+    },
+    {
+      "week_number": 4,
+      "description": "Semaine de régénération du 1er cycle. Cette semaine a pour objectif d'assimiler le travail accompli des 3 semaines précédentes. Elle ne comporte que 2 séances pour permettre une meilleure récupération.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "45 minutes de footing",
+          "description": "45 minutes en aisance respiratoire (70% de la fréquence cardiaque maximale). Ne pas hésiter à courir moins vite si besoin.",
+          "advice": "Toujours garder l’aisance respiratoire.",
+          "advice_post_session": "Étirements statiques, relâchement complet.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation, puis alimentation équilibrée."]
+        },
+        {
+          "session_order": 2,
+          "title": "Repos",
+          "description": "Pas de course pour cette séance. Ce repos aide le corps à assimiler le travail accompli et permet la récupération pour anticiper le 2nd cycle.",
+          "advice": "Reposez-vous.",
+          "advice_post_session": "Manger équilibré et bien dormir.",
+          "duration": 0,
+          "nutrition_tips": ["Hydratation, fruits secs en collation."]
+        },
+        {
+          "session_order": 3,
+          "title": "45 minutes de footing",
+          "description": "45 minutes en aisance respiratoire (70% de la fréquence cardiaque maximale). Ne pas hésiter à courir moins vite si besoin.",
+          "advice": "Rester en endurance fondamentale (zone 2), éviter les pics de fréquence cardiaque.",
+          "advice_post_session": "Étirements.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation."]
+        }
+      ]
+    },
+    {
+      "week_number": 5,
+      "description": "1ère semaine du 2nd cycle d'entraînement. Augmentation du travail de vitesse sur le 2nd cycle.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "VMA 4x(3min - 3min)",
+          "description": "Après l'échauffement (20 minutes de footing, préparation physique générale et 3 accélérations), faites un effort maximal sur 3 minutes. Trottinez ensuite 3 minutes très lentement et recommencez un total de 4 répétitions.",
+          "advice": "Finir la séance 10 min au calme sans dépasser 65% de sa fréquence cardiaque pour détendre les muscles et faire baisser les pulsations.",
+          "advice_post_session": "Étirements après la douche sans trop d'amplitude.",
+          "duration": 70,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 2,
+          "title": "45 minutes de footing",
+          "description": "Effectuer 45 minutes d'effort en étant en aisance respiratoire. Courir moins vite si besoin.",
+          "advice": "Garder une allure fluide et régulière sans dépasser 70% de sa fréquence cardiaque maximale.",
+          "advice_post_session": "Étirements, repos actif en fin de journée.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation, glucides complexes."]
+        },
+        {
+          "session_order": 3,
+          "title": "1h de footing sur terrain vallonné",
+          "description": "Footing en aisance respiratoire. Le terrain vallonné fait travailler le renforcement musculaire naturellement. Séance plaisir, ne pas hésiter à ralentir si besoin.",
+          "advice": "Être à l’écoute de son corps, adapter le rythme si besoin. Ne pas dépasser 70% de sa FCmax.",
+          "advice_post_session": "Étirements aussitôt terminés.",
+          "duration": 60,
+          "nutrition_tips": ["Hydratation."]
+        }
+      ]
+    },
+    {
+      "week_number": 6,
+      "description": "2ème semaine du 2ème cycle",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "VMA 3x(5min - 3min)",
+          "description": "Après l'échauffement (20 minutes de footing, préparation physique générale et 3 accélérations), faites un effort maximal sur 5 minutes. Trottinez ensuite 3 minutes très lentement et recommencez un total de 3 répétitions. Retour au calme 10 minutes sans dépasser 65% de cardio.",
+          "advice": "Courir les 5 minutes à l'allure que vous pensez tenir lors de la course.",
+          "advice_post_session": "Étirements globaux, sans trop d'amplitude.",
+          "duration": 65,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 2,
+          "title": "45 minutes de footing",
+          "description": "Footing en aisance respiratoire, ne pas hésiter à ralentir si besoin.",
+          "advice": "Garder le rythme, ne pas chercher à accélérer.",
+          "advice_post_session": "Étirements classiques, bien s'hydrater.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 3,
+          "title": "1h15 de footing sur terrain vallonné",
+          "description": "Footing en aisance respiratoire. Le terrain vallonné fait travailler le renforcement musculaire naturellement. Séance plaisir, ne pas hésiter à ralentir si besoin.",
+          "advice": "Être à l’écoute de son corps, adapter le rythme si besoin. Ne pas dépasser 70% de sa FCmax.",
+          "advice_post_session": "Hydratation et étirements.",
+          "duration": 75,
+          "nutrition_tips": ["Hydratation, repas complet dans les 2 h."]
+        }
+      ]
+    },
+    {
+      "week_number": 7,
+      "description": "3ème semaine du 2ème cycle",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "VMA 2x(6min - 5min)",
+          "description": "Après l'échauffement (20 minutes de footing, préparation physique générale et 3 accélérations), faites un effort maximal sur 6 minutes. Trottinez ensuite 5 minutes très lentement et recommencez un total de 2 répétitions. Retour au calme 10 minutes sans dépasser 65% de cardio.",
+          "advice": "Courir les 6 minutes à l'allure que vous pensez tenir lors de la course.",
+          "advice_post_session": "Étirements globaux, sans trop d'amplitude.",
+          "duration": 65,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 2,
+          "title": "45 minutes de footing",
+          "description": "Footing en aisance respiratoire, ne pas hésiter à ralentir si besoin.",
+          "advice": "Garder le rythme, ne pas chercher à accélérer.",
+          "advice_post_session": "Étirements classiques, bien s'hydrater.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 3,
+          "title": "1h15 de footing sur terrain vallonné",
+          "description": "Footing en aisance respiratoire. Le terrain vallonné fait travailler le renforcement musculaire naturellement. Séance plaisir, ne pas hésiter à ralentir si besoin.",
+          "advice": "Être à l’écoute de son corps, adapter le rythme si besoin. Ne pas dépasser 70% de sa FCmax.",
+          "advice_post_session": "Hydratation et étirements.",
+          "duration": 75,
+          "nutrition_tips": ["Hydratation, repas complet dans les 2 h."]
+        }
+      ]
+    },
+    {
+      "week_number": 8,
+      "description": "Semaine de récupération avant course",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "30 minutes de footing très léger",
+          "description": "Footing très léger à une intensité confortable, objectif détente musculaire et mentale.",
+          "advice": "Ne pas forcer. Écouter son corps.",
+          "advice_post_session": "Étirements doux, hydratation.",
+          "duration": 30,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 2,
+          "title": "Repos",
+          "description": "Repos complet, préparation mentale pour la course.",
+          "advice": "Se reposer, bien dormir.",
+          "advice_post_session": "Hydratation et alimentation équilibrée.",
+          "duration": 0,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 3,
+          "title": "15 minutes de footing léger",
+          "description": "Séance d'activation musculaire très légère, juste pour garder les muscles prêts.",
+          "advice": "Conserver une aisance respiratoire totale.",
+          "advice_post_session": "Étirements très doux, hydratation.",
+          "duration": 15,
+          "nutrition_tips": ["Hydratation."]
+        }
+      ]
+    }
+  ]
+}

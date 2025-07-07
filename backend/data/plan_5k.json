@@ -1,0 +1,222 @@
+{
+  "type": "5km",
+  "duration": "6 weeks",
+  "weeks": [
+    {
+      "week_number": 1,
+      "description": "Courir 2,5 kilomètres.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 2 fois 1 km",
+          "distance_km": 2,
+          "description": "La séance commence par 5 minutes de marche active pour préparer les muscles à l’effort. Ensuite, il est proposé d’alterner deux phases de course de 1 km, séparées par 5 minutes de marche pour récupérer. L’intensité de la course doit rester modérée : il faut pouvoir parler tout en courant. Enfin, la séance se termine par 5 minutes de marche pour faciliter le retour au calme.",
+          "advice": "L’objectif n’est pas la vitesse, mais de courir en aisance respiratoire. Pour ceux qui utilisent un capteur cardiaque, il est suggéré de rester autour de 70 % de la fréquence cardiaque maximale.",
+          "advice_post_session": "Faire 5 à 10 min d'étirements légers, en insistant sur les mollets, quadriceps et ischios.",
+          "duration": 28,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 2 km en continu",
+          "distance_km": 2,
+          "description": "La séance débute par 5 minutes de marche active. Elle se poursuit par 2 km de course continue à un rythme modéré. Enfin, un retour au calme de 5 minutes en marchant est prévu.",
+          "advice": "L’intensité doit rester confortable : courir sans être essoufflé, dans la zone d'effort modérée (70 % FCM).",
+          "advice_post_session": "Faire 5 à 10 min d'étirements légers pour favoriser la récupération.",
+          "duration": 23,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 3,
+          "title": "Courir 2,5 km",
+          "distance_km": 2.5,
+          "description": "Après 10 min de marche active, courir 2,5 km sans s'arrêter. Finir par 5 min de marche pour faciliter la récupération.",
+          "advice": "Courir en aisance respiratoire, autour de 70 % de la fréquence cardiaque maximale.",
+          "advice_post_session": "Étirements classiques + douche tiède si jambes lourdes.",
+          "duration": 31,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        }
+      ]
+    },
+    {
+      "week_number": 2,
+      "description": "Courir 3 kilomètres.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 2 km en continu",
+          "distance_km": 2,
+          "description": "Après 10 min de marche active, courir 2 km sans s'arrêter. Finir par 10 min de marche pour faciliter la récupération.",
+          "advice": "L’objectif est de rester en aisance respiratoire, à 70 % de FCM maximum.",
+          "advice_post_session": "Étirements de 10 minutes après la douche.",
+          "duration": 33,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 2,5 km en continu",
+          "distance_km": 2.5,
+          "description": "Après 10 min de marche active, courir 2,5 km sans s'arrêter. Finir par 10 min de marche pour faciliter la récupération.",
+          "advice": "Courir confortablement, sans forcer, dans une zone d'effort modérée.",
+          "advice_post_session": "Étirements ciblés jambes et hanches.",
+          "duration": 36,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        },
+        {
+          "session_order": 3,
+          "title": "Courir 3 km",
+          "distance_km": 3,
+          "description": "Après 10 min de marche active, courir 3 km sans s'arrêter. Finir par 5 min de marche pour faciliter la récupération.",
+          "advice": "Rester dans sa zone d’endurance fondamentale. Garder une respiration aisée.",
+          "advice_post_session": "Étirements, puis hydratation, puis collation riche en glucides complexes.",
+          "duration": 40,
+          "nutrition_tips": ["Hydratation aussitôt la séance terminée."]
+        }
+      ]
+    },
+    {
+      "week_number": 3,
+      "description": "Courir 3,5 kilomètres.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 2,5 km en continu",
+          "distance_km": 2.5,
+          "description": "Après 10 min de marche active, courir 2,5 km sans s'arrêter. Finir par 10 min de marche pour faciliter la récupération.",
+          "advice": "Ne pas chercher la performance. L'objectif est d’allonger la distance à rythme modéré.",
+          "advice_post_session": "Étirements après la séance, auto‑massage des mollets.",
+          "duration": 36,
+          "nutrition_tips": ["Hydratation, fruit ou compote en récupération."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 3 km en continu",
+          "distance_km": 3,
+          "description": "10 min de marche, puis courir 3 km. Retour au calme : 5 à 10 min de marche.",
+          "advice": "Essayer de courir plus longtemps sans se focaliser sur la vitesse.",
+          "advice_post_session": "Étirements doux, jambes surélevées pendant 10 minutes.",
+          "duration": 40,
+          "nutrition_tips": ["Hydratation, éviter les sucres rapides."]
+        },
+        {
+          "session_order": 3,
+          "title": "Courir 3,5 km",
+          "distance_km": 3.5,
+          "description": "10 min de marche, puis 3,5 km. Finir par 10 min de marche lente.",
+          "advice": "Allonger la durée d’effort tout en restant confortable. Tenir une allure régulière.",
+          "advice_post_session": "Douche fraîche sur les jambes, étirements + hydratation.",
+          "duration": 45,
+          "nutrition_tips": ["Hydratation et collation post-effort."]
+        }
+      ]
+    },
+    {
+      "week_number": 4,
+      "description": "Courir 4 kilomètres.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 3 km",
+          "distance_km": 3,
+          "description": "10 min de marche + 3 km à allure modérée. Retour au calme : 5 min de marche.",
+          "advice": "Toujours garder l’aisance respiratoire.",
+          "advice_post_session": "Étirements statiques, relâchement complet.",
+          "duration": 38,
+          "nutrition_tips": ["Hydratation, puis alimentation équilibrée."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 3,5 km",
+          "distance_km": 3.5,
+          "description": "10 min de marche + 3,5 km en continu. Finir par 10 min de marche lente.",
+          "advice": "Essayer de courir les 3,5 km à allure constante, sans accélérer.",
+          "advice_post_session": "Massage avec rouleau si disponible.",
+          "duration": 43,
+          "nutrition_tips": ["Hydratation, fruits secs en collation."]
+        },
+        {
+          "session_order": 3,
+          "title": "Courir 4 km",
+          "distance_km": 4,
+          "description": "10 min de marche + 4 km. Finir par 10 min de marche pour le retour au calme.",
+          "advice": "Rester en endurance fondamentale (zone 2), éviter les pics de fréquence cardiaque.",
+          "advice_post_session": "Étirements + boisson de récupération si sensation de fatigue.",
+          "duration": 47,
+          "nutrition_tips": ["Hydratation."]
+        }
+      ]
+    },
+    {
+      "week_number": 5,
+      "description": "Courir 4,5 kilomètres.",
+          "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 3,5 km",
+          "distance_km": 3.5,
+          "description": "10 min de marche + 3,5 km. Finir par 10 min de retour au calme.",
+          "advice": "Continuer à courir lentement mais plus longtemps.",
+          "advice_post_session": "Étirements après la douche, respiration profonde.",
+          "duration": 42,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 4 km",
+          "distance_km": 4,
+          "description": "10 min de marche + 4 km. Finir par 10 min de marche lente.",
+          "advice": "Garder une allure fluide et régulière.",
+          "advice_post_session": "Étirements, repos actif en fin de journée.",
+          "duration": 46,
+          "nutrition_tips": ["Hydratation, glucides complexes."]
+        },
+        {
+          "session_order": 3,
+          "title": "Courir 4,5 km",
+          "distance_km": 4.5,
+          "description": "10 min de marche + 4,5 km. Retour au calme : 10 min de marche lente.",
+          "advice": "Être à l’écoute de son corps, adapter le rythme si besoin.",
+          "advice_post_session": "Étirements profonds, massage des pieds.",
+          "duration": 51,
+          "nutrition_tips": ["Hydratation."]
+        }
+      ]
+    },
+    {
+      "week_number": 6,
+      "description": "Courir 5 kilomètres.",
+      "sessions": [
+        {
+          "session_order": 1,
+          "title": "Courir 4 km",
+          "distance_km": 4,
+          "description": "10 min de marche + 4 km. Finir par 10 min de marche.",
+          "advice": "Garder l'allure de croisière, bien respirer.",
+          "advice_post_session": "Étirements globaux, 5 à 10 minutes.",
+          "duration": 46,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 2,
+          "title": "Courir 4,5 km",
+          "distance_km": 4.5,
+          "description": "10 min de marche + 4,5 km. Retour au calme de 10 min.",
+          "advice": "Garder le rythme, ne pas chercher à accélérer.",
+          "advice_post_session": "Étirements classiques, bien s'hydrater.",
+          "duration": 51,
+          "nutrition_tips": ["Hydratation."]
+        },
+        {
+          "session_order": 3,
+          "title": "Objectif : 5 km",
+          "distance_km": 5,
+          "description": "10 min de marche + 5 km sans s’arrêter. Finir par 10 min de marche lente.",
+          "advice": "C’est la dernière ! Gérer son effort dès le départ pour terminer dans de bonnes conditions.",
+          "advice_post_session": "Grand bravo ! Étirements complets, boisson de récupération, et félicitations.",
+          "duration": 55,
+          "nutrition_tips": ["Hydratation, repas complet dans les 2 h."]
+        }
+      ]
+    }
+  ]
+}
