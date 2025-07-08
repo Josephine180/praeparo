@@ -1,6 +1,5 @@
 import prisma from '../src/index.js';
 
-
 export const createMyProfile = async (req, res) => {
   try {
     const userId = req.user?.userId;
@@ -13,7 +12,14 @@ export const createMyProfile = async (req, res) => {
     if (existing) return res.status(400).json({ error: 'Profil existe déjà' });
 
     const newProfile = await prisma.profile.create({
-      data: { userId, firstName, lastName, email, weight, height },
+      data: { 
+        userId, 
+        firstName, 
+        lastName, 
+        email: email || '', // Optionnel car pas dans le schéma 
+        weight, 
+        height 
+      },
     });
 
     res.status(201).json(newProfile);
@@ -48,7 +54,7 @@ export const updateMyProfile = async (req, res) => {
     const userId = req.user?.userId;
     if (!userId) return res.status(401).json({ error: 'Non autorisé' });
 
-    const { firstName, lastName,email, weight, height } = req.body;
+    const { firstName, lastName, email, weight, height } = req.body;
 
     const existing = await prisma.profile.findUnique({
       where: { userId },
@@ -58,11 +64,24 @@ export const updateMyProfile = async (req, res) => {
     if (existing) {
       updatedProfile = await prisma.profile.update({
         where: { userId },
-        data: { firstName, lastName, email, weight, height },
+        data: { 
+          firstName, 
+          lastName, 
+          email: email || existing.email || '', 
+          weight, 
+          height 
+        },
       });
     } else {
       updatedProfile = await prisma.profile.create({
-        data: { userId, firstName, lastName, email, weight, height },
+        data: { 
+          userId, 
+          firstName, 
+          lastName, 
+          email: email || '', 
+          weight, 
+          height 
+        },
       });
     }
 
