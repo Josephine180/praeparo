@@ -158,27 +158,40 @@ function generateWeeklyFocus(plans) {
   focusSection.style.display = 'block';
 }
 
-// Générer le contenu des onglets
+// Générer le contenu des onglets - VERSION DEBUG
 function generateTabsContent(plans) {
   const container = document.getElementById('userPlans');
+  
+  console.log('🔍 DEBUG generateTabsContent:');
+  console.log('- Nombre de plans:', plans.length);
+  console.log('- Plans:', plans.map(p => p.goal_type));
   
   const tabsContentHTML = plans.map((plan, index) => {
     const planType = plan.goal_type.toLowerCase().replace(/[^a-z0-9]/g, '');
     const isActive = index === 0;
     
+    console.log(`- Plan ${index}: ${plan.goal_type} -> planType: ${planType}, active: ${isActive}`);
+    
     return `
-      <div class="tab-content ${isActive ? 'active' : ''}" id="tab-${planType}">
-        ${generatePlanContent(plan)}
-      </div>
-    `;
+    <div class="tab-content ${isActive ? 'active' : ''}" 
+         id="tab-${planType}"
+         style="display: ${isActive ? 'block' : 'none'};">
+      ${generatePlanContent(plan)}
+    </div>
+  `;
   }).join('');
   
+  console.log('📝 HTML généré:', tabsContentHTML);
   container.innerHTML = tabsContentHTML;
   
-  // Définir le premier onglet comme actif
-  if (plans.length > 0) {
-    currentActiveTab = plans[0].goal_type.toLowerCase().replace(/[^a-z0-9]/g, '');
-  }
+  // Vérifier après insertion
+  setTimeout(() => {
+    const allTabs = document.querySelectorAll('.tab-content');
+    console.log('✅ Onglets dans le DOM:', allTabs.length);
+    allTabs.forEach((tab, i) => {
+      console.log(`- Onglet ${i}: id=${tab.id}, display=${tab.style.display}, classes=${tab.className}`);
+    });
+  }, 100);
 }
 
 // Générer le contenu d'un plan
@@ -202,11 +215,17 @@ function generatePlanContent(plan) {
         </div>
       </div>
       <p style="color: rgba(255,255,255,0.9);">${plan.goal_time || 'Programme personnalisé pour atteindre vos objectifs.'}</p>
+      
+      <div style="margin-top: 20px; text-align: right;">
+        <button class="btn" onclick="quitPlan(${plan.id}, '${plan.goal_type}')" 
+                style="background: #dc3545; color: white; padding: 8px 16px; font-size: 0.85rem;">
+          🗑️ Quitter ce programme
+        </button>
+      </div>
     </div>
     
     <div class="sessions-container">
   `;
-  
   // Ajouter les semaines
   plan.weeks.forEach(week => {
     const weekStats = getWeekStats(week);
@@ -331,20 +350,27 @@ function formatDate(dateString) {
   });
 }
 
-// Gestion des onglets
 function showTab(planType, buttonElement) {
+  console.log('🎯 showTab appelée:', planType);
+  
   // Masquer tous les onglets
-  document.querySelectorAll('.tab-content').forEach(tab => {
+  document.querySelectorAll('.tab-content').forEach((tab, i) => {
+    console.log(`- Masquage onglet ${i}: ${tab.id}`);
     tab.classList.remove('active');
-  });
-  document.querySelectorAll('.tab-button').forEach(btn => {
-    btn.classList.remove('active');
+    tab.style.display = 'none';
   });
   
   // Afficher l'onglet sélectionné
-  document.getElementById('tab-' + planType).classList.add('active');
-  buttonElement.classList.add('active');
+  const targetTab = document.getElementById('tab-' + planType);
+  console.log('🎯 Onglet cible:', targetTab ? targetTab.id : 'INTROUVABLE');
   
+  if (targetTab) {
+    targetTab.classList.add('active');
+    targetTab.style.display = 'block';
+    console.log('✅ Onglet affiché:', targetTab.id);
+  }
+  
+  buttonElement.classList.add('active');
   currentActiveTab = planType;
 }
 
@@ -484,6 +510,37 @@ function loadFeedbacks(sessionId) {
   });
 }
 
+async function quitPlan(planId, planName) {
+  const confirmed = confirm(`Êtes-vous sûr de vouloir quitter le programme "${planName}" ?\n\nVous pourrez toujours le redémarrer plus tard depuis la page d'accueil.`);
+  
+  if (!confirmed) return;
+  
+  try {
+    const res = await fetch('http://localhost:3000/training-plans/quit', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ training_plan_id: planId })
+    });
+    
+    if (res.ok) {
+      // Recharger le dashboard
+      await loadQuickStats();
+      await loadUserPlans();
+      
+      alert('Programme quitté avec succès !');
+    } else {
+      const error = await res.json();
+      throw new Error(error.error || 'Erreur lors de la suppression');
+    }
+  } catch (error) {
+    console.error('Erreur quit plan:', error);
+    alert(`Erreur : ${error.message}`);
+  }
+}
+
+
 // Rendre les fonctions globales pour les onclick
 window.showTab = showTab;
 window.toggleWeek = toggleWeek;
+window.quitPlan = quitPlan;
