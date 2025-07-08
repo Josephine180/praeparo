@@ -8,27 +8,27 @@
 </head>
 <body>
   <div class="container">
-    <h1>Bonjour, <span id="user-firstName">Utilisateur</span> 👋</h1>
+    <h1>Bonjour, <span id="user-firstname">Utilisateur</span> 👋</h1>
 
     <form id="profile-form">
       <label>Prénom :
-        <input type="text" id="firstName" name="firstName" required />
+        <input type="text" name="firstName" required />
       </label>
 
       <label>Nom :
-        <input type="text" id="lastName" name="lastName" required />
+        <input type="text" name="lastName" required />
       </label>
 
       <label>Email :
-        <input type="text" id="email" name="email" />
+        <input type="email" name="email" required />
       </label>
 
       <label>Poids (kg) :
-        <input type="number" id="weight" name="weight" step="0.1" />
+        <input type="number" name="weight" step="0.1" />
       </label>
 
       <label>Taille (cm) :
-        <input type="number" id="height" name="height" step="0.1" />
+        <input type="number" name="height" step="0.1" />
       </label>
 
       <button type="submit">Enregistrer</button>

@@ -26,14 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       const data = await res.json();
 
-      // DEBUG : afficher les éléments du formulaire
-      console.log('form.elements.firstName:', form.elements.firstName);
-      console.log('form.elements.lastName:', form.elements.lastName);
-      console.log('form.elements.email:', form.elements.email);
-      console.log('form.elements.weight:', form.elements.weight);
-      console.log('form.elements.height:', form.elements.height);
-
-      // Remplissage des champs
+      // Remplissage des champs avec les noms corrects
       form.elements.firstName.value = data.firstName || '';
       form.elements.lastName.value = data.lastName || '';
       form.elements.email.value = data.email || '';
@@ -50,14 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // DEBUG : afficher les éléments du formulaire avant récupération des valeurs
-    console.log('Avant récupération des valeurs :');
-    console.log('form.elements.firstName:', form.elements.firstName);
-    console.log('form.elements.lastName:', form.elements.lastName);
-    console.log('form.elements.email:', form.elements.email);
-    console.log('form.elements.weight:', form.elements.weight);
-    console.log('form.elements.height:', form.elements.height);
-
     const profileData = {
       firstName: form.elements.firstName.value,
       lastName: form.elements.lastName.value,
@@ -65,6 +50,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       weight: parseFloat(form.elements.weight.value),
       height: parseFloat(form.elements.height.value),
     };
+
+    console.log('📤 Données envoyées:', profileData);
 
     try {
       let res;
@@ -86,7 +73,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
       }
 
-      if (!res.ok) throw new Error('Erreur lors de la sauvegarde');
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'Erreur lors de la sauvegarde');
+      }
 
       const updated = await res.json();
       firstNameDisplay.textContent = updated.firstName;
@@ -95,8 +85,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       profileExists = true; // maintenant le profil existe
     } catch (err) {
-      console.error(err);
-      message.textContent = 'Erreur lors de la sauvegarde';
+      console.error('❌ Erreur sauvegarde:', err);
+      message.textContent = `Erreur lors de la sauvegarde: ${err.message}`;
       message.style.color = 'red';
     }
   });

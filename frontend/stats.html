@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mes Statistiques | Praeparo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/stats.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="stats-container">
+        <h1 class="stats-title">📈 Mes Statistiques</h1>
+        
+        <!-- Cards de statistiques -->
+        <div id="stats-content">
+            <p class="loading">Chargement de vos statistiques...</p>
+        </div>
+
+        <!-- Section graphiques -->
+        <div class="charts-section" id="charts-section" style="display: none;">
+            <div class="chart-container">
+                <h2 class="chart-title">📊 Répartition des Sessions</h2>
+                <canvas id="sessionsChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="chart-title">⚡ Niveau d'Énergie Moyen</h2>
+                <canvas id="energyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/stats.js"></script>
+</body>
+</html>
