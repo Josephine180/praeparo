@@ -21,7 +21,7 @@ export const getUserStats = async (req, res) => {
       }
     });
 
-    // 3. NOUVEAU : Sessions totales dans ses plans
+    // Sessions totales dans ses plans
     const totalSessions = await prisma.session.count({
       where: {
         trainingPlan: {
@@ -32,7 +32,7 @@ export const getUserStats = async (req, res) => {
       }
     });
 
-    // 4. NOUVEAU : Sessions restantes
+    // Sessions restantes
     const remainingSessions = totalSessions - completedSessions;
 
     // 5. Temps total d'entraînement
@@ -63,8 +63,8 @@ export const getUserStats = async (req, res) => {
     res.json({
       activePlans,
       completedSessions,
-      totalSessions,        // NOUVEAU
-      remainingSessions,    // NOUVEAU
+      totalSessions,        
+      remainingSessions,    
       totalDuration,
       avgEnergy: parseFloat(avgEnergy)
     });

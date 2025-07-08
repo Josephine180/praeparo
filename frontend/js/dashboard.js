@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let allPlans = [];
 let currentActiveTab = null;
 
-// Nouvelle fonction pour charger les stats rapidement
+// fonction pour charger les stats rapidement
 async function loadQuickStats() {
   try {
     const res = await fetch('http://localhost:3000/stats/overview', {
@@ -351,23 +351,19 @@ function formatDate(dateString) {
 }
 
 function showTab(planType, buttonElement) {
-  console.log('🎯 showTab appelée:', planType);
   
   // Masquer tous les onglets
   document.querySelectorAll('.tab-content').forEach((tab, i) => {
-    console.log(`- Masquage onglet ${i}: ${tab.id}`);
     tab.classList.remove('active');
     tab.style.display = 'none';
   });
   
   // Afficher l'onglet sélectionné
   const targetTab = document.getElementById('tab-' + planType);
-  console.log('🎯 Onglet cible:', targetTab ? targetTab.id : 'INTROUVABLE');
   
   if (targetTab) {
     targetTab.classList.add('active');
     targetTab.style.display = 'block';
-    console.log('✅ Onglet affiché:', targetTab.id);
   }
   
   buttonElement.classList.add('active');
@@ -402,6 +398,8 @@ function loadAllFeedbacks() {
     });
   });
 }
+
+
 
 // Event listeners
 function attachEventListeners() {
@@ -448,27 +446,56 @@ async function handleSessionComplete(e) {
   }
 }
 
+function createModal(title, content, buttons = []) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  
+  modal.innerHTML = `
+    <div class="modal-header">
+      <h3>${title}</h3>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      ${content}
+    </div>
+    <div class="modal-footer">
+      ${buttons.map(btn => `<button class="btn ${btn.class}" onclick="${btn.onclick}">${btn.text}</button>`).join('')}
+    </div>
+  `;
+  
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+  
+  // Fermer la modale
+  overlay.querySelector('.modal-close').onclick = () => overlay.remove();
+  overlay.onclick = (e) => {
+    if (e.target === overlay) overlay.remove();
+  };
+  
+  return overlay;
+}
+
 function handleNutritionTip(e) {
   const tip = e.target.getAttribute('data-tip-text');
-  if (tip && tip.trim() !== '') {
-    alert(`🍎 Conseil nutritionnel :\n\n${tip}`);
-  } else {
-    alert('Aucun conseil nutritionnel disponible pour cette session.');
-  }
-}
-
-function handleFeedbackView(e) {
-  const sessionId = e.target.getAttribute('data-session-id');
-  const feedbackSection = document.getElementById(`feedback-${sessionId}`);
   
-  if (feedbackSection.style.display === 'none' || !feedbackSection.style.display) {
-    feedbackSection.style.display = 'block';
+  if (tip && tip.trim() !== '') {
+    createModal(
+      '🍎 Conseil Nutritionnel',
+      `<p class="tip-text">${tip}</p>`,
+      [{ text: 'Compris !', class: 'btn-primary', onclick: 'this.closest(".modal-overlay").remove()' }]
+    );
   } else {
-    feedbackSection.style.display = 'none';
+    createModal(
+      '🍎 Conseil Nutritionnel',
+      '<p>Aucun conseil nutritionnel disponible pour cette session.</p>',
+      [{ text: 'OK', class: 'btn-secondary', onclick: 'this.closest(".modal-overlay").remove()' }]
+    );
   }
 }
 
-// Charger les feedbacks (fonction existante adaptée)
 function loadFeedbacks(sessionId) {
   fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
     method: 'GET',
@@ -504,9 +531,99 @@ function loadFeedbacks(sessionId) {
       `).join('')}
     `;
     container.innerHTML = html;
+    container.style.display = 'block';
   })
   .catch(err => {
     console.error('Erreur feedbacks:', err);
+  });
+}
+
+function handleFeedbackView(e) {
+  const sessionId = e.target.getAttribute('data-session-id');
+  
+  // IDs uniques pour éviter les conflits
+  const energyId = `energy-${sessionId}`;
+  const motivationId = `motivation-${sessionId}`;
+  const fatigueId = `fatigue-${sessionId}`;
+  const commentId = `comment-${sessionId}`;
+  
+  const formContent = `
+    <div class="feedback-form-modal">
+      <div class="form-group">
+        <label>⚡ Niveau d'énergie :</label>
+        <input type="range" id="${energyId}" min="1" max="10" value="5" 
+               oninput="document.getElementById('${energyId}-val').textContent = this.value">
+        <span id="${energyId}-val" class="range-display">5</span>/10
+      </div>
+      
+      <div class="form-group">
+        <label>💪 Niveau de motivation :</label>
+        <input type="range" id="${motivationId}" min="1" max="10" value="5" 
+               oninput="document.getElementById('${motivationId}-val').textContent = this.value">
+        <span id="${motivationId}-val" class="range-display">5</span>/10
+      </div>
+      
+      <div class="form-group">
+        <label>😴 Niveau de fatigue :</label>
+        <input type="range" id="${fatigueId}" min="1" max="10" value="5" 
+               oninput="document.getElementById('${fatigueId}-val').textContent = this.value">
+        <span id="${fatigueId}-val" class="range-display">5</span>/10
+      </div>
+      
+      <div class="form-group">
+        <label>💭 Commentaire (optionnel) :</label>
+        <textarea id="${commentId}" placeholder="Comment vous sentez-vous après cette session ?"></textarea>
+      </div>
+    </div>
+  `;
+  
+  createModal(
+    '💬 Donner mon feedback',
+    formContent,
+    [
+      { text: 'Annuler', class: 'btn-secondary', onclick: 'this.closest(".modal-overlay").remove()' },
+      { text: 'Envoyer', class: 'btn-primary', onclick: `submitFeedbackModal(${sessionId})` }
+    ]
+  );
+}
+
+// MODIFIER submitFeedbackModal aussi :
+
+function submitFeedbackModal(sessionId) {
+  const energy = document.getElementById(`energy-${sessionId}`).value;
+  const motivation = document.getElementById(`motivation-${sessionId}`).value;
+  const fatigue = document.getElementById(`fatigue-${sessionId}`).value;
+  const comment = document.getElementById(`comment-${sessionId}`).value || '';
+  
+  const data = {
+    energy_level: parseInt(energy),
+    motivation_level: parseInt(motivation),
+    fatigue_level: parseInt(fatigue),
+    comment: comment
+  };
+  
+  fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Erreur lors de l\'envoi');
+    return res.json();
+  })
+  .then(result => {
+    // Fermer la modale
+    document.querySelector('.modal-overlay').remove();
+    
+    // Message de succès plus rapide (pas de nouvelle modale)
+    alert('✅ Feedback enregistré !');
+    
+    // Recharger les feedbacks
+    loadFeedbacks(sessionId);
+  })
+  .catch(err => {
+    alert('❌ Erreur : ' + err.message);
   });
 }
 
