@@ -8,6 +8,7 @@ import userRoutes from './routes/user.routes.js';
 import trainingPlanRoutes from './routes/plan.routes.js';
 import sessionRoutes from './routes/session.routes.js';
 import nutritionRoutes from './routes/nutrition.routes.js';
+import profileRoutes from './routes/profile.routes.js';
 import weekRoutes from './routes/week.routes.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -55,6 +56,7 @@ app.use(express.static('frontend'));
 app.use(express.json());
 
 // Routes
+app.use('/profile', profileRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/training-plans', trainingPlanRoutes);
