@@ -1,4 +1,132 @@
-<h1>Mon Dashboard</h1>
-<div id="userPlans">Chargement des plans...</div>
-<script src="js/dashboard.js"></script>
-<script src="js/auth.js"></script>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon Dashboard | Praeparo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+    <!-- SIDEBAR (on garde ta sidebar actuelle) -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>PRAEPARO</h1>
+        </div>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link active">
+                        <span class="nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="stats.html" class="nav-link">
+                        <span class="nav-icon">📈</span>
+                        <span>Statistiques</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="profile.html" class="nav-link">
+                        <span class="nav-icon">👤</span>
+                        <span>Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#programs" class="nav-link">
+                        <span class="nav-icon">🔍</span>
+                        <span>Programmes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button id="logout-btn" class="nav-link" style="width: 100%; border: none; background: none; cursor: pointer;">
+                        <span class="nav-icon">🚪</span>
+                        <span>Déconnexion</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- Header avec nom utilisateur -->
+        <header class="dashboard-header">
+            <h1 class="welcome-title">Bonjour, <span id="user-name">Utilisateur</span> ! 👋</h1>
+            <p class="welcome-subtitle">Voici un aperçu de vos progrès d'entraînement</p>
+        </header>
+
+        <!-- Stats Cards -->
+        <section class="stats-overview">
+            <div class="stats-grid" id="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-trend">+2 cette semaine</div>
+                    </div>
+                    <div class="stat-value" id="completed-sessions">-</div>
+                    <div class="stat-label">Sessions complétées</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-trend">Objectif en cours</div>
+                    </div>
+                    <div class="stat-value" id="remaining-sessions">-</div>
+                    <div class="stat-label">Sessions restantes</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-trend">+45 min cette semaine</div>
+                    </div>
+                    <div class="stat-value" id="total-duration">-</div>
+                    <div class="stat-label">Minutes d'entraînement</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-trend">Tendance stable</div>
+                    </div>
+                    <div class="stat-value" id="avg-energy">-</div>
+                    <div class="stat-label">Énergie moyenne (/10)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus hebdomadaire -->
+        <section class="weekly-focus" id="weekly-focus" style="display: none;">
+            <div class="focus-title">🎯 Cette semaine</div>
+            <div id="focus-content">
+                <p>Chargement du focus...</p>
+            </div>
+        </section>
+
+        <!-- Onglets des plans -->
+        <section class="plans-section">
+            <h2 class="section-title">📋 Mes Plans d'Entraînement</h2>
+            
+            <!-- Onglets -->
+            <div class="tabs-header" id="tabs-header" style="display: none;">
+                <!-- Les onglets seront générés par JavaScript -->
+            </div>
+            
+            <!-- Contenu des onglets -->
+            <div class="tabs-content">
+                <div id="userPlans">
+                    <p style="text-align: center; color: rgba(255,255,255,0.7);">
+                        Chargement de vos plans d'entraînement...
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
