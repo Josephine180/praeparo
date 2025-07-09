@@ -635,7 +635,9 @@ body {
     }
 }
 
+/* RESPONSIVE - Bloc unique fusionné */
 @media (max-width: 768px) {
+    /* Stats et layout */
     .stats-grid {
         grid-template-columns: 1fr;
     }
@@ -688,16 +690,34 @@ body {
         background: linear-gradient(45deg, #dc3545, #c82333) !important;
         color: white !important;
         transition: all 0.3s ease;
-      }
+    }
       
-      .btn-quit:hover {
+    .btn-quit:hover {
         background: linear-gradient(45deg, #c82333, #bd2130) !important;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-      }
-      
-/* Styles des modales - À ajouter dans dashboard.css */
+    }
 
+    /* Modales responsive */
+    .modal {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .modal-header, .modal-body, .modal-footer {
+        padding: 15px 20px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .feedback-form-modal input[type="range"] {
+        width: 60%;
+    }
+}
+
+/* STYLES DES MODALES */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -711,9 +731,9 @@ body {
     justify-content: center;
     z-index: 10000;
     animation: fadeIn 0.3s ease;
-  }
-  
-  .modal {
+}
+
+.modal {
     background: rgba(20, 20, 20, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
@@ -723,25 +743,25 @@ body {
     overflow: hidden;
     animation: slideUp 0.3s ease;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-header {
+}
+
+.modal-header {
     padding: 20px 25px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(45deg, rgba(255, 165, 0, 0.1), rgba(255, 109, 45, 0.1));
-  }
-  
-  .modal-header h3 {
+}
+
+.modal-header h3 {
     margin: 0;
     color: #FFA500;
     font-size: 1.3rem;
     font-weight: 600;
-  }
-  
-  .modal-close {
+}
+
+.modal-close {
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.7);
@@ -755,47 +775,47 @@ body {
     justify-content: center;
     border-radius: 50%;
     transition: all 0.3s ease;
-  }
-  
-  .modal-close:hover {
+}
+
+.modal-close:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
-  }
-  
-  .modal-body {
+}
+
+.modal-body {
     padding: 25px;
     color: white;
     max-height: 60vh;
     overflow-y: auto;
-  }
-  
-  .modal-footer {
+}
+
+.modal-footer {
     padding: 20px 25px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-  }
-  
-  /* Formulaire feedback dans modale */
-  .feedback-form-modal .form-group {
+}
+
+/* Formulaire feedback dans modale */
+.feedback-form-modal .form-group {
     margin-bottom: 20px;
-  }
-  
-  .feedback-form-modal label {
+}
+
+.feedback-form-modal label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
-  }
-  
-  .feedback-form-modal input[type="range"] {
+}
+
+.feedback-form-modal input[type="range"] {
     width: 70%;
     margin-right: 10px;
     accent-color: #FFA500;
-  }
-  
-  .range-display {
+}
+
+.range-display {
     background: #FFA500;
     color: black;
     padding: 3px 8px;
@@ -805,9 +825,9 @@ body {
     min-width: 25px;
     text-align: center;
     display: inline-block;
-  }
-  
-  .feedback-form-modal textarea {
+}
+
+.feedback-form-modal textarea {
     width: 100%;
     height: 80px;
     padding: 12px;
@@ -817,20 +837,20 @@ body {
     color: white;
     resize: vertical;
     font-family: inherit;
-  }
-  
-  .feedback-form-modal textarea::placeholder {
+}
+
+.feedback-form-modal textarea::placeholder {
     color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .feedback-form-modal textarea:focus {
+}
+
+.feedback-form-modal textarea:focus {
     outline: none;
     border-color: #FFA500;
     box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
-  }
-  
-  /* Boutons modales */
-  .modal .btn {
+}
+
+/* Boutons modales */
+.modal .btn {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -838,30 +858,30 @@ body {
     font-weight: 600;
     transition: all 0.3s ease;
     font-size: 0.9rem;
-  }
-  
-  .btn-primary {
+}
+
+.btn-primary {
     background: linear-gradient(45deg, #FFA500, #FF6D2D);
     color: white;
-  }
-  
-  .btn-primary:hover {
+}
+
+.btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 165, 0, 0.4);
-  }
-  
-  .btn-secondary {
+}
+
+.btn-secondary {
     background: #6c757d;
     color: white;
-  }
-  
-  .btn-secondary:hover {
+}
+
+.btn-secondary:hover {
     background: #5a6268;
     transform: translateY(-2px);
-  }
-  
-  /* Contenu des tips nutrition */
-  .tip-text {
+}
+
+/* Contenu des tips nutrition */
+.tip-text {
     font-size: 1.1rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
@@ -869,42 +889,21 @@ body {
     padding: 15px;
     border-radius: 8px;
     border-left: 3px solid #FFA500;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
+}
+
+/* Animations */
+@keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-  }
-  
-  @keyframes slideUp {
+}
+
+@keyframes slideUp {
     from {
-      opacity: 0;
-      transform: translateY(50px) scale(0.9);
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
     }
     to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .modal {
-      width: 95%;
-      margin: 10px;
-    }
-    
-    .modal-header, .modal-body, .modal-footer {
-      padding: 15px 20px;
-    }
-    
-    .modal-footer {
-      flex-direction: column;
-    }
-    
-    .feedback-form-modal input[type="range"] {
-      width: 60%;
-    }
-  }
 }

@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
   const authButton = document.getElementById('auth-button');
   if (!authButton) return console.error("Élément #auth-button introuvable dans le DOM");
@@ -5,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderAuthButton() {
     fetch('http://localhost:3000/auth/me', {
       method: 'GET',
-      credentials: 'include' // Envoie automatiquement le cookie avec le token
+      credentials: 'include'
     })
     .then(res => {
       if (res.ok) {
@@ -15,10 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     .then(user => {
-      // L'utilisateur est connecté
-      authButton.innerHTML = `<button id="logout-btn" class="nav-btn">Déconnexion</button>`;
+      // L'utilisateur est connecté - navbar complète
+      const menu = authButton.closest('ul');
       
-      // Ajouter l'event listener pour la déconnexion
+      // Vider le menu et reconstruire
+      menu.innerHTML = `
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li id="auth-button">
+          <button id="logout-btn" class="nav-btn">Déconnexion</button>
+        </li>
+      `;
+      
+      // Event listener pour la déconnexion
       document.getElementById('logout-btn').addEventListener('click', () => {
         fetch('http://localhost:3000/users/logout', {
           method: 'POST',
@@ -39,8 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(err => {
-      // L'utilisateur n'est pas connecté
-      authButton.innerHTML = `<a href="login.html" class="nav-btn">Connexion</a>`;
+      // L'utilisateur n'est pas connecté - navbar simple
+      const menu = authButton.closest('ul');
+      
+      menu.innerHTML = `
+        <li><a href="index.html#programs">Programmes</a></li>
+        <li id="auth-button">
+          <a href="login.html" class="nav-btn">Connexion</a>
+        </li>
+      `;
     });
   }
 

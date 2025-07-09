@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Charger d'abord les stats pour les cards
   loadQuickStats();
   
+  loadUserInfo();
   // Puis charger les plans détaillés
   loadUserPlans();
   
@@ -31,6 +32,27 @@ async function loadQuickStats() {
     }
   } catch (error) {
     console.error('Erreur stats:', error);
+  }
+}
+
+async function loadUserInfo() {
+  try {
+    const res = await fetch('http://localhost:3000/auth/me', {
+      credentials: 'include'
+    });
+    
+    if (res.ok) {
+      const user = await res.json();
+      console.log('👤 User info:', user);
+      
+      // Mettre à jour le nom affiché
+      const userName = document.getElementById('user-name');
+      if (userName) {
+        userName.textContent = user.firstname || user.name || 'Utilisateur';
+      }
+    }
+  } catch (error) {
+    console.error('Erreur user info:', error);
   }
 }
 
@@ -485,16 +507,34 @@ function handleNutritionTip(e) {
     createModal(
       '🍎 Conseil Nutritionnel',
       `<p class="tip-text">${tip}</p>`,
-      [{ text: 'Compris !', class: 'btn-primary', onclick: 'this.closest(".modal-overlay").remove()' }]
+      [{ 
+        text: 'Compris !', 
+        class: 'btn-primary', 
+        onclick: 'closeCurrentModal()'
+      }]
     );
   } else {
     createModal(
       '🍎 Conseil Nutritionnel',
       '<p>Aucun conseil nutritionnel disponible pour cette session.</p>',
-      [{ text: 'OK', class: 'btn-secondary', onclick: 'this.closest(".modal-overlay").remove()' }]
+      [{ 
+        text: 'OK', 
+        class: 'btn-secondary', 
+        onclick: 'closeCurrentModal()',
+      }]
     );
   }
 }
+
+function closeCurrentModal() {
+  const modal = document.querySelector('.modal-overlay');
+  if (modal) {
+    modal.remove();
+  }
+}
+
+// Rendre la fonction globale
+window.closeCurrentModal = closeCurrentModal;
 
 function loadFeedbacks(sessionId) {
   fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
