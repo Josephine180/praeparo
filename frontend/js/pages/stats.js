@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  console.log('📈 Page des statistiques chargée');
+  console.log('Page des statistiques chargée');
   
   try {
       // Vérifier que l'utilisateur est connecté
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       await loadStats();
       
   } catch (error) {
-      console.error('❌ Erreur:', error);
+      console.error(' Erreur:', error);
       showError('Impossible de charger les statistiques');
   }
 });
@@ -40,7 +40,7 @@ function redirectToLogin() {
 // Charger les statistiques
 async function loadStats() {
   try {
-      console.log('🔍 Récupération des statistiques...');
+      console.log('Récupération des statistiques...');
       
       const response = await fetch('http://localhost:3000/stats/overview', {
           credentials: 'include'
@@ -51,7 +51,7 @@ async function loadStats() {
       }
 
       const stats = await response.json();
-      console.log('📊 Données reçues:', stats);
+      console.log('Données reçues:', stats);
 
       // Afficher les cards de stats
       displayStatsCards(stats);
@@ -60,7 +60,7 @@ async function loadStats() {
       displayCharts(stats);
       
   } catch (error) {
-      console.error('❌ Erreur loadStats:', error);
+      console.error('Erreur loadStats:', error);
       showError(`Erreur lors du chargement: ${error.message}`);
   }
 }
@@ -124,8 +124,8 @@ function createSessionsChart(stats) {
           datasets: [{
               data: [stats.completedSessions, stats.remainingSessions],
               backgroundColor: [
-                  '#28a745',  // Vert pour complétées
-                  '#6c757d'   // Gris pour restantes
+                  '#28a745',  // Vertes pour complétées
+                  'rgba(255, 255, 255, 0.2'   // Gris pour restantes
               ],
               borderWidth: 0
           }]
@@ -147,8 +147,9 @@ function createSessionsChart(stats) {
 }
 
 // Graphique de l'énergie (Gauge/Bar)
-function createEnergyChart(stats) {
+function createEnergyChart(stats) { /* déclaration fonction avec objet stats */
   const ctx = document.getElementById('energyChart').getContext('2d');
+  /* recuperation contexte 2D du canvas : obligatoire pour dessiner un graphique avec Chart.js*/
   
   new Chart(ctx, {
       type: 'bar',
@@ -171,10 +172,10 @@ function createEnergyChart(stats) {
               y: {
                   beginAtZero: true,
                   max: 10,
-                  ticks: {
+                  ticks: { /* couleur des chiffres*/
                       color: 'white'
                   },
-                  grid: {
+                  grid: { /* grille fine et transparente */
                       color: 'rgba(255,255,255,0.1)'
                   }
               },

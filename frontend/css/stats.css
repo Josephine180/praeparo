@@ -10,7 +10,73 @@ body {
     min-height: 100vh;
     color: white;
 }
-
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px 20px;
+    z-index: 1000;
+  }
+  
+  .logo h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #FFA500, #FF6D2D);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin-bottom: 8px;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .nav-link:hover {
+    background: rgba(255, 165, 0, 0.1);
+    color: white;
+    transform: translateX(5px);
+  }
+  
+  .nav-link.active {
+    background: linear-gradient(45deg, #FFA500, #FF6D2D);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+  }
+  
+  .nav-icon {
+    margin-right: 15px;
+    font-size: 1.2rem;
+    width: 20px;
+  }
+  
 .stats-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -18,13 +84,13 @@ body {
 }
 
 .stats-title {
-    text-align: center;
     font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(45deg, #FFA500, #FF6D2D);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 400;        
     margin-bottom: 40px;
+    background: linear-gradient(45deg, #FFA500, #FF6D2D); /* effet de dégradé sur le texte */
+    background-clip: text; /* elargir à tous les moteurs de recherche (firefox);*/
+    -webkit-background-clip: text; /* propriété expérimentale pour appliquer le fond sur le texte uniquement */
+    -webkit-text-fill-color: transparent; /* fond transparent pour afficher le dégradé */
 }
 
 /* Cards de stats */
@@ -37,17 +103,34 @@ body {
 
 .stat-card {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); /* flou d'arrière plan */
     border-radius: 15px;
     padding: 25px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
     transition: all 0.3s ease;
+    overflow: hidden; /* cacher les dépassements */
+}
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FFA500, #FF6D2D); /* bande orangée */
+    opacity: 0; /* cachée par défaut */
+    transition: opacity 0.3s ease;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+.stat-card:hover { /* effet de survol */
+    transform: translateY(-8px) scale(1.02); /* effet carte remonte et grandit */
+    box-shadow: 0 15px 15px rgba(255, 165, 0, 0.15);/* ombre orangée */
+    border-color: rgba(255, 165, 0, 0.3); /* bordure plus visible */
+}
+
+.stat-card:hover::before {
+    opacity: 1; /* affiche la bande colorée en haut */
 }
 
 .stat-icon {

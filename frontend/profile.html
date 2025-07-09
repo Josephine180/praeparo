@@ -8,31 +8,72 @@
   <link rel="stylesheet" href="css/navbar.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Bonjour, <span id="user-firstname">Utilisateur</span> 👋</h1>
+  <aside class="sidebar">
+    <div class="logo">
+        <h1>PRAEPARO</h1>
+    </div>
+    
+    <nav>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="stats.html" class="nav-link">
+                    <span class="nav-icon">📈</span>
+                    <span>Statistiques</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="profile.html" class="nav-link active">
+                    <span class="nav-icon">👤</span>
+                    <span>Profil</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#programs" class="nav-link">
+                    <span class="nav-icon">🔍</span>
+                    <span>Programmes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <button id="logout-btn" class="nav-link" style="width: 100%; border: none; background: none; cursor: pointer;">
+                    <span class="nav-icon">🚪</span>
+                    <span>Déconnexion</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</aside>
 
-    <form id="profile-form">
+  <div class="container">
+    <h1>Mes informations</span> </h1>
+
+    <form id="profile-form" class="profile-form">
       <label>Prénom :
-        <input type="text" name="firstName" required />
+        <input type="text" name="firstName" placeholder="Prénom" required />
       </label>
 
       <label>Nom :
-        <input type="text" name="lastName" required />
+        <input type="text" name="lastName" placeholder="Nom" required />
       </label>
 
       <label>Email :
-        <input type="email" name="email" required />
+        <input type="email" name="email" placeholder="Email" required />
       </label>
 
       <label>Poids (kg) :
-        <input type="number" name="weight" step="0.1" />
+        <input type="number" name="weight" placeholder="Poids" step="0.1" />
       </label>
 
       <label>Taille (cm) :
-        <input type="number" name="height" step="0.1" />
+        <input type="number" name="height" placeholder="Taille" step="0.1" />
       </label>
 
-      <button type="submit">Enregistrer</button>
+      <button class="profile-button" type="submit">Enregistrer</button>
     </form>
 
     <p id="message" class="message"></p>

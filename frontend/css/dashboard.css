@@ -7,7 +7,7 @@
 body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
     color: white;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: 'Outfit', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -37,6 +37,7 @@ body {
     font-size: 2rem;
     font-weight: 700;
     background: linear-gradient(45deg, #FFA500, #FF6D2D);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 40px;
@@ -94,11 +95,12 @@ body {
 
 .welcome-title {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 10px;
-    background: linear-gradient(45deg, #FFA500, #FF6D2D);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(45deg, #FFA500, #FF6D2D); /* effet de dégradé sur le texte */
+    background-clip: text; /* elargir à tous les moteurs de recherche (firefox);*/
+    -webkit-background-clip: text; /* propriété expérimentale pour appliquer le fond sur le texte uniquement */
+    -webkit-text-fill-color: transparent; /* fond transparent pour afficher le dégradé */
 }
 
 .welcome-subtitle {
@@ -107,7 +109,7 @@ body {
     font-weight: 300;
 }
 
-/* STATS CARDS - Style amélioré */
+/* STATS CARDS - Style */
 .stats-overview {
     margin-bottom: 40px;
 }
