@@ -4,14 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/training-plan.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <title>Détail du programme</title>
 </head>
 <body>
+  <!-- Navigation si vous en avez une -->
+  <nav class="navbar">
+    <!-- Votre navbar existante -->
+  </nav>
 
-  <h1>Détail du programme</h1>
-  <div id="programDetails">Chargement...</div>
+  <!-- Container principal -->
+  <main class="main-container">
+    <!-- Header avec titre -->
+    <header class="page-header">
+      <h1 class="page-title">Détail du programme</h1>
+      <div class="header-decoration"></div>
+    </header>
 
-  <script src="js/training-plan.js"></script>
-  <script src="js/auth.js"></script>
+    <!-- Contenu principal -->
+    <section class="content-wrapper">
+      <div id="programDetails" class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Chargement du programme...</p>
+      </div>
+
+      <!-- Actions -->
+      <div id="actionSection" class="action-section" style="display: none;">
+        <button id="startButton" class="cta-button">
+          <span class="button-icon">🚀</span>
+          <span class="button-text">Commencer ce programme</span>
+        </button>
+        <div id="startResult" class="result-container"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer si nécessaire -->
+  <footer class="page-footer">
+    <!-- Votre footer existant -->
+  </footer>
+
+  <script src="js/pages/training-plan.js"></script>
+  <script src="js/pages/auth.js"></script>
 </body>
 </html>
