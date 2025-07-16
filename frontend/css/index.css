@@ -14,12 +14,12 @@ body {
 .menu {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   padding: 20px 40px;
   z-index: 999;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -32,19 +32,19 @@ body {
 }
 
 .menu ul {
-  list-style: none;
   display: flex;
   gap: 40px;
+  align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
-  align-items: center;
 }
 
 .menu a {
   color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1.1rem;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -70,15 +70,15 @@ body {
 }
 
 .nav-btn {
-  padding: 12px 24px;
-  border-radius: 30px;
-  outline: none;
-  border: none;
+  width: auto;
+  padding: 10px 19px;
+  border-radius: 15px;
   background: linear-gradient(45deg, #FF8C00, #FFA500);
   color: white;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
+  border: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
 }
@@ -89,7 +89,7 @@ body {
   background: linear-gradient(45deg, #FFA500, #FFB000);
 }
 
-/* ===== SECTION HERO (VOTRE PARTIE EXISTANTE AMÉLIORÉE) ===== */
+/* ===== SECTION HERO ===== */
 .hero-section {
   height: 100vh;
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
@@ -105,73 +105,50 @@ body {
   text-align: center;
   color: white;
   z-index: 2;
-  max-width: 900px;
+  max-width: 800px;
   padding: 0 20px;
-  animation: heroFadeIn 1.5s ease-out;
-}
-
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  margin-top: 80px; /* Espace pour le menu fixe */
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: 5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-shadow: 0 5px 25px rgba(0,0,0,0.5);
   background: linear-gradient(45deg, #ffffff, #ffd000, #FF6D2D, #1a1a1a);
-  background-size: 400% 400%;
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 4s ease-in-out infinite, letterSpacing 2s ease-in-out infinite alternate;
-}
-
-@keyframes letterSpacing {
-  from { letter-spacing: 0.05em; }
-  to { letter-spacing: 0.15em; }
+  animation: fadeInUp 1s ease-out, gradientShift 3s ease-in-out infinite;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  font-size: 2rem;
   margin-bottom: 2rem;
-  opacity: 0.95;
-  font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  opacity: 0.9;
   animation: fadeInUp 1s ease-out 0.3s both;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .hero-description {
-  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-size: 1.5rem;
   margin-bottom: 3rem;
-  line-height: 1.7;
-  opacity: 0.9;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 1.6;
+  opacity: 0.8;
   animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 40px;
-  font-size: 1.2rem;
+  padding: 15px 40px;
+  font-size: 1.1rem;
   font-weight: 600;
-  background: linear-gradient(45deg, #ffd000, #FF6D2D);
+  background: linear-gradient(45deg, #FF8C00, #FFA500);
   border: none;
   border-radius: 50px;
   color: white;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
   animation: fadeInUp 1s ease-out 0.9s both;
@@ -197,10 +174,10 @@ body {
 
 .cta-button:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.5);
+  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
 }
 
-/* Effet de particules flottantes (VOTRE PARTIE EXISTANTE) */
+/* Effet de particules flottantes */
 .floating-elements {
   position: absolute;
   width: 100%;
@@ -231,4 +208,182 @@ body {
 .floating-element:nth-child(3) { 
   left: 80%; 
   animation-delay: 4s; 
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes gradientShift {
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(100vh) rotate(0deg); 
+    opacity: 0; 
+  }
+  10%, 90% { 
+    opacity: 1; 
+  }
+  50% { 
+    transform: translateY(-100px) rotate(180deg); 
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.8rem;
+  }
+  
+  .hero-description {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu {
+    padding: 15px 20px;
+  }
+  
+  .menu ul {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .menu a {
+    font-size: 1.1rem;
+  }
+  
+  .nav-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+  
+  .hero-content {
+    padding: 0 15px;
+    margin-top: 100px; /* Plus d'espace sur mobile */
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+  }
+  
+  .cta-button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    padding: 12px 15px;
+  }
+  
+  .menu ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  .menu a {
+    font-size: 1rem;
+  }
+  
+  .nav-btn {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+  }
+  
+  .hero-content {
+    padding: 0 10px;
+    margin-top: 140px; /* Encore plus d'espace sur très petit écran */
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  
+  .cta-button {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== AMÉLIORATIONS VISUELLES ===== */
+.menu {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content {
+  animation: heroFadeIn 1.5s ease-out;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Amélioration du scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Menu qui change d'apparence au scroll */
+.menu.scrolled {
+  padding: 12px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .menu.scrolled {
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu.scrolled {
+    padding: 8px 15px;
+  }
 }

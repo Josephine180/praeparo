@@ -9,11 +9,46 @@
     <link rel="stylesheet" href="css/navbar.css" />
 </head>
 <body>
+    <nav class="mobile-nav">
+        <div class="mobile-nav-brand">PRAEPARO</div>
+        <ul class="mobile-nav-menu">
+            <li class="mobile-nav-item">
+                <a href="dashboard.html" class="mobile-nav-link active">
+                    <span class="mobile-nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="stats.html" class="mobile-nav-link">
+                    <span class="mobile-nav-icon">📈</span>
+                    <span>Stats</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="profile.html" class="mobile-nav-link">
+                    <span class="mobile-nav-icon">👤</span>
+                    <span>Profil</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="index.html#programs" class="mobile-nav-link">
+                    <span class="mobile-nav-icon">🔍</span>
+                    <span>Programmes</span>
+                </a>
+            </li>
+            <li class="mobile-nav-item">
+                <button id="logout-btn-mobile" class="mobile-nav-link" style="background: none; border: none; cursor: pointer;">
+                    <span class="mobile-nav-icon">🚪</span>
+                    <span>Déconnexion</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
     <!-- SIDEBAR -->
     <aside class="sidebar">
-        <div class="logo">
+        <a class="logo" href="dashboard.html">
             <h1>PRAEPARO</h1>
-        </div>
+        </a>
         
         <nav>
             <ul class="nav-menu">

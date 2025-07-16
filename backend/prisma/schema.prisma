@@ -25,6 +25,7 @@ model User {
   trainingPlans     TrainingPlan[]
   feedbacks         Feedback[]
   userTrainingPlans UserTrainingPlan[]
+  sessionProgresses SessionProgress[]
 
   profile Profile?
 }
@@ -89,7 +90,20 @@ model Session {
   week             Week         @relation(fields: [week_id], references: [id])
   feedback         Feedback? // Une session = un feedback max
   nutritionTip     NutritionTip @relation(fields: [nutrition_tip_id], references: [id])
+  sessionProgresses SessionProgress[]
   nutrition_tip_id Int
+}
+
+model SessionProgress {
+  id         Int     @id @default(autoincrement())
+  user_id    Int
+  session_id Int
+  completed  Boolean @default(false)
+
+  user       User    @relation(fields: [user_id], references: [id])
+  session    Session @relation(fields: [session_id], references: [id])
+
+  @@unique([user_id, session_id]) // Un seul état par session/user
 }
 
 model Feedback {

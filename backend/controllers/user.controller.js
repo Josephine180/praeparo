@@ -149,7 +149,34 @@ export const register = async (req, res) => {
       }
     });
 
-    res.status(201).json({ message: 'Utilisateur créé', userId: newUser.id });
+    // ✅ AJOUTER CETTE PARTIE : Créer et définir le cookie (comme dans login)
+    const token = jwt.sign(
+      { userId: newUser.id, role: newUser.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '4h' }
+    );
+
+    // ✅ AJOUTER : Envoyer le token dans un cookie sécurisé
+    res.cookie('token', token, {
+      httpOnly: true,       // Empêche l'accès JavaScript côté client
+      secure: false,        // true en production avec HTTPS
+      sameSite: 'lax',      // Protection CSRF
+      path: '/',
+      maxAge: 4 * 60 * 60 * 1000, // 4 heures en millisecondes
+    });
+
+    // ✅ MODIFIER : Réponse avec les infos utilisateur (comme dans login)
+    res.status(201).json({ 
+      message: 'Utilisateur créé', 
+      userId: newUser.id,
+      user: {
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name,
+        firstname: newUser.firstname,
+        role: newUser.role
+      }
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erreur serveur.' });

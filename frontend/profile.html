@@ -3,82 +3,171 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mon Profil</title>
+  <title>Mon Profil | Praeparo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/profile.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
 </head>
 <body>
+  <!-- MENU MOBILE (visible uniquement sur mobile) -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-brand">PRAEPARO</div>
+    <ul class="mobile-nav-menu">
+      <li class="mobile-nav-item">
+        <a href="dashboard.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="stats.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">📈</span>
+          <span>Stats</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="profile.html" class="mobile-nav-link active">
+          <span class="mobile-nav-icon">👤</span>
+          <span>Profil</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="index.html#programs" class="mobile-nav-link">
+          <span class="mobile-nav-icon">🔍</span>
+          <span>Programmes</span>
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <button id="logout-btn-mobile" class="mobile-nav-link" style="background: none; border: none; cursor: pointer;">
+          <span class="mobile-nav-icon">🚪</span>
+          <span>Déconnexion</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- SIDEBAR (visible uniquement sur desktop) -->
   <aside class="sidebar">
-    <div class="logo">
-        <h1>PRAEPARO</h1>
-    </div>
+    <a class="logo" href="dashboard.html">
+      <h1>PRAEPARO</h1>
+    </a>
     
     <nav>
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="dashboard.html" class="nav-link">
-                    <span class="nav-icon">📊</span>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="stats.html" class="nav-link">
-                    <span class="nav-icon">📈</span>
-                    <span>Statistiques</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="profile.html" class="nav-link active">
-                    <span class="nav-icon">👤</span>
-                    <span>Profil</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="index.html#programs" class="nav-link">
-                    <span class="nav-icon">🔍</span>
-                    <span>Programmes</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <button id="logout-btn" class="nav-link" style="width: 100%; border: none; background: none; cursor: pointer;">
-                    <span class="nav-icon">🚪</span>
-                    <span>Déconnexion</span>
-                </button>
-            </li>
-        </ul>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link">
+            <span class="nav-icon">📊</span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="stats.html" class="nav-link">
+            <span class="nav-icon">📈</span>
+            <span>Statistiques</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="profile.html" class="nav-link active">
+            <span class="nav-icon">👤</span>
+            <span>Profil</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="index.html#programs" class="nav-link">
+            <span class="nav-icon">🔍</span>
+            <span>Programmes</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button id="logout-btn" class="nav-link">
+            <span class="nav-icon">🚪</span>
+            <span>Déconnexion</span>
+          </button>
+        </li>
+      </ul>
     </nav>
-</aside>
+  </aside>
 
-  <div class="container">
-    <h1>Mes informations</span> </h1>
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="profile-header">
+      <h1 class="profile-title">Mon Profil</h1>
+      <p class="profile-subtitle">Gérez vos informations et suivez vos progrès</p>
+    </header>
 
-    <form id="profile-form" class="profile-form">
-      <label>Prénom :
-        <input type="text" name="firstName" placeholder="Prénom" required />
-      </label>
+    <div class="profile-container">
+      <!-- INFORMATIONS PERSONNELLES -->
+      <div class="profile-card">
+        <div class="card-header">
+          <span class="card-icon">👤</span>
+          <h2 class="card-title">Mes informations</h2>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Prénom</span>
+          <span class="info-value editable">Jean</span>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Nom</span>
+          <span class="info-value editable">Dupont</span>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Email</span>
+          <span class="info-value editable">jean.dupont@email.com</span>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Poids (kg)</span>
+          <span class="info-value editable">75</span>
+        </div>
+        
+        <div class="info-item">
+          <span class="info-label">Taille (cm)</span>
+          <span class="info-value editable">180</span>
+        </div>
 
-      <label>Nom :
-        <input type="text" name="lastName" placeholder="Nom" required />
-      </label>
-
-      <label>Email :
-        <input type="email" name="email" placeholder="Email" required />
-      </label>
-
-      <label>Poids (kg) :
-        <input type="number" name="weight" placeholder="Poids" step="0.1" />
-      </label>
-
-      <label>Taille (cm) :
-        <input type="number" name="height" placeholder="Taille" step="0.1" />
-      </label>
-
-      <button class="profile-button" type="submit">Enregistrer</button>
-    </form>
-
-    <p id="message" class="message"></p>
-  </div>
+        <div class="card-actions">
+          <button class="btn btn-primary">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <script src="js/pages/profile.js"></script>
+  
+  <script>
+    // Script pour gérer la déconnexion sur mobile
+    document.getElementById('logout-btn-mobile')?.addEventListener('click', async () => {
+      try {
+        const res = await fetch('http://localhost:3000/users/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        
+        if (res.ok) {
+          window.location.href = 'index.html';
+        }
+      } catch (error) {
+        console.error('Erreur déconnexion:', error);
+      }
+    });
+
+    // Script pour gérer la déconnexion sur desktop
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
+      try {
+        const res = await fetch('http://localhost:3000/users/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        
+        if (res.ok) {
+          window.location.href = 'index.html';
+        }
+      } catch (error) {
+        console.error('Erreur déconnexion:', error);
+      }
+    });
+  </script>
 </body>
 </html>

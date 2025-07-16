@@ -39,7 +39,7 @@ function fetchPrograms() {
     .catch(err => {
       console.error(err);
       const container = document.querySelector('.grid-container');
-      container.innerHTML = '<p style="color:white; text-align:center;">Impossible de charger les programmes.</p>';
+      container.innerHTML = '<p ">Impossible de charger les programmes.</p>';
     });
 }
 
@@ -52,9 +52,8 @@ function renderGrid() {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div style="font-size: 2rem;">${emojiForGoal(program.goal_type)}</div>
+      <div class="emoji-square">${emojiForGoal(program.goal_type)}</div>
       <h3>${program.goal_type}</h3>
-      <p>${program.description || 'Pas de description disponible.'}</p>
       <p><strong>Durée :</strong> ${program.goal_time || 'Non spécifiée'}</p>
       <button class="details-btn">Voir détails</button>
     `;
@@ -78,10 +77,9 @@ function renderCarousel() {
     card.className = 'carousel-card';
     card.style.display = (index === currentSlide) ? 'block' : 'none';
     card.innerHTML = `
-      <div style="font-size: 3rem; text-align:center;">${emojiForGoal(program.goal_type)}</div>
+      <div class="emoji-square">${emojiForGoal(program.goal_type)}</div>
       <h3>${program.goal_type}</h3>
-      <p>${program.description || 'Pas de description disponible.'}</p>
-      <p><strong>Durée :</strong> ${program.goal_time || 'Non spécifiée'}</p>
+      <p><strong>Durée :</strong> ${program.goal_time}</p>
       <button class="details-btn">Voir détails</button>
     `;
 
@@ -125,17 +123,23 @@ function updateCarouselNav() {
   });
 }
 
-// Changement de vue grille/carrousel
+// Fonction simple pour les boutons toggle
 function toggleView(view) {
-  if (view === 'grid') {
-    showView('grid');
-  } else if (view === 'carousel') {
-    showView('carousel');
-  }
-  // Mise à jour des boutons toggle
+  // Mettre à jour les boutons
   document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent.toLowerCase() === view);
+    btn.classList.remove('active');
   });
+  
+  // Activer le bon bouton
+  if (view === 'grid') {
+    document.querySelector('.toggle-btn:first-child').classList.add('active');
+    document.getElementById('gridView').style.display = 'grid';
+    document.getElementById('carouselView').style.display = 'none';
+  } else {
+    document.querySelector('.toggle-btn:last-child').classList.add('active');
+    document.getElementById('gridView').style.display = 'none';
+    document.getElementById('carouselView').style.display = 'block';
+  }
 }
 
 function showView(view) {

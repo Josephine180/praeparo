@@ -2,7 +2,6 @@
 
 import prisma from '../src/index.js';
 
-// Assurez-vous que TOUTES ces fonctions sont bien présentes et exportées
 
 export const createSession = async (req, res) => {
   console.log("Données reçues :", req.body);
@@ -88,7 +87,7 @@ export const getSessionById = async (req, res) => {
   }
 };
 
-// FONCTION CORRIGÉE - SessionFeedback
+
 export const SessionFeedback = async (req, res) => {
   const sessionId = parseInt(req.params.id);
   const {
@@ -98,7 +97,7 @@ export const SessionFeedback = async (req, res) => {
     comment
   } = req.body;
 
-  // IMPORTANT : Récupérer user_id depuis le token JWT (req.user)
+  //  Récupérer user_id depuis le token JWT (req.user)
   const user_id = req.user.userId;
 
   console.log('📝 Feedback reçu:');
@@ -154,11 +153,11 @@ export const SessionFeedback = async (req, res) => {
       }
     });
 
-    console.log('✅ Feedback créé avec succès:', feedback.id);
+    console.log('Feedback créé avec succès:', feedback.id);
     res.status(201).json(feedback);
 
   } catch (error) {
-    console.error("💥 Erreur création feedback:", error);
+    console.error("Erreur création feedback:", error);
     console.error("Stack trace:", error.stack);
     res.status(500).json({ 
       error: "Impossible d'ajouter le feedback",
