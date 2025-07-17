@@ -9,8 +9,8 @@ router.get('/', getAllSessions);
 router.post('/', authenticate, createSession);
 router.patch('/:id/complete', authenticate, markSessionAsCompleted);
 router.get('/:id', authenticate, getSessionById);
-router.post('/:id/feedback',authenticate, SessionFeedback);
 router.get('/:id/feedback', authenticate, getFeedbacksBySessionId);
+router.post('/:id/feedback',authenticate, SessionFeedback);
 router.patch('/:id/uncomplete', authenticate, markSessionAsUncompleted);
 export default router;
 

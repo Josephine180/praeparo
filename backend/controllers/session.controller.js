@@ -1,5 +1,4 @@
 // backend/controllers/session.controller.js
-
 import prisma from '../src/index.js';
 
 
@@ -38,29 +37,6 @@ export const createSession = async (req, res) => {
   }
 };
 
-export const markSessionAsCompleted = async (req, res) => {
-  const sessionId = parseInt(req.params.id);
-  try {
-    const existingSession = await prisma.session.findUnique({
-      where: { id: sessionId },
-    });
-
-    if (!existingSession) {
-      return res.status(404).json({ error: "Session introuvable." });
-    }
-
-    const updatedSession = await prisma.session.update({
-      where: { id: sessionId },
-      data: { completed: true },
-    });
-
-    res.json(updatedSession);
-  } catch (error) {
-    console.error("Erreur PATCH session :", error);
-    res.status(500).json({ error: "Impossible de marquer la session comme complétée." });
-  }
-};
-
 export const getAllSessions = async (req, res) => {
   try {
     const sessions = await prisma.session.findMany({
@@ -87,7 +63,6 @@ export const getSessionById = async (req, res) => {
   }
 };
 
-
 export const SessionFeedback = async (req, res) => {
   const sessionId = parseInt(req.params.id);
   const {
@@ -97,7 +72,6 @@ export const SessionFeedback = async (req, res) => {
     comment
   } = req.body;
 
-  //  Récupérer user_id depuis le token JWT (req.user)
   const user_id = req.user.userId;
 
   console.log('📝 Feedback reçu:');
@@ -112,21 +86,63 @@ export const SessionFeedback = async (req, res) => {
     return res.status(401).json({ error: 'Utilisateur non authentifié' });
   }
 
-  if (isNaN(sessionId)) {
+  if (isNaN(sessionId) || sessionId <= 0) {
     return res.status(400).json({ error: 'ID de session invalide' });
+  }
+
+  // Validation des niveaux
+  const validateLevel = (level, name) => {
+    const parsed = parseInt(level);
+    if (isNaN(parsed) || parsed < 1 || parsed > 10) {
+      return `${name} doit être un nombre entre 1 et 10`;
+    }
+    return null;
+  };
+
+  const energyError = validateLevel(energy_level, 'Le niveau d\'énergie');
+  const fatigueError = validateLevel(fatigue_level, 'Le niveau de fatigue');
+  const motivationError = validateLevel(motivation_level, 'Le niveau de motivation');
+
+  if (energyError || fatigueError || motivationError) {
+    return res.status(400).json({ 
+      error: energyError || fatigueError || motivationError 
+    });
+  }
+
+  if (comment && typeof comment !== 'string') {
+    return res.status(400).json({ error: 'Le commentaire doit être une chaîne de caractères' });
+  }
+
+  if (comment && comment.length > 500) {
+    return res.status(400).json({ error: 'Le commentaire ne peut pas dépasser 500 caractères' });
   }
 
   try {
     // Vérifier que la session existe
     const session = await prisma.session.findUnique({
-      where: { id: sessionId }
+      where: { id: sessionId },
+      include: {
+        trainingPlan: {
+          include: {
+            users: {
+              where: { user_id: user_id }
+            }
+          }
+        }
+      }
     });
 
     if (!session) {
       return res.status(404).json({ error: 'Session introuvable' });
     }
 
+    // Vérifier que l'utilisateur a accès à cette session
+    if (!session.trainingPlan.users.length) {
+      return res.status(403).json({ error: 'Vous n\'avez pas accès à cette session' });
+    }
+
     // Vérifier s'il existe déjà un feedback pour cette session par cet utilisateur
+    // CORRECTION : Utiliser findFirst au lieu de findUnique avec les bons champs
     const existingFeedback = await prisma.feedback.findFirst({
       where: {
         session_id: sessionId,
@@ -135,13 +151,26 @@ export const SessionFeedback = async (req, res) => {
     });
 
     if (existingFeedback) {
-      return res.status(400).json({ 
-        error: 'Vous avez déjà donné un feedback pour cette session',
-        existingFeedbackId: existingFeedback.id
+      console.log('Mise à jour du feedback existant:', existingFeedback.id);
+      
+      const updatedFeedback = await prisma.feedback.update({
+        where: { id: existingFeedback.id },
+        data: {
+          energy_level: parseInt(energy_level),
+          fatigue_level: parseInt(fatigue_level),
+          motivation_level: parseInt(motivation_level),
+          comment: comment ? comment.trim() : null
+        }
+      });
+
+      console.log('Feedback mis à jour avec succès:', updatedFeedback.id);
+      return res.status(200).json({
+        message: 'Feedback mis à jour avec succès',
+        feedback: updatedFeedback
       });
     }
 
-    // Créer le feedback
+    // Créer le nouveau feedback
     const feedback = await prisma.feedback.create({
       data: {
         session_id: sessionId,
@@ -149,44 +178,114 @@ export const SessionFeedback = async (req, res) => {
         energy_level: parseInt(energy_level),
         fatigue_level: parseInt(fatigue_level),
         motivation_level: parseInt(motivation_level),
-        comment: comment || null
+        comment: comment ? comment.trim() : null
       }
     });
 
     console.log('Feedback créé avec succès:', feedback.id);
-    res.status(201).json(feedback);
+    res.status(201).json({
+      message: 'Feedback créé avec succès',
+      feedback: feedback
+    });
 
   } catch (error) {
-    console.error("Erreur création feedback:", error);
+    console.error("Erreur création/mise à jour feedback:", error);
     console.error("Stack trace:", error.stack);
+    
+    // Gérer les erreurs spécifiques de Prisma
+    if (error.code === 'P2002') {
+      return res.status(409).json({ 
+        error: "Un feedback existe déjà pour cette session" 
+      });
+    }
+    
     res.status(500).json({ 
-      error: "Impossible d'ajouter le feedback",
-      details: error.message 
+      error: "Erreur serveur lors de la gestion du feedback",
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
 
 export const getFeedbacksBySessionId = async (req, res) => {
   const sessionId = parseInt(req.params.id);
+  const user_id = req.user.userId;
+
+  if (isNaN(sessionId) || sessionId <= 0) {
+    return res.status(400).json({ error: 'ID de session invalide' });
+  }
+
+  if (!user_id) {
+    return res.status(401).json({ error: 'Utilisateur non authentifié' });
+  }
 
   try {
+    // Récupérer uniquement les feedbacks de l'utilisateur connecté pour cette session
     const feedbacks = await prisma.feedback.findMany({
-      where: { session_id: sessionId }
+      where: { 
+        session_id: sessionId,
+        user_id: user_id
+      },
+      orderBy: { created_at: 'desc' }
     });
 
     if (!feedbacks || feedbacks.length === 0) {
-      return res.status(404).json({ message: 'Aucun feedback trouvé pour cette session' });
+      return res.status(404).json({ 
+        message: 'Aucun feedback trouvé pour cette session' 
+      });
     }
 
     res.json(feedbacks);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erreur serveur lors de la récupération des feedbacks' });
+    console.error('Erreur récupération feedbacks:', error);
+    res.status(500).json({ 
+      error: 'Erreur serveur lors de la récupération des feedbacks',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
+export const markSessionAsCompleted = async (req, res) => {
+  const sessionId = parseInt(req.params.id);
+  const userId = req.user.userId;
+  
+  try {
+    const existingSession = await prisma.session.findUnique({
+      where: { id: sessionId },
+    });
+
+    if (!existingSession) {
+      return res.status(404).json({ error: "Session introuvable." });
+    }
+
+    // Créer ou mettre à jour le progrès de la session pour cet utilisateur
+    const sessionProgress = await prisma.sessionProgress.upsert({
+      where: {
+        user_id_session_id: {
+          user_id: userId,
+          session_id: sessionId
+        }
+      },
+      update: {
+        completed: true
+      },
+      create: {
+        user_id: userId,
+        session_id: sessionId,
+        completed: true
+      }
+    });
+
+    res.json({ success: true, sessionProgress });
+  } catch (error) {
+    console.error("Erreur PATCH session :", error);
+    res.status(500).json({ error: "Impossible de marquer la session comme complétée." });
   }
 };
 
 export const markSessionAsUncompleted = async (req, res) => {
   const sessionId = parseInt(req.params.id);
+  const userId = req.user.userId;
+  
   try {
     const existingSession = await prisma.session.findUnique({
       where: { id: sessionId }
@@ -196,14 +295,28 @@ export const markSessionAsUncompleted = async (req, res) => {
       return res.status(404).json({ error: "Session introuvable." });
     }
 
-    const updatedSession = await prisma.session.update({
-      where: { id: sessionId },
-      data: { completed: false },
+    // Créer ou mettre à jour le progrès de la session pour cet utilisateur
+    const sessionProgress = await prisma.sessionProgress.upsert({
+      where: {
+        user_id_session_id: {
+          user_id: userId,
+          session_id: sessionId
+        }
+      },
+      update: {
+        completed: false
+      },
+      create: {
+        user_id: userId,
+        session_id: sessionId,
+        completed: false
+      }
     });
 
-    res.json(updatedSession);
+    res.json({ success: true, sessionProgress });
   } catch (error) {
     console.error("Erreur PATCH session :", error);
     res.status(500).json({ error: "Impossible de marquer la session comme non complétée." });
   }
 };
+

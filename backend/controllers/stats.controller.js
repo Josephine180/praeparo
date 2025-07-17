@@ -2,26 +2,28 @@ import prisma from '../src/index.js';
 
 export const getUserStats = async (req, res) => {
   const userId = req.user.userId;
+  
+  console.log('🔍 getUserStats appelée pour userId:', userId);
 
   try {
     // 1. Plans actifs de l'utilisateur
     const activePlans = await prisma.userTrainingPlan.count({
       where: { user_id: userId }
     });
+    
+    console.log('📊 Plans actifs pour userId', userId, ':', activePlans);
 
-    // 2. Sessions complétées dans ses plans
-    const completedSessions = await prisma.session.count({
+    // 2. Sessions complétées par CET utilisateur (via SessionProgress)
+    const completedSessions = await prisma.sessionProgress.count({
       where: {
-        completed: true,
-        trainingPlan: {
-          users: {
-            some: { user_id: userId }
-          }
-        }
+        user_id: userId,
+        completed: true
       }
     });
+    
+    console.log('✅ Sessions complétées pour userId', userId, ':', completedSessions);
 
-    // Sessions totales dans ses plans
+    // 3. Sessions totales dans ses plans
     const totalSessions = await prisma.session.count({
       where: {
         trainingPlan: {
@@ -35,22 +37,22 @@ export const getUserStats = async (req, res) => {
     // Sessions restantes
     const remainingSessions = totalSessions - completedSessions;
 
-    // 5. Temps total d'entraînement
-    const sessionsWithDuration = await prisma.session.findMany({
+    // 4. Temps total d'entraînement
+    const userCompletedSessions = await prisma.sessionProgress.findMany({
       where: {
-        completed: true,
-        trainingPlan: {
-          users: {
-            some: { user_id: userId }
-          }
-        }
+        user_id: userId,
+        completed: true
       },
-      select: { duree: true }
+      include: {
+        session: {
+          select: { duree: true }
+        }
+      }
     });
 
-    const totalDuration = sessionsWithDuration.reduce((sum, session) => sum + session.duree, 0);
+    const totalDuration = userCompletedSessions.reduce((sum, sp) => sum + sp.session.duree, 0);
 
-    // 6. Moyenne d'énergie
+    // 5. Moyenne d'énergie
     const feedbacks = await prisma.feedback.findMany({
       where: { user_id: userId },
       select: { energy_level: true }
@@ -60,14 +62,18 @@ export const getUserStats = async (req, res) => {
       ? (feedbacks.reduce((sum, fb) => sum + fb.energy_level, 0) / feedbacks.length).toFixed(1)
       : 0;
 
-    res.json({
-      activePlans,
+    const result = {
+      activePlans,        
       completedSessions,
       totalSessions,        
       remainingSessions,    
       totalDuration,
       avgEnergy: parseFloat(avgEnergy)
-    });
+    };
+    
+    console.log('Stats finales pour userId', userId, ':', result);
+    
+    res.json(result);
 
   } catch (error) {
     console.error('Erreur getUserStats:', error);

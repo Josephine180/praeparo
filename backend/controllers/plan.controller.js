@@ -217,28 +217,8 @@ export const getUserActiveTrainingPlans = async (req, res) => {
   const userId = req.user.userId;
   console.log('getUserActiveTrainingPlans - START');
   console.log('UserID:', userId);
-  console.log('Type de userId:', typeof userId);
 
   try {
-    console.log('Comptage des associations...');
-    
-    // D'abord compter les associations pour debug
-    const totalUserPlans = await prisma.userTrainingPlan.count();
-    console.log('Total associations dans la base:', totalUserPlans);
-    
-    const userSpecificCount = await prisma.userTrainingPlan.count({
-      where: { user_id: userId }
-    });
-    console.log('Associations pour userId', userId, ':', userSpecificCount);
-
-    // Lister TOUTES les associations pour debug
-    const allAssociations = await prisma.userTrainingPlan.findMany({
-      select: { user_id: true, training_plan_id: true, id: true }
-    });
-    console.log('Toutes les associations:', allAssociations);
-
-    console.log('Recherche des plans pour userId:', userId);
-    
     const userPlans = await prisma.userTrainingPlan.findMany({
       where: { user_id: userId },
       include: {
@@ -249,49 +229,59 @@ export const getUserActiveTrainingPlans = async (req, res) => {
                 sessions: {
                   include: {
                     nutritionTip: true,
+                    sessionProgresses: {
+                      where: { user_id: userId }
+                    }
                   }
                 }
               }
             },
             sessions: {
               include: {
-                nutritionTip: true
+                nutritionTip: true,
+                sessionProgresses: {
+                  where: { user_id: userId }
+                }
               }
             },
           }
         }
       }
     });
-
-    console.log('UserPlans trouvés:', userPlans.length);
-    console.log('Détail userPlans:', JSON.stringify(userPlans, null, 2));
-
+    
     if (!userPlans.length) {
-      console.log('Aucun plan trouvé - retour 404');
-      return res.status(404).json({ 
-        error: 'Aucun plan actif trouvé pour cet utilisateur',
-        debug: {
-          userId: userId,
-          totalAssociations: totalUserPlans,
-          userAssociations: userSpecificCount,
-          allAssociations: allAssociations
-        }
-      });
+      console.log('Aucun plan trouvé - retour tableau vide');
+      return res.json([]); // 👈 Ici, retourner un tableau vide
     }
 
-    // Extraire juste les trainingPlans pour simplifier le front
-    const plans = userPlans.map(up => up.trainingPlan);
-    console.log('Plans extraits:', plans.length);
-    console.log('Envoi des plans au frontend');
-    
-    res.json(plans);
+    // ... reste du code inchangé
+    const transformedPlans = userPlans.map(up => {
+      const plan = { ...up.trainingPlan };
+      
+      plan.weeks = plan.weeks.map(week => ({
+        ...week,
+        sessions: week.sessions.map(session => ({
+          ...session,
+          completed: session.sessionProgresses.length > 0 ? session.sessionProgresses[0].completed : false
+        }))
+      }));
+
+      plan.sessions = plan.sessions.map(session => ({
+        ...session,
+        completed: session.sessionProgresses.length > 0 ? session.sessionProgresses[0].completed : false
+      }));
+
+      return plan;
+    });
+
+    res.json(transformedPlans);
     
   } catch (error) {
     console.error("Erreur dans getUserActiveTrainingPlans:", error);
-    console.error("Stack trace:", error.stack);
     res.status(500).json({ error: 'Erreur serveur', details: error.message });
   }
 };
+
 
 export const quitTrainingPlan = async (req, res) => {
   const userId = req.user?.userId;

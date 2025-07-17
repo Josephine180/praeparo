@@ -17,6 +17,7 @@ import statsRoutes from './routes/stats.routes.js';
 
 const app = express();
 
+// Configuration CORS corrigée
 app.use(cors({
   origin: (origin, callback) => {
     // Autoriser toutes les origines en développement
@@ -41,7 +42,15 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Accept',
+    'Origin'
+  ], // ✅ Ajout des headers manquants
+  exposedHeaders: ['Set-Cookie'], // ✅ Exposer les cookies
+  optionsSuccessStatus: 200 // ✅ Pour les anciens navigateurs
 }));
 
 app.use(cookieParser());
