@@ -15,6 +15,21 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     const data = await response.json();
 
     if (response.ok) {
+      // Vider le cache local
+      if (typeof(Storage) !== "undefined") {
+        localStorage.clear();
+        sessionStorage.clear();
+      }
+      
+      // Vider le cache navigateur
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => {
+            caches.delete(name);
+          });
+        });
+      }
+      
       alert('Connexion réussie !');
       
       // Vérifier s'il y a une page de redirection dans l'URL
@@ -22,11 +37,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
       const redirectUrl = urlParams.get('redirect');
       
       if (redirectUrl) {
-        // Rediriger vers la page d'origine
-        window.location.href = decodeURIComponent(redirectUrl);
+        window.location.href = decodeURIComponent(redirectUrl) + '?t=' + new Date().getTime();
       } else {
-        // Redirection par défaut vers le dashboard
-        window.location.href = 'dashboard.html';
+        window.location.href = 'dashboard.html?t=' + new Date().getTime();
       }
     } else {
       alert(data.error || 'Erreur lors de la connexion');
@@ -36,4 +49,3 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     alert('Erreur réseau ou serveur');
   }
 });
-

@@ -10,7 +10,7 @@
     display: flex;
     justify-content: flex-end;
     color: white;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
   
   .menu ul {
@@ -29,7 +29,6 @@
   }
   
   .menu a:hover {
-    color: #FFC107;
     text-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
   }
   

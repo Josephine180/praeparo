@@ -1,5 +1,13 @@
+// Variable pour tracker la modale actuelle
+let currentModalElement = null;
+
 // Créer une modale
 function createModal(title, content, buttons = []) {
+  // Fermer toute modale existante
+  if (currentModalElement) {
+    currentModalElement.remove();
+  }
+
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
   
@@ -22,20 +30,42 @@ function createModal(title, content, buttons = []) {
   overlay.appendChild(modal);
   document.body.appendChild(overlay);
   
+  // Stocker la référence
+  currentModalElement = overlay;
+  
   // Fermer la modale
-  overlay.querySelector('.modal-close').onclick = () => overlay.remove();
-  overlay.onclick = (e) => {
-    if (e.target === overlay) overlay.remove();
+  const closeBtn = overlay.querySelector('.modal-close');
+  closeBtn.onclick = () => {
+    overlay.remove();
+    currentModalElement = null;
   };
+  
+  overlay.onclick = (e) => {
+    if (e.target === overlay) {
+      overlay.remove();
+      currentModalElement = null;
+    }
+  };
+  
+  // Gérer la touche Escape
+  const handleEscape = (e) => {
+    if (e.key === 'Escape' && currentModalElement === overlay) {
+      overlay.remove();
+      currentModalElement = null;
+      document.removeEventListener('keydown', handleEscape);
+    }
+  };
+  
+  document.addEventListener('keydown', handleEscape);
   
   return overlay;
 }
 
 // Fermer la modale actuelle
 function closeCurrentModal() {
-  const modal = document.querySelector('.modal-overlay');
-  if (modal) {
-    modal.remove();
+  if (currentModalElement) {
+    currentModalElement.remove();
+    currentModalElement = null;
   }
 }
 
@@ -66,9 +96,14 @@ function handleNutritionTip(e) {
   }
 }
 
-// Modale de feedback
+// Modale de feedback avec validation améliorée
 function handleFeedbackView(e) {
   const sessionId = e.target.getAttribute('data-session-id');
+  
+  if (!sessionId) {
+    console.error('Session ID manquant pour le feedback');
+    return;
+  }
   
   const energyId = `energy-${sessionId}`;
   const motivationId = `motivation-${sessionId}`;
@@ -80,28 +115,31 @@ function handleFeedbackView(e) {
       <div class="form-group">
         <label>⚡ Niveau d'énergie :</label>
         <input type="range" id="${energyId}" min="1" max="10" value="5" 
-               oninput="document.getElementById('${energyId}-val').textContent = this.value">
+               oninput="updateRangeValue('${energyId}', this.value)">
         <span id="${energyId}-val" class="range-display">5</span>/10
       </div>
       
       <div class="form-group">
         <label>💪 Niveau de motivation :</label>
         <input type="range" id="${motivationId}" min="1" max="10" value="5" 
-               oninput="document.getElementById('${motivationId}-val').textContent = this.value">
+               oninput="updateRangeValue('${motivationId}', this.value)">
         <span id="${motivationId}-val" class="range-display">5</span>/10
       </div>
       
       <div class="form-group">
         <label>😴 Niveau de fatigue :</label>
         <input type="range" id="${fatigueId}" min="1" max="10" value="5" 
-               oninput="document.getElementById('${fatigueId}-val').textContent = this.value">
+               oninput="updateRangeValue('${fatigueId}', this.value)">
         <span id="${fatigueId}-val" class="range-display">5</span>/10
       </div>
       
       <div class="form-group">
         <label>💭 Commentaire (optionnel) :</label>
-        <textarea id="${commentId}" placeholder="Comment vous sentez-vous après cette session ?"></textarea>
+        <textarea id="${commentId}" placeholder="Comment vous sentez-vous après cette session ?" maxlength="500"></textarea>
+        <small style="color: rgba(255,255,255,0.6);">0/500 caractères</small>
       </div>
+      
+      <div id="feedback-error" style="color: #dc3545; margin-top: 10px; display: none;"></div>
     </div>
   `;
   
@@ -109,46 +147,172 @@ function handleFeedbackView(e) {
     '💬 Donner mon feedback',
     formContent,
     [
-      { text: 'Annuler', class: 'btn-secondary', onclick: 'this.closest(".modal-overlay").remove()' },
-      { text: 'Envoyer', class: 'btn-primary', onclick: `submitFeedbackModal(${sessionId})` }
+      { 
+        text: 'Annuler', 
+        class: 'btn-secondary', 
+        onclick: 'closeCurrentModal()' 
+      },
+      { 
+        text: 'Envoyer', 
+        class: 'btn-primary', 
+        onclick: `submitFeedbackModal(${sessionId})` 
+      }
     ]
   );
+  
+  // Ajouter l'event listener pour le compteur de caractères
+  setTimeout(() => {
+    const textarea = document.getElementById(commentId);
+    const counter = textarea.nextElementSibling;
+    
+    if (textarea && counter) {
+      textarea.addEventListener('input', function() {
+        const length = this.value.length;
+        counter.textContent = `${length}/500 caractères`;
+        if (length > 450) {
+          counter.style.color = '#ffc107';
+        } else {
+          counter.style.color = 'rgba(255,255,255,0.6)';
+        }
+      });
+    }
+  }, 100);
 }
 
-// Soumettre le feedback
-function submitFeedbackModal(sessionId) {
-  const energy = document.getElementById(`energy-${sessionId}`).value;
-  const motivation = document.getElementById(`motivation-${sessionId}`).value;
-  const fatigue = document.getElementById(`fatigue-${sessionId}`).value;
-  const comment = document.getElementById(`comment-${sessionId}`).value || '';
+// Fonction pour mettre à jour les valeurs des ranges
+function updateRangeValue(rangeId, value) {
+  const display = document.getElementById(rangeId + '-val');
+  if (display) {
+    display.textContent = value;
+  }
+}
+
+// Soumettre le feedback avec validation et gestion d'erreurs améliorée
+async function submitFeedbackModal(sessionId) {
+  const errorDiv = document.getElementById('feedback-error');
+  const submitButton = document.querySelector('.btn-primary');
   
-  const data = {
-    energy_level: parseInt(energy),
-    motivation_level: parseInt(motivation),
-    fatigue_level: parseInt(fatigue),
-    comment: comment
-  };
+  // Réinitialiser les erreurs
+  if (errorDiv) {
+    errorDiv.style.display = 'none';
+    errorDiv.textContent = '';
+  }
   
-  fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Erreur lors de l\'envoi');
-    return res.json();
-  })
-  .then(result => {
-    document.querySelector('.modal-overlay').remove();
-    alert('✅ Feedback enregistré !');
-    loadFeedbacks(sessionId);
-  })
-  .catch(err => {
-    alert('❌ Erreur : ' + err.message);
-  });
+  // Désactiver le bouton pendant l'envoi
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Envoi en cours...';
+  }
+  
+  try {
+    const energy = document.getElementById(`energy-${sessionId}`);
+    const motivation = document.getElementById(`motivation-${sessionId}`);
+    const fatigue = document.getElementById(`fatigue-${sessionId}`);
+    const comment = document.getElementById(`comment-${sessionId}`);
+    
+    // Validation des éléments
+    if (!energy || !motivation || !fatigue) {
+      throw new Error('Éléments du formulaire manquants');
+    }
+    
+    const data = {
+      energy_level: parseInt(energy.value),
+      motivation_level: parseInt(motivation.value),
+      fatigue_level: parseInt(fatigue.value),
+      comment: comment ? comment.value.trim() : ''
+    };
+    
+    // Validation des données
+    if (data.energy_level < 1 || data.energy_level > 10) {
+      throw new Error('Le niveau d\'énergie doit être entre 1 et 10');
+    }
+    if (data.motivation_level < 1 || data.motivation_level > 10) {
+      throw new Error('Le niveau de motivation doit être entre 1 et 10');
+    }
+    if (data.fatigue_level < 1 || data.fatigue_level > 10) {
+      throw new Error('Le niveau de fatigue doit être entre 1 et 10');
+    }
+    if (data.comment.length > 500) {
+      throw new Error('Le commentaire ne peut pas dépasser 500 caractères');
+    }
+    
+    console.log('📤 Envoi du feedback:', data);
+    
+    const response = await fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.error || `Erreur ${response.status}: ${response.statusText}`);
+    }
+    
+    console.log('✅ Feedback envoyé avec succès:', result);
+    
+    // Fermer la modale
+    closeCurrentModal();
+    
+    // Afficher un message de succès
+    showSuccessMessage('✅ Feedback enregistré avec succès !');
+    
+    // Recharger les feedbacks pour cette session
+    if (typeof loadFeedbacks === 'function') {
+      loadFeedbacks(sessionId);
+    }
+    
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'envoi du feedback:', error);
+    
+    // Afficher l'erreur dans la modale
+    if (errorDiv) {
+      errorDiv.style.display = 'block';
+      errorDiv.textContent = error.message || 'Erreur lors de l\'envoi du feedback';
+    } else {
+      alert('❌ Erreur : ' + error.message);
+    }
+  } finally {
+    // Réactiver le bouton
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Envoyer';
+    }
+  }
+}
+
+// Fonction pour afficher un message de succès
+function showSuccessMessage(message) {
+  const successDiv = document.createElement('div');
+  successDiv.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 10001;
+    font-weight: 600;
+    animation: slideIn 0.3s ease;
+  `;
+  
+  successDiv.textContent = message;
+  document.body.appendChild(successDiv);
+  
+  // Supprimer après 3 secondes
+  setTimeout(() => {
+    successDiv.remove();
+  }, 3000);
 }
 
 // Rendre les fonctions disponibles globalement
+window.createModal = createModal;
 window.closeCurrentModal = closeCurrentModal;
+window.handleNutritionTip = handleNutritionTip;
+window.handleFeedbackView = handleFeedbackView;
 window.submitFeedbackModal = submitFeedbackModal;
+window.updateRangeValue = updateRangeValue;

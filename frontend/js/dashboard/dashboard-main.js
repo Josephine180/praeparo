@@ -4,16 +4,24 @@
 let allPlans = [];
 let currentActiveTab = null;
 
-// TES fonctions de chargement existantes
 async function loadQuickStats() {
+  // Réinitialiser les stats d'abord
+  document.getElementById('completed-sessions').textContent = '0';
+  document.getElementById('remaining-sessions').textContent = '0';
+  document.getElementById('total-duration').textContent = '0';
+  document.getElementById('avg-energy').textContent = '0';
+  
   try {
     const res = await fetch('http://localhost:3000/stats/overview', {
-      credentials: 'include'
+      credentials: 'include',
+      cache: 'no-cache',
     });
     
     if (res.ok) {
       const stats = await res.json();
+      console.log('📊 Stats reçues:', stats);
       
+      // Mettre à jour avec les vraies données
       document.getElementById('completed-sessions').textContent = stats.completedSessions;
       document.getElementById('remaining-sessions').textContent = stats.remainingSessions;
       document.getElementById('total-duration').textContent = stats.totalDuration;
@@ -23,7 +31,6 @@ async function loadQuickStats() {
     console.error('Erreur stats:', error);
   }
 }
-
 async function loadUserInfo() {
   try {
     const res = await fetch('http://localhost:3000/auth/me', {
@@ -54,8 +61,13 @@ async function loadUserPlans() {
 
     if (res.status === 401) {
       container.innerHTML = `
-        <p>Vous devez être connecté pour voir votre dashboard.</p>
-        <button id="loginBtn">Se connecter</button>
+        <div style="text-align: center; padding: 60px 20px;">
+          <div style="font-size: 3rem; margin-bottom: 20px;">🔒</div>
+          <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; margin-bottom: 30px;">
+            Vous devez être connecté pour voir votre dashboard.
+          </p>
+          <button id="loginBtn" class="btn btn-primary">Se connecter</button>
+        </div>
       `;
       document.getElementById('loginBtn').addEventListener('click', () => {
         window.location.href = 'login.html';
@@ -67,12 +79,35 @@ async function loadUserPlans() {
 
     allPlans = await res.json();
 
+    // Gestion du cas "pas de plans"
     if (!allPlans.length) {
-      container.innerHTML = '<p>Aucun plan actif associé à votre compte.</p>';
+      container.innerHTML = `
+        <div style="text-align: center; padding: 60px 20px;">
+          <h3 style="color: #FFA500; font-size: 1.8rem; margin-bottom: 15px;">
+            Aucun programme actif
+          </h3>
+          <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            Vous n'avez pas encore commencé de programme d'entraînement.<br>
+            Choisissez votre objectif et commencez votre parcours !
+          </p>
+          <button id="choosePlanBtn" class="btn btn-primary" style="padding: 15px 30px; font-size: 1.1rem;">
+            🔍 Choisir mon programme
+          </button>
+        </div>
+      `;
+      
+      // Event listener pour le bouton
+      document.getElementById('choosePlanBtn').addEventListener('click', () => {
+        window.location.href = 'index.html#programs';
+      });
+      
+      // Masquer la section focus hebdomadaire
+      document.getElementById('weekly-focus').style.display = 'none';
+      
       return;
     }
 
-    // Utiliser TES fonctions de génération
+    // Utiliser vos fonctions de génération existantes
     generateTabs(allPlans);
     generateWeeklyFocus(allPlans);
     generateTabsContent(allPlans);
@@ -81,10 +116,21 @@ async function loadUserPlans() {
     attachEventListeners();
 
   } catch (err) {
-    container.innerHTML = `<p>Erreur lors du chargement des plans: ${err.message}</p>`;
+    container.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px;">
+        <div style="font-size: 3rem; margin-bottom: 20px;">⚠️</div>
+        <p style="color: #dc3545; font-size: 1.2rem;">
+          Erreur lors du chargement des plans: ${err.message}
+        </p>
+        <button onclick="window.location.reload()" class="btn btn-secondary" style="margin-top: 20px;">
+          Réessayer
+        </button>
+      </div>
+    `;
     console.error(err);
   }
 }
+
 
 // TES fonctions d'événements existantes
 function showTab(planType, buttonElement) {
@@ -135,7 +181,6 @@ async function handleSessionComplete(e) {
     const res = await fetch(url, {
       method: 'PATCH',
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json' }
     });
     
     if (!res.ok) throw new Error('Erreur lors de la mise à jour');
@@ -246,33 +291,62 @@ async function quitPlan(planId, planName) {
 }
 
 function setupLogout() {
-  document.getElementById('logout-btn').addEventListener('click', async () => {
-    try {
-      const res = await fetch('http://localhost:3000/users/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
-      
-      if (res.ok) {
-        window.location.href = 'index.html';
-      }
-    } catch (error) {
-      console.error('Erreur déconnexion:', error);
-    }
-  });
+  document.getElementById('logout-btn').addEventListener('click', logout);
+  
+  // Ajout pour le bouton mobile s'il existe
+  const mobileLogoutBtn = document.getElementById('logout-btn-mobile');
+  if (mobileLogoutBtn) {
+    mobileLogoutBtn.addEventListener('click', logout);
+  }
 }
 
-// TON initialisation existante
-document.addEventListener('DOMContentLoaded', () => {
-  loadQuickStats();
-  loadUserInfo();
-  loadUserPlans();
-  setupLogout();
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    // D'abord vérifier l'auth et charger les infos utilisateur
+    await loadUserInfo();
+    
+    // Attendre un peu pour s'assurer que l'utilisateur est bien identifié
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
+    // Puis charger les stats seulement si authentifié
+    await loadQuickStats();
+    await loadUserPlans();
+    
+    setupLogout();
+  } catch (error) {
+    console.error('Erreur initialisation:', error);
+    window.location.href = 'login.html';
+  }
 });
 
-// Rendre les fonctions globales (comme dans ton code)
-window.showTab = showTab;
-window.toggleWeek = toggleWeek;
-window.quitPlan = quitPlan;
-window.closeCurrentModal = closeCurrentModal;
-window.submitFeedbackModal = submitFeedbackModal;
+async function logout() {
+  try {
+    // Déconnexion côté serveur
+    const res = await fetch('http://localhost:3000/users/logout', {
+      method: 'POST',
+      credentials: 'include'
+    });
+    
+    // Nettoyage côté client
+    if (typeof(Storage) !== "undefined") {
+      localStorage.clear();
+      sessionStorage.clear();
+    }
+    
+    // Vider le cache navigateur
+    if ('caches' in window) {
+      caches.keys().then(names => {
+        names.forEach(name => {
+          caches.delete(name);
+        });
+      });
+    }
+    
+    if (res.ok) {
+      window.location.href = 'index.html';
+    }
+  } catch (error) {
+    console.error('Erreur déconnexion:', error);
+    window.location.href = 'index.html';
+  }
+}

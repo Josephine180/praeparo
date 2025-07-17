@@ -47,6 +47,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
   }
 });
 
+
 async function debugAuthAndRedirect() {
   console.log('🔍 Début de la vérification auth...');
   
@@ -70,8 +71,15 @@ async function debugAuthAndRedirect() {
     if (authResponse.ok) {
       const user = await authResponse.json();
       console.log('✅ Authentification confirmée:', user);
+      
+      // Vider le cache
+      if (typeof(Storage) !== "undefined") {
+        localStorage.clear();
+        sessionStorage.clear();
+      }
+      
       alert('Connexion confirmée ! Redirection vers le dashboard...');
-      window.location.href = 'dashboard.html';
+      window.location.href = 'dashboard.html?t=' + new Date().getTime();
     } else {
       const errorData = await authResponse.text();
       console.log('❌ Erreur auth:', errorData);
