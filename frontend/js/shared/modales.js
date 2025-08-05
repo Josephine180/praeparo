@@ -85,7 +85,7 @@ function handleNutritionTip(e) {
     );
   } else {
     createModal(
-      '🍎 Conseil Nutritionnel',
+      'Conseil Nutritionnel',
       '<p>Aucun conseil nutritionnel disponible pour cette session.</p>',
       [{ 
         text: 'OK', 
@@ -251,13 +251,13 @@ async function submitFeedbackModal(sessionId) {
       throw new Error(result.error || `Erreur ${response.status}: ${response.statusText}`);
     }
     
-    console.log('✅ Feedback envoyé avec succès:', result);
+    console.log('Feedback envoyé avec succès:', result);
     
     // Fermer la modale
     closeCurrentModal();
     
     // Afficher un message de succès
-    showSuccessMessage('✅ Feedback enregistré avec succès !');
+    showSuccessMessage('Feedback enregistré avec succès !');
     
     // Recharger les feedbacks pour cette session
     if (typeof loadFeedbacks === 'function') {
@@ -265,14 +265,14 @@ async function submitFeedbackModal(sessionId) {
     }
     
   } catch (error) {
-    console.error('❌ Erreur lors de l\'envoi du feedback:', error);
+    console.error('Erreur lors de l\'envoi du feedback:', error);
     
     // Afficher l'erreur dans la modale
     if (errorDiv) {
       errorDiv.style.display = 'block';
       errorDiv.textContent = error.message || 'Erreur lors de l\'envoi du feedback';
     } else {
-      alert('❌ Erreur : ' + error.message);
+      alert('Erreur : ' + error.message);
     }
   } finally {
     // Réactiver le bouton
