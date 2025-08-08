@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon Dashboard | Praeparo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/dashboard.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- CSS propre et séparé -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/dashboard-new.css" />
 </head>
 <body>
+    <!-- Navigation mobile -->
     <nav class="mobile-nav">
         <div class="mobile-nav-brand">PRAEPARO</div>
         <ul class="mobile-nav-menu">
@@ -37,14 +39,15 @@
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <button id="logout-btn-mobile" class="mobile-nav-link" style="background: none; border: none; cursor: pointer;">
+                <button id="logout-btn-mobile" class="mobile-nav-link">
                     <span class="mobile-nav-icon">🚪</span>
                     <span>Déconnexion</span>
                 </button>
             </li>
         </ul>
     </nav>
-    <!-- SIDEBAR -->
+
+    <!-- Sidebar desktop -->
     <aside class="sidebar">
         <a class="logo" href="dashboard.html">
             <h1>PRAEPARO</h1>
@@ -77,7 +80,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <button id="logout-btn" class="nav-link" style="width: 100%; border: none; background: none; cursor: pointer;">
+                    <button id="logout-btn" class="nav-link">
                         <span class="nav-icon">🚪</span>
                         <span>Déconnexion</span>
                     </button>
@@ -86,17 +89,17 @@
         </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- Contenu principal -->
     <main class="main-content">
         <!-- Header avec nom utilisateur -->
         <header class="dashboard-header">
-            <h1 class="welcome-title">Bonjour, <span id="user-name">Utilisateur</span> ! 👋</h1>
+            <h1 class="welcome-title">Bonjour, <span id="user-name">Utilisateur</span> !</h1>
             <p class="welcome-subtitle">Voici un aperçu de vos progrès d'entraînement</p>
         </header>
 
-        <!-- Stats Cards -->
+        <!-- Stats Cards - HTML STATIQUE -->
         <section class="stats-overview">
-            <div class="stats-grid" id="stats-cards">
+            <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-header">
                         <div class="stat-icon">✅</div>
@@ -143,32 +146,54 @@
             </div>
         </section>
 
-        <!-- Onglets des plans -->
+        <!-- Plans d'entraînement -->
         <section class="plans-section">
             <h2 class="section-title">📋 Mes Plans d'Entraînement</h2>
             
-            <!-- Onglets -->
+            <!-- Onglets (générés par JS si multiple plans) -->
             <div class="tabs-header" id="tabs-header" style="display: none;">
-                <!-- Les onglets seront générés par JavaScript -->
+                <!-- Onglets générés par JavaScript -->
             </div>
             
-            <!-- Contenu des onglets -->
+            <!-- Contenu des plans -->
             <div class="tabs-content">
-                <div id="userPlans">
+                <!-- État de chargement -->
+                <div id="loading-state">
                     <div style="text-align: center; padding: 60px 20px;">
                         <div style="font-size: 3rem; margin-bottom: 20px;">⏳</div>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 1.2rem;">
+                        <p style="color: var(--text-light); font-size: 1.2rem;">
                             Chargement de vos plans d'entraînement...
                         </p>
                     </div>
+                </div>
+
+                <!-- État sans plans -->
+                <div id="no-plans-state" style="display: none;">
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <h3 style="color: var(--orange); font-size: 1.8rem; margin-bottom: 15px;">
+                            Aucun programme actif
+                        </h3>
+                        <p style="color: var(--text-dark); font-size: 1.2rem; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                            Vous n'avez pas encore commencé de programme d'entraînement.<br>
+                            Choisissez votre objectif et commencez votre parcours !
+                        </p>
+                        <a href="index.html#programs" class="btn btn-primary" style="padding: 15px 30px; font-size: 1.1rem;">
+                            🔍 Choisir mon programme
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contenu des plans (généré par JS) -->
+                <div id="plans-content">
+                    <!-- Plans insérés ici avec JS -->
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- JavaScript-->
     <script src="js/shared/utils.js"></script>
     <script src="js/shared/modales.js"></script>
-    <script src="js/dashboard/dashboard-main.js"></script>
-    <script src="js/dashboard/dashboard-ui.js"></script>
+    <script src="js/dashboard/dashboard-clean.js"></script>
 </body>
 </html>

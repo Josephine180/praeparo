@@ -1,0 +1,94 @@
+/* css/base/variables.css - Variables globales pour Praeparo */
+:root {
+    /* COULEURS PRINCIPALES */
+    --orange: #FFA500;
+    --orange-dark: #FF6D2D;
+    --orange-light: #FFB000;
+    --orange-gradient: linear-gradient(45deg, #FF8C00, #FFA500);
+    --orange-gradient-hover: linear-gradient(45deg, #FFA500, #FFB000);
+    --primary-gradient: linear-gradient(45deg, #FFA500, #FF6D2D);
+    --primary-gradient-reverse: linear-gradient(45deg, #FF6D2D, #FFA500);
+    
+    /* BACKGROUNDS  */
+    --bg-main: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+    --bg-dark: #1a1a1a;
+    --bg-darker: #0a0a0a;
+    --bg-medium: #2d2d2d;
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    --bg-glass-hover: rgba(255, 255, 255, 0.08);
+    --bg-sidebar: rgba(20, 20, 20, 0.95);
+    --bg-input: rgba(255, 255, 255, 0.1);
+    --bg-input-focus: rgba(255, 255, 255, 0.15);
+    
+    /*COULEURS STATUS */
+    --success: #28a745;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --info: #17a2b8;
+    --secondary: #6c757d;
+    
+    /* TEXTE */
+    --text-white: white;
+    --text-light: rgba(255, 255, 255, 0.7);
+    --text-lighter: rgba(255, 255, 255, 0.6);
+    --text-lightest: rgba(255, 255, 255, 0.5);
+    --text-dark: rgba(255, 255, 255, 0.9);
+    --text-black: black;
+    
+    /* BORDURES */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.2);
+    --border-orange: rgba(255, 165, 0, 0.3);
+    --border-orange-hover: rgba(255, 165, 0, 0.5);
+    
+    /* ESPACEMENTS */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-2xl: 24px;
+    --space-3xl: 32px;
+    --space-4xl: 40px;
+    --space-5xl: 48px;
+    
+    /* BORDER RADIUS */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 15px;
+    --radius-xl: 20px;
+    --radius-2xl: 25px;
+    --radius-full: 50px;
+    
+    /* OMBRES */
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.3);
+    --shadow-orange: 0 4px 15px rgba(255, 165, 0, 0.3);
+    --shadow-orange-hover: 0 8px 25px rgba(255, 165, 0, 0.4);
+    
+    /* TRANSITIONS  */
+    --transition: 0.3s ease;
+    --transition-fast: 0.2s ease;
+    --transition-slow: 0.4s ease;
+    
+    /*  LAYOUT */
+    --sidebar-width: 280px;
+    --mobile-nav-height: 160px;
+    
+    /* TYPOGRAPHY */
+    --font-family: 'Outfit', sans-serif;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    :root {
+      --mobile-nav-height: 140px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    :root {
+      --mobile-nav-height: 130px;
+    }
+  }
