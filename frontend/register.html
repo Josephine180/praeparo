@@ -3,55 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inscription</title>
-  <link rel="stylesheet" href="css/register.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
+  <title>Inscription | Praeparo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/auth.css" />
   <script src="https://kit.fontawesome.com/3f172e472d.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- Navigation normale -->
   <nav class="menu">
     <ul>
       <li><a href="index.html">Accueil</a></li>
-      <li id="auth-button"></li>
+      <li><a href="index.html#programs">Programmes</a></li>
+      <li><a href="login.html" class="nav-btn">Connexion</a></li>
     </ul>
   </nav>
-  
-  <main>
-    <div class="container">
-      <div class="card">
-        <h1>Inscription</h1>
-        <form id="register-form">
-          <div class="form-group">
-            <label for="firstname">Prénom : </label>
-            <input type="text" id="firstname" placeholder="Jean" required />
-            <i class="fa-solid fa-person-running"></i>
-          </div>
-          <div class="form-group">
-            <label for="name">Nom :</label>
-            <input type="text" id="name" placeholder="Dupont" required />
-            <i class="fa-solid fa-person-running"></i>
-          </div>
-          <div class="form-group">
-            <label for="email">Adresse email :</label>
-            <input type="email" id="email" placeholder="exemple@gmail.com" required />
-            <i class="fa-solid fa-envelope"></i>
-          </div>
-          <div class="form-group">
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" placeholder="EJdmz.34" required />
-            <i class="fa-solid fa-lock"></i>
-          </div>
-          <button class='register-btn' type="submit">Créer un compte</button>
-        </form>
-        <p class="bottom-text">
-          Déjà inscrit ? <a href="login.html">Se connecter</a>
-        </p>
-      </div>
+
+  <!-- Page d'inscription -->
+  <main class="auth-page">
+    <div class="auth-container">
+      <h1 class="auth-title">Inscription</h1>
+      
+      <form id="register-form" class="auth-form">
+        <div class="form-group">
+          <label for="firstname">Prénom :</label>
+          <input type="text" id="firstname" placeholder="Jean" required />
+          <i class="fa-solid fa-person-running"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="name">Nom :</label>
+          <input type="text" id="name" placeholder="Dupont" required />
+          <i class="fa-solid fa-person-running"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Adresse email :</label>
+          <input type="email" id="email" placeholder="exemple@gmail.com" required />
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Mot de passe :</label>
+          <input type="password" id="password" placeholder="EJdmz.34" required />
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        
+        <button type="submit" class="auth-submit">Créer un compte</button>
+      </form>
+      
+      <p class="auth-footer">
+        Déjà inscrit ? <a href="login.html">Se connecter</a>
+      </p>
     </div>
   </main>
 
-  <!-- Scripts placés AVANT la fermeture du body -->
   <script src="js/pages/register.js"></script>
   <script src="js/pages/auth.js"></script>
 </body>
