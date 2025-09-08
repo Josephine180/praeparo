@@ -1,5 +1,3 @@
-// Dans app.js, DÉPLACEZ la ligne express.static AVANT les autres middlewares
-
 import express from 'express';
 import prisma from './src/index.js';
 import userRoutes from './routes/user.routes.js';
@@ -44,7 +42,7 @@ app.use(cors({
       'http://192.168.1.23:5000',
       'http://localhost:3000',
       'http://127.0.0.1:3000',
-      'https://praeparo-3.onrender.com', // ⭐ Ajout de votre domaine
+      'https://praeparo-3.onrender.com',
       'http://praeparo-3.onrender.com'
     ];
     
@@ -88,10 +86,23 @@ app.use('/sessions', sessionRoutes);
 app.use('/nutrition', nutritionRoutes);
 app.use('/weeks', weekRoutes);
 
-// ⭐ 7. Route catch-all pour SPA (Single Page Application)
-app.get('*', (req, res) => {
+// ⭐ 7. Routes SPA corrigées
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+// Route catch-all pour SPA (CORRIGÉE)
+app.get('/*', (req, res) => {
   // Si c'est une route API qui n'existe pas
-  if (req.path.startsWith('/api') || req.path.startsWith('/training-plans') || req.path.startsWith('/users')) {
+  if (req.path.startsWith('/api') || 
+      req.path.startsWith('/training-plans') || 
+      req.path.startsWith('/users') ||
+      req.path.startsWith('/sessions') ||
+      req.path.startsWith('/auth') ||
+      req.path.startsWith('/profile') ||
+      req.path.startsWith('/stats') ||
+      req.path.startsWith('/nutrition') ||
+      req.path.startsWith('/weeks')) {
     return res.status(404).json({ error: 'Route API non trouvée' });
   }
   
