@@ -86,28 +86,29 @@ app.use('/sessions', sessionRoutes);
 app.use('/nutrition', nutritionRoutes);
 app.use('/weeks', weekRoutes);
 
-// ⭐ 7. Routes SPA corrigées
+// ⭐ 7. Route spécifique pour la racine
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
-// Route catch-all pour SPA (CORRIGÉE)
-app.get('/*', (req, res) => {
-  // Si c'est une route API qui n'existe pas
-  if (req.path.startsWith('/api') || 
-      req.path.startsWith('/training-plans') || 
-      req.path.startsWith('/users') ||
-      req.path.startsWith('/sessions') ||
-      req.path.startsWith('/auth') ||
-      req.path.startsWith('/profile') ||
-      req.path.startsWith('/stats') ||
-      req.path.startsWith('/nutrition') ||
-      req.path.startsWith('/weeks')) {
-    return res.status(404).json({ error: 'Route API non trouvée' });
-  }
-  
-  // Sinon, servir index.html pour les routes frontend
+// ⭐ 8. Routes spécifiques pour votre SPA (au lieu du catch-all)
+app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
+
+app.get('/programs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+// ⭐ 9. SUPPRIMÉ : Plus de route catch-all problématique !
+// Les fichiers statiques seront servis par express.static()
 
 export default app;
