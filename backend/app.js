@@ -1,3 +1,7 @@
+// IMPORTANT : charger dotenv EN PREMIER
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import prisma from './src/index.js';
 import userRoutes from './routes/user.routes.js';
@@ -19,7 +23,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // ⭐ 1. SERVIR LES FICHIERS STATIQUES EN PREMIER
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 // ⭐ 2. Configuration des types MIME explicites
 app.use((req, res, next) => {
@@ -33,20 +37,25 @@ app.use((req, res, next) => {
   next();
 });
 
-// 3. Configuration CORS
+// 3. Configuration CORS corrigée
 app.use(cors({
   origin: (origin, callback) => {
+    // Autoriser toutes les origines en développement
+    // En production, vous devriez être plus restrictif
     const allowedOrigins = [
       'http://localhost:5000',
       'http://127.0.0.1:5000',
       'http://192.168.1.23:5000',
       'http://localhost:3000',
       'http://127.0.0.1:3000',
-      'https://praeparo-3.onrender.com',
+      'https://praeparo-3.onrender.com', // ⭐ Ajout de votre domaine
       'http://praeparo-3.onrender.com'
     ];
     
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    // Autoriser les requêtes sans origine (ex: Postman, applications natives)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       console.log('🚫 CORS: Origin not allowed:', origin);
@@ -61,22 +70,23 @@ app.use(cors({
     'X-Requested-With',
     'Accept',
     'Origin'
-  ],
-  exposedHeaders: ['Set-Cookie'],
-  optionsSuccessStatus: 200
+  ], // ✅ Ajout des headers manquants
+  exposedHeaders: ['Set-Cookie'], // ✅ Exposer les cookies
+  optionsSuccessStatus: 200 // ✅ Pour les anciens navigateurs
 }));
 
-// 4. Autres middlewares
 app.use(cookieParser());
-app.use(express.json());
 
-// 5. Logs de debug
 app.use((req, res, next) => {
-  console.log('🌐 Request:', req.method, req.url);
+  console.log('🍪 Cookies reçus:', req.cookies);
+  console.log('📝 Headers:', req.headers);
+  console.log('🌐 URL:', req.method, req.url);
   next();
 });
 
-// 6. Routes API
+app.use(express.json());
+
+// Routes
 app.use('/stats', statsRoutes);
 app.use('/profile', profileRoutes);
 app.use('/auth', authRoutes);
@@ -86,29 +96,25 @@ app.use('/sessions', sessionRoutes);
 app.use('/nutrition', nutritionRoutes);
 app.use('/weeks', weekRoutes);
 
-// ⭐ 7. Route spécifique pour la racine
+// ⭐ Routes pour servir index.html aux routes spécifiques
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
-// ⭐ 8. Routes spécifiques pour votre SPA (au lieu du catch-all)
 app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
 app.get('/programs', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
-
-// ⭐ 9. SUPPRIMÉ : Plus de route catch-all problématique !
-// Les fichiers statiques seront servis par express.static()
 
 export default app;
