@@ -12,7 +12,7 @@ async function loadQuickStats() {
   document.getElementById('avg-energy').textContent = '0';
   
   try {
-    const res = await fetch('http://localhost:3000/stats/overview', {
+    const res = await fetch('/stats/overview', {
       credentials: 'include',
       cache: 'no-cache',
     });
@@ -33,7 +33,7 @@ async function loadQuickStats() {
 }
 async function loadUserInfo() {
   try {
-    const res = await fetch('http://localhost:3000/auth/me', {
+    const res = await fetch('/auth/me', {
       credentials: 'include'
     });
     
@@ -55,7 +55,7 @@ async function loadUserPlans() {
   const container = document.getElementById('userPlans');
   
   try {
-    const res = await fetch('http://localhost:3000/training-plans/user/active-plans', {
+    const res = await fetch('/training-plans/user/active-plans', {
       credentials: 'include',
     });
 
@@ -174,8 +174,8 @@ async function handleSessionComplete(e) {
   const sessionId = btn.getAttribute('data-session-id');
   const isCompleted = btn.getAttribute('data-completed') === 'true';
   const url = isCompleted 
-    ? `http://localhost:3000/sessions/${sessionId}/uncomplete` 
-    : `http://localhost:3000/sessions/${sessionId}/complete`;
+    ? `/sessions/${sessionId}/uncomplete` 
+    : `/sessions/${sessionId}/complete`;
 
   try {
     const res = await fetch(url, {
@@ -221,7 +221,7 @@ function loadAllFeedbacks() {
 }
 
 function loadFeedbacks(sessionId) {
-  fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
+  fetch(`/sessions/${sessionId}/feedback`, {
     method: 'GET',
     credentials: 'include',
   })
@@ -268,7 +268,7 @@ async function quitPlan(planId, planName) {
   if (!confirmed) return;
   
   try {
-    const res = await fetch('http://localhost:3000/training-plans/quit', {
+    const res = await fetch('/training-plans/quit', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function logout() {
   try {
     // Déconnexion côté serveur
-    const res = await fetch('http://localhost:3000/users/logout', {
+    const res = await fetch('/users/logout', {
       method: 'POST',
       credentials: 'include'
     });

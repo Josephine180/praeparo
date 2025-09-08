@@ -6,7 +6,7 @@
 
 async function loadUserInfo() {
   try {
-    const res = await fetch('http://localhost:3000/auth/me', {
+    const res = await fetch('/auth/me', {
       credentials: 'include'
     });
     
@@ -25,7 +25,7 @@ async function loadUserInfo() {
 
 async function loadQuickStats() {
   try {
-    const res = await fetch('http://localhost:3000/stats/overview', {
+    const res = await fetch('/stats/overview', {
       credentials: 'include',
       cache: 'no-cache',
     });
@@ -69,7 +69,7 @@ async function loadUserPlans() {
   const plansContent = document.getElementById('plans-content');
   
   try {
-    const res = await fetch('http://localhost:3000/training-plans/user/active-plans', {
+    const res = await fetch('/training-plans/user/active-plans', {
       credentials: 'include',
     });
 
@@ -328,8 +328,8 @@ async function handleSessionComplete(e) {
   const sessionId = btn.getAttribute('data-session-id');
   const isCompleted = btn.getAttribute('data-completed') === 'true';
   const url = isCompleted 
-    ? `http://localhost:3000/sessions/${sessionId}/uncomplete` 
-    : `http://localhost:3000/sessions/${sessionId}/complete`;
+    ? `/sessions/${sessionId}/uncomplete` 
+    : `/sessions/${sessionId}/complete`;
 
   try {
     const res = await fetch(url, {
@@ -356,7 +356,7 @@ async function handleQuitPlan(e) {
   if (!confirmed) return;
   
   try {
-    const res = await fetch('http://localhost:3000/training-plans/quit', {
+    const res = await fetch('/training-plans/quit', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -438,7 +438,7 @@ function hideWeeklyFocus() {
 
 async function logout() {
   try {
-    const res = await fetch('http://localhost:3000/users/logout', {
+    const res = await fetch('/users/logout', {
       method: 'POST',
       credentials: 'include'
     });
