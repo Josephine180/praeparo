@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let profileExists = true;
 
   try {
-    const res = await fetch('http://localhost:3000/profile/load', {
+    const res = await fetch('/profile/load', {
       method: 'GET',
       credentials: 'include',
     });
@@ -165,14 +165,14 @@ async function saveAllFields(profileExists) {
   try {
     let res;
     if (profileExists) {
-      res = await fetch('http://localhost:3000/profile/update', {
+      res = await fetch('/profile/update', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(profileData),
       });
     } else {
-      res = await fetch('http://localhost:3000/profile/create', {
+      res = await fetch('/profile/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

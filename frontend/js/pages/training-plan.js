@@ -77,7 +77,7 @@ function renderError(message) {
 function loadProgramDetails(programId) {
   const container = document.getElementById('programDetails');
   
-  fetch(`http://localhost:3000/training-plans/id/${programId}`)
+  fetch(`/training-plans/id/${programId}`)
     .then(res => {
       if (!res.ok) throw new Error('Programme non trouvé');
       return res.json();

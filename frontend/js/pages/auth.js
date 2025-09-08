@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!authButton) return console.error("Élément #auth-button introuvable dans le DOM");
 
   function renderAuthButton() {
-    fetch('http://localhost:3000/auth/me', {
+    fetch('/auth/me', {
       method: 'GET',
       credentials: 'include'
     })
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Event listener pour la déconnexion
       document.getElementById('logout-btn').addEventListener('click', () => {
-        fetch('http://localhost:3000/users/logout', {
+        fetch('/users/logout', {
           method: 'POST',
           credentials: 'include'
         })

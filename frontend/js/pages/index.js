@@ -22,7 +22,7 @@ function goToProgramDetail(programId) {
 
 // Chargement des programmes depuis l'API
 function fetchPrograms() {
-  fetch('http://localhost:3000/training-plans', {
+  fetch('/training-plans', {
     credentials: 'include'
   })
     .then(res => {

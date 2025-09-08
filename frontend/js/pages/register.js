@@ -11,7 +11,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
   try {
     console.log('📤 Tentative d\'inscription:', { firstname, name, email });
     
-    const response = await fetch('http://localhost:3000/users/register', {
+    const response = await fetch('/users/register', {
       method: 'POST',
       credentials: 'include',
       headers: { 
@@ -60,7 +60,7 @@ async function debugAuthAndRedirect() {
   try {
     console.log('🔍 Test de l\'endpoint /auth/me...');
     
-    const authResponse = await fetch('http://localhost:3000/auth/me', {
+    const authResponse = await fetch('/auth/me', {
       method: 'GET',
       credentials: 'include'
     });

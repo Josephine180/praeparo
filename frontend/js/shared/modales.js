@@ -238,7 +238,7 @@ async function submitFeedbackModal(sessionId) {
     
     console.log('📤 Envoi du feedback:', data);
     
-    const response = await fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
+    const response = await fetch(`/sessions/${sessionId}/feedback`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

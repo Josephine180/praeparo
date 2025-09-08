@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Vérifier l'authentification
 async function checkAuth() {
   try {
-      const response = await fetch('http://localhost:3000/auth/me', {
+      const response = await fetch('/auth/me', {
           credentials: 'include'
       });
       return response.ok;
@@ -42,7 +42,7 @@ async function loadStats() {
   try {
       console.log('Récupération des statistiques...');
       
-      const response = await fetch('http://localhost:3000/stats/overview', {
+      const response = await fetch('/stats/overview', {
           credentials: 'include'
       });
 

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Vérifier que l'utilisateur est connecté via cookie HTTP-only
-  fetch('http://localhost:3000/auth/me', {
+  fetch('/auth/me', {
     method: 'GET',
     credentials: 'include',
   })
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('📤 Envoi du feedback:', data);
 
         try {
-          const response = await fetch(`http://localhost:3000/sessions/${sessionId}/feedback`, {
+          const response = await fetch(`sessions/${sessionId}/feedback`, {
             method: 'POST',
             credentials: 'include',
             headers: {
