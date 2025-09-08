@@ -136,7 +136,7 @@ function startPlan(programId) {
 }
 
 function checkAuthentication() {
-  return fetch('http://localhost:3000/auth/me', {
+  return fetch('/auth/me', {
     method: 'GET',
     credentials: 'include',
   })
@@ -151,7 +151,7 @@ function submitPlanStart(programId) {
   const startButton = document.getElementById('startButton');
   startButton.innerHTML = '<span class="button-icon">⏳</span><span class="button-text">Démarrage...</span>';
   
-  return fetch('http://localhost:3000/training-plans/start', {
+  return fetch('/training-plans/start', {
     method: 'POST',
     credentials: 'include',
     headers: {
