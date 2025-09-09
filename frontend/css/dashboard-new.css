@@ -144,33 +144,6 @@
   overflow-x: auto;
 }
 
-.tab-button {
-  flex: 1;
-  min-width: 220px;
-  padding: 20px 25px;
-  background: transparent;
-  border: none;
-  color: var(--text-light);
-  cursor: pointer;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
-  font-weight: 600;
-  text-align: center;
-  font-size: 1rem;
-}
-
-.tab-button.active {
-  background: var(--primary-gradient);
-  color: var(--text-white);
-  box-shadow: var(--shadow-orange);
-  transform: translateY(-2px);
-}
-
-.tab-button:hover:not(.active) {
-  background: rgba(255,165,0,0.1);
-  color: var(--text-white);
-}
-
 .plan-progress-mini {
   font-size: 0.8rem;
   opacity: 0.8;

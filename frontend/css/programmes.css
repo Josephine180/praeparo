@@ -1,7 +1,3 @@
-/* ================================
-   CSS/PROGRAMMES.CSS - VERSION PROPRE
-   ================================ */
-
 /* === SECTION PROGRAMMES === */
 .programs-section {
     background: var(--bg-main);
@@ -62,49 +58,6 @@
     margin-bottom: 4rem;
   }
   
-  .toggle-btn {
-    background: var(--bg-glass);
-    border: 2px solid var(--border-orange);
-    color: var(--text-white);
-    padding: 16px 32px;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    transition: var(--transition);
-    margin: 0 10px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .toggle-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--primary-gradient);
-    transition: left 0.3s ease;
-    z-index: -1;
-  }
-  
-  .toggle-btn.active::before {
-    left: 0;
-  }
-  
-  .toggle-btn.active {
-    color: var(--text-white);
-    border-color: var(--orange);
-    box-shadow: var(--shadow-orange);
-    transform: translateY(-2px);
-  }
-  
-  .toggle-btn:hover:not(.active) {
-    background: rgba(255, 165, 0, 0.15);
-    border-color: rgba(255, 165, 0, 0.5);
-    transform: translateY(-2px);
-  }
   
   /* === GRILLE === */
   .grid-container {
@@ -203,31 +156,6 @@
     margin: 0 0 1.5rem 0;
     text-align: center;
     line-height: 1.4;
-  }
-  
-  .card-button, 
-  .details-btn {
-    width: 100%;
-    padding: 14px 20px;
-    background: var(--primary-gradient);
-    border: none;
-    border-radius: var(--radius-lg);
-    color: var(--text-white);
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: var(--shadow-orange);
-    margin-top: auto;
-  }
-  
-  .card-button:hover, 
-  .details-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 165, 0, 0.4);
-    background: linear-gradient(45deg, #FF6D2D, #FFA500);
   }
   
   /* === CARROUSEL === */
@@ -384,12 +312,6 @@
     
     .carousel-card {
       padding: 2rem;
-    }
-    
-    .toggle-btn {
-      padding: 14px 24px;
-      font-size: 1rem;
-      margin: 5px;
     }
   }
   

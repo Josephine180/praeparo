@@ -1,0 +1,316 @@
+/* ================================
+   BASE/MODALS.CSS
+   ================================
+   Système de modales unifié
+   Compatible avec js/shared/modales.js
+   ================================ */
+
+/* === OVERLAY DE MODALE === */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* === MODALE PRINCIPALE === */
+  .modal {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+  }
+  
+  /* === HEADER DE MODALE === */
+  .modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg, rgba(255, 165, 0, 0.1), rgba(255, 109, 45, 0.1));
+  }
+  
+  .modal-header h3 {
+    margin: 0;
+    color: var(--orange);
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+    line-height: 1;
+  }
+  
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--orange);
+  }
+  
+  /* === BODY DE MODALE === */
+  .modal-body {
+    padding: 25px;
+    color: var(--text-white);
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  
+  .modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  .modal-body::-webkit-scrollbar-thumb {
+    background: var(--orange);
+    border-radius: 3px;
+  }
+  
+  .modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-light);
+  }
+  
+  /* === FOOTER DE MODALE === */
+  .modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  
+  /* === CONTENU SPÉCIFIQUE FEEDBACK === */
+  .feedback-form-modal {
+    width: 100%;
+  }
+  
+  .feedback-form-modal .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .feedback-form-modal label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: var(--text-white);
+    font-weight: 500;
+    display: block;
+  }
+  
+  .feedback-form-modal input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  
+  .feedback-form-modal input[type="range"]:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .range-display {
+    color: var(--orange);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-left: 10px;
+  }
+  
+  .feedback-form-modal textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    border: 1px solid var(--border-medium);
+    color: var(--text-white);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition);
+  }
+  
+  .feedback-form-modal textarea:focus {
+    border-color: var(--orange);
+    background: var(--bg-input-focus);
+    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
+  }
+  
+  .feedback-form-modal textarea::placeholder {
+    color: var(--text-lighter);
+    font-style: italic;
+  }
+  
+  /* === CONTENU TIPS NUTRITIONNELS === */
+  .tip-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-white);
+    text-align: left;
+    background: rgba(255, 165, 0, 0.1);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--orange);
+  }
+  
+  /* === MESSAGES D'ERREUR DANS MODALES === */
+  .modal-body .error-message,
+  .modal-body .success-message,
+  .modal-body .info-message {
+    margin: 15px 0;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .modal-body .error-message {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: var(--danger);
+  }
+  
+  .modal-body .success-message {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    color: var(--success);
+  }
+  
+  .modal-body .info-message {
+    background: rgba(23, 162, 184, 0.1);
+    border: 1px solid rgba(23, 162, 184, 0.3);
+    color: var(--info);
+  }
+  
+  /* === ANIMATIONS === */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .modal {
+      width: 95%;
+      max-width: 95%;
+      max-height: 90vh;
+    }
+    
+    .modal-header {
+      padding: 15px 20px;
+    }
+    
+    .modal-header h3 {
+      font-size: 1.2rem;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    .modal-footer {
+      padding: 15px 20px;
+      flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+      width: 100%;
+    }
+    
+    .feedback-form-modal textarea {
+      min-height: 60px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal {
+      width: 98%;
+      max-height: 95vh;
+    }
+    
+    .modal-header {
+      padding: 12px 15px;
+    }
+    
+    .modal-header h3 {
+      font-size: 1.1rem;
+    }
+    
+    .modal-body {
+      padding: 15px;
+    }
+    
+    .modal-footer {
+      padding: 12px 15px;
+    }
+    
+    .tip-text {
+      font-size: 1rem;
+      padding: 15px;
+    }
+  }
+  
+  /* === ACCESSIBILITÉ === */
+  @media (prefers-reduced-motion: reduce) {
+    .modal-overlay {
+      animation: none;
+    }
+    
+    .modal {
+      animation: none;
+    }
+  }
+  
+  /* Focus pour navigation au clavier */
+  .modal-close:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+  }
+  
