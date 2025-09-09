@@ -7,7 +7,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 100px 20px 40px; /* Espace pour le menu fixed de main.css */
+    padding: 120px 20px 40px; /* Espace pour le menu fixed de main.css */
   }
   
   /* === CONTENEUR AUTH === */
@@ -18,7 +18,7 @@
     padding: 50px;
     border-radius: var(--radius-xl);
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
     box-shadow: var(--shadow-lg);
     position: relative;
@@ -107,7 +107,7 @@
     font-size: 1.1rem;
     pointer-events: none;
   }
-  
+
   /* === TEXTE EN BAS === */
   .auth-footer {
     text-align: center;
