@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Praeparo</title>
+    <title>Praeparo - Programmes Course à Pied Personnalisés | 5km, 10km, Marathon</title>
+    <meta name="description" content="Atteignez vos objectifs de course avec Praeparo. Programmes personnalisés du 5km au marathon, suivi de progrès et conseils nutrition.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/main.css" />  
     <link rel="stylesheet" href="css/programmes.css"/>
@@ -11,10 +12,11 @@
 </head>
 <body>
     <!-- Section Hero -->
-    <section class="hero-section">
-        <nav class="menu">
+    <main role="main" id="main-content">
+    <section class="hero-section" aria-labelledby="hero-title">
+        <nav class="menu" role="navigation" aria-label="Navigation principale">
             <ul>
-                <li><a href="#">Accueil</a></li>
+                <li><a href="#" aria-current="page">Accueil</a></li>
                 <li><a href="#programs">Programmes</a></li>
                 <li id="auth-button"><span class="nav-btn">Chargement</span></li>
             </ul>
@@ -26,7 +28,7 @@
         </div>
 
         <div class="hero-content">
-            <h1 class="hero-title">PRAEPARO</h1>
+            <h1 id="hero-title" class="hero-title">PRAEPARO</h1>
             <p class="hero-subtitle">Transformez vos efforts en réussites !</p>
             <p class="hero-description">
                 Accédez à des programmes d'entraînement sur mesure, adaptés à
@@ -41,8 +43,8 @@
     <section class="programs-section" id="programs">
         <div class="programs-container">
             <div class="section-header">
-                <h2 class="section-title">Nos Programmes</h2>
-                <p class="section-subtitle">Choisissez votre parcours et franchissez à coup sûr la ligne d'arrivée.</p>
+                <h2 class="section-title">Programmes d'Entraînement Running</h2>
+                <p class="section-subtitle">Du débutant 5km au marathon confirmé : choisissez votre programme personnalisé et atteignez vos objectifs de course à pied.</p>
             </div>
 
             <div class="toggle-container">
@@ -68,6 +70,7 @@
             </div>
         </div>
     </section>
+</main>
     <script src="js/pages/index.js"></script>
     <script src="js/pages/auth.js"></script>
 </body>

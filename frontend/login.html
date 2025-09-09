@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion | Praeparo</title>
+  <meta name="robots" content="noindex, nofollow">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/auth.css" />
@@ -11,7 +12,7 @@
 </head>
 <body>
   <!-- Menu simple -->
-  <nav class="top-menu">
+  <nav class="top-menu" role="navigation" aria-label="Navigation principale">
     <div></div>
     <ul class="top-nav-menu">
       <li><a href="index.html" class="top-nav-link">Accueil</a></li>
@@ -21,21 +22,21 @@
   </nav>
 
   <!-- Page de connexion -->
-  <main class="auth-page">
+  <main class="auth-page"  role="main" id="main-content">
     <div class="auth-container">
-      <h1 class="auth-title">Connexion</h1>
+      <h1 id="login-title" class="auth-title">Connexion</h1>
       
-      <form id="login-form" class="auth-form">
+      <form id="login-form" class="auth-form" role="form" aria-labelledby="login-title">
         <div class="form-group">
           <label for="email">Adresse email :</label>
-          <input type="email" id="email" placeholder="exemple@gmail.com" required />
-          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="email" name="email" placeholder="exemple@gmail.com" required aria-required="true" autocomplete="email" />
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
         </div>
         
         <div class="form-group">
           <label for="password">Mot de passe :</label>
-          <input type="password" id="password" placeholder="Mot de passe sécurisé" required />
-          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="Mot de passe sécurisé" required aria-required="true" autocomplete="current-password" />
+          <i class="fa-solid fa-lock" aria-hidden="true"></i>
         </div>
         
         <button type="submit" class="auth-submit">Se connecter</button>

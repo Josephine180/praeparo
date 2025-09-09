@@ -6,11 +6,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/training-plan.css" />
-  <title>Détail du programme</title>
+  <title>Détails du programme running</title>
 </head>
 <body>
   <!-- Menu unifié comme les autres pages -->
-  <nav class="top-menu">
+  <nav class="top-menu"  role="navigation" aria-label="Menu principal">
     <div></div> <!-- Espace vide à gauche -->
     <ul class="top-nav-menu">
       <li><a href="index.html" class="top-nav-link">Accueil</a></li>
@@ -22,15 +22,15 @@
   </nav>
 
   <!-- Container principal -->
-  <main class="main-container">
+  <main class="main-container" id="main-content" role="main">
     <!-- Header avec titre -->
     <header class="page-header">
       <h1 class="page-title">Détails du programme</h1>
-      <div class="header-decoration"></div>
+      <div class="header-decoration" aria-hidden="true"></div>
     </header>
 
     <!-- Contenu principal -->
-    <section class="content-wrapper">
+    <section class="content-wrapper" aria-labelledby="program-title">
       <div id="programDetails" class="loading-state">
         <div class="loading-spinner"></div>
         <p>Chargement du programme...</p>
@@ -38,8 +38,8 @@
 
       <!-- Actions -->
       <div id="actionSection" class="action-section" style="display: none;">
-        <button id="startButton" class="cta-button">
-          <span class="button-icon">🚀</span>
+        <button id="startButton" class="cta-button"  aria-describedby="startResult">
+          <span class="button-icon" aria-hidden="true">🚀</span>
           <span class="button-text">Commencer ce programme</span>
         </button>
         <div id="startResult" class="result-container"></div>

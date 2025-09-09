@@ -4,43 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mon Dashboard | Praeparo</title>
+    <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- CSS propre et séparé -->
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/dashboard-new.css" />
 </head>
 <body>
     <!-- Navigation mobile -->
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" role="navigation" aria-label="Navigation mobile">
         <div class="mobile-nav-brand">PRAEPARO</div>
         <ul class="mobile-nav-menu">
             <li class="mobile-nav-item">
                 <a href="dashboard.html" class="mobile-nav-link active">
-                    <span class="mobile-nav-icon">📊</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">📊</span>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <a href="stats.html" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">📈</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">📈</span>
                     <span>Stats</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <a href="profile.html" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">👤</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">👤</span>
                     <span>Profil</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <a href="index.html#programs" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">🔍</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">🔍</span>
                     <span>Programmes</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <button id="logout-btn-mobile" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">🚪</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">🚪</span>
                     <span>Déconnexion</span>
                 </button>
             </li>
@@ -48,40 +48,40 @@
     </nav>
 
     <!-- Sidebar desktop -->
-    <aside class="sidebar">
+    <aside class="sidebar" role="complementary" aria-label="Menu principal">
         <a class="logo" href="dashboard.html">
             <h1>PRAEPARO</h1>
         </a>
         
-        <nav>
+        <nav role="navigation" aria-label="Navigation du dashboard">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="dashboard.html" class="nav-link active">
-                        <span class="nav-icon">📊</span>
+                    <a href="dashboard.html" class="nav-link active" aria-current="page">
+                        <span class="nav-icon" aria-hidden="true">📊</span>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="stats.html" class="nav-link">
-                        <span class="nav-icon">📈</span>
+                        <span class="nav-icon" aria-hidden="true">📈</span>
                         <span>Statistiques</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="profile.html" class="nav-link">
-                        <span class="nav-icon">👤</span>
+                        <span class="nav-icon" aria-hidden="true">👤</span>
                         <span>Profil</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="index.html#programs" class="nav-link">
-                        <span class="nav-icon">🔍</span>
+                        <span class="nav-icon" aria-hidden="true">🔍</span>
                         <span>Programmes</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <button id="logout-btn" class="nav-link">
-                        <span class="nav-icon">🚪</span>
+                        <span class="nav-icon" aria-hidden="true">🚪</span>
                         <span>Déconnexion</span>
                     </button>
                 </li>
@@ -90,14 +90,11 @@
     </aside>
 
     <!-- Contenu principal -->
-    <main class="main-content">
-        <!-- Header avec nom utilisateur -->
+    <main class="main-content" id="main-content">
         <header class="dashboard-header">
             <h1 class="welcome-title">Bonjour, <span id="user-name">Utilisateur</span> !</h1>
             <p class="welcome-subtitle">Voici un aperçu de vos progrès d'entraînement</p>
         </header>
-
-        <!-- Stats Cards - HTML STATIQUE -->
         <section class="stats-overview">
             <div class="stats-grid">
                 <div class="stat-card">
@@ -138,7 +135,6 @@
             </div>
         </section>
 
-        <!-- Focus hebdomadaire -->
         <section class="weekly-focus" id="weekly-focus" style="display: none;">
             <div class="focus-title">🎯 Cette semaine</div>
             <div id="focus-content">
@@ -146,18 +142,14 @@
             </div>
         </section>
 
-        <!-- Plans d'entraînement -->
         <section class="plans-section">
             <h2 class="section-title">📋 Mes Plans d'Entraînement</h2>
-            
-            <!-- Onglets (générés par JS si multiple plans) -->
+           
             <div class="tabs-header" id="tabs-header" style="display: none;">
-                <!-- Onglets générés par JavaScript -->
             </div>
             
             <!-- Contenu des plans -->
             <div class="tabs-content">
-                <!-- État de chargement -->
                 <div id="loading-state">
                     <div style="text-align: center; padding: 60px 20px;">
                         <div style="font-size: 3rem; margin-bottom: 20px;">⏳</div>
@@ -182,16 +174,11 @@
                         </a>
                     </div>
                 </div>
-
-                <!-- Contenu des plans (généré par JS) -->
                 <div id="plans-content">
-                    <!-- Plans insérés ici avec JS -->
                 </div>
             </div>
         </section>
     </main>
-
-    <!-- JavaScript-->
     <script src="js/shared/utils.js"></script>
     <script src="js/shared/modales.js"></script>
     <script src="js/dashboard/dashboard-clean.js"></script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mes Statistiques | Praeparo</title>
+    <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/stats.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -13,32 +14,32 @@
         <div class="mobile-nav-brand">PRAEPARO</div>
         <ul class="mobile-nav-menu">
             <li class="mobile-nav-item">
-                <a href="dashboard.html" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">📊</span>
+                <a href="dashboard.html" class="mobile-nav-link" aria-current="page">
+                    <span class="mobile-nav-icon" aria-hidden="true" >📊</span>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <a href="stats.html" class="mobile-nav-link active">
-                    <span class="mobile-nav-icon">📈</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">📈</span>
                     <span>Stats</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <a href="profile.html" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">👤</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">👤</span>
                     <span>Profil</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
                 <a href="index.html#programs" class="mobile-nav-link">
-                    <span class="mobile-nav-icon">🔍</span>
+                    <span class="mobile-nav-icon" aria-hidden="true">🔍</span>
                     <span>Programmes</span>
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <button id="logout-btn-mobile" class="mobile-nav-link" style="background: none; border: none; cursor: pointer;">
-                    <span class="mobile-nav-icon">🚪</span>
+                <button id="logout-btn-mobile" class="mobile-nav-link" type="button">
+                    <span class="mobile-nav-icon" aria-hidden="true">🚪</span>
                     <span>Déconnexion</span>
                 </button>
             </li>
@@ -53,31 +54,31 @@
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="dashboard.html" class="nav-link">
-                        <span class="nav-icon">📊</span>
+                        <span class="nav-icon" aria-hidden="true">📊</span>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="stats.html" class="nav-link active">
-                        <span class="nav-icon">📈</span>
+                        <span class="nav-icon" aria-hidden="true">📈</span>
                         <span>Statistiques</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="profile.html" class="nav-link">
-                        <span class="nav-icon">👤</span>
+                        <span class="nav-icon" aria-hidden="true">👤</span>
                         <span>Profil</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="index.html#programs" class="nav-link">
-                        <span class="nav-icon">🔍</span>
+                        <span class="nav-icon" aria-hidden="true">🔍</span>
                         <span>Programmes</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <button id="logout-btn" class="nav-link">
-                        <span class="nav-icon">🚪</span>
+                    <button id="logout-btn" class="nav-link" type="button">
+                        <span class="nav-icon" aria-hidden="true">🚪</span>
                         <span>Déconnexion</span>
                     </button>
                 </li>
@@ -85,7 +86,7 @@
         </nav>
     </aside>
     <div class="stats-container">
-        <h1 class="stats-title">📈 Mes Statistiques</h1>
+        <h1 id=" stats-title" class="stats-title">📈 Mes Statistiques</h1>
         
         <!-- Cards de statistiques -->
         <div id="stats-content">
@@ -95,13 +96,13 @@
         <!-- Section graphiques -->
         <div class="charts-section" id="charts-section" style="display: none;">
             <div class="chart-container">
-                <h2 class="chart-title">📊 Répartition des Sessions</h2>
-                <canvas id="sessionsChart"></canvas>
+                <h2 id="session-chart-title" class="chart-title" >📊 Répartition des Sessions</h2>
+                <canvas id="sessionsChart" role="img" aria-label="Graphique montrant la répartition des sessions terminées et en cours"></canvas>
             </div>
             
             <div class="chart-container">
-                <h2 class="chart-title">⚡ Niveau d'Énergie Moyen</h2>
-                <canvas id="energyChart"></canvas>
+                <h2 id="energy-chart-title" class="chart-title" >⚡ Niveau d'Énergie Moyen</h2>
+                <canvas id="energyChart" role="img" aria-label="Graphique montrant l’évolution du niveau d’énergie moyen"></canvas>
             </div>
         </div>
     </div>

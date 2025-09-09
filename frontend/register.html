@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inscription | Praeparo</title>
+  <meta name="robots" content="noindex, nofollow">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/auth.css" />
@@ -11,7 +12,7 @@
 </head>
 <body>
   <!-- Navigation normale -->
-  <nav class="top-menu">
+  <nav class="top-menu" role="navigation" aria-label="Navigation principale">
     <div></div>
     <ul class="top-nav-menu">
       <li><a href="index.html" class="top-nav-link">Accueil</a></li>
@@ -21,33 +22,33 @@
   </nav>
 
   <!-- Page d'inscription -->
-  <main class="auth-page">
+  <main class="auth-page"  role="main" id="main-content">
     <div class="auth-container">
-      <h1 class="auth-title">Inscription</h1>
+      <h1 id="auth-title" class="auth-title">Inscription</h1>
       
-      <form id="register-form" class="auth-form">
+      <form id="register-form" class="auth-form" role="form" aria-labelledby="auth-title">
         <div class="form-group">
           <label for="firstname">Prénom :</label>
-          <input type="text" id="firstname" placeholder="Jean" required />
-          <i class="fa-solid fa-person-running"></i>
+          <input type="text" id="firstname" name="firstname" placeholder="Jean" required aria-required="true" autocomplete="given-name" />
+          <i class="fa-solid fa-person-running" aria-hidden="true"></i>
         </div>
         
         <div class="form-group">
           <label for="name">Nom :</label>
-          <input type="text" id="name" placeholder="Dupont" required />
-          <i class="fa-solid fa-person-running"></i>
+          <input type="text" id="name" name="name" placeholder="Dupont" required aria-required="true" autocomplete="family-name"/>
+          <i class="fa-solid fa-person-running" aria-hidden="true"></i>
         </div>
         
         <div class="form-group">
           <label for="email">Adresse email :</label>
-          <input type="email" id="email" placeholder="exemple@gmail.com" required />
-          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="email" name="email" placeholder="exemple@gmail.com" required aria-required="true" autocomplete="email"/>
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
         </div>
         
         <div class="form-group">
           <label for="password">Mot de passe :</label>
-          <input type="password" id="password" placeholder="EJdmz.34" required />
-          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="EJdmz.34" required aria-required="true" autocomplete="new-password"/>
+          <i class="fa-solid fa-lock" aria-hidden="true"></i>
         </div>
         
         <button type="submit" class="auth-submit">Créer un compte</button>
