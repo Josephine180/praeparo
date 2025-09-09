@@ -1,10 +1,3 @@
-/* ================================
-   BASE/MODALS.CSS
-   ================================
-   Système de modales unifié
-   Compatible avec js/shared/modales.js
-   ================================ */
-
 /* === OVERLAY DE MODALE === */
 .modal-overlay {
     position: fixed;
@@ -26,8 +19,8 @@
     background: rgba(20, 20, 20, 0.95);
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
-    width: 90%;
-    max-width: 500px;
+    width: 95%;
+    max-width: 600px;
     max-height: 80vh;
     overflow: hidden;
     animation: slideUp 0.3s ease;
@@ -238,7 +231,7 @@
   /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .modal {
-      width: 95%;
+      width: 98%;
       max-width: 95%;
       max-height: 90vh;
     }
@@ -313,4 +306,3 @@
     outline: 2px solid var(--orange);
     outline-offset: 2px;
   }
-  
