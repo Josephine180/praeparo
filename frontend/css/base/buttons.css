@@ -68,6 +68,7 @@
 .card-button:hover,
 .details-btn:hover {
   background: var(--orange-gradient-hover);
+  color: white;
   transform: translateY(-2px);
   box-shadow: var(--shadow-orange-hover);
 }

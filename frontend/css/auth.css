@@ -152,7 +152,7 @@
   /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .auth-page {
-      padding: 80px 20px 20px; /* Espace normal pour le menu responsive de main.css */
+      padding: 160px 20px 20px; 
     }
     
     .auth-container {
@@ -186,7 +186,7 @@
   
   @media (max-width: 480px) {
     .auth-page {
-      padding: 70px 10px 20px; /* Espace optimisé pour petit écran */
+      padding: 160px 10px 20px; /* Espace optimisé pour petit écran */
     }
     
     .auth-container {
