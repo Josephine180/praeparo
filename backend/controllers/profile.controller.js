@@ -16,7 +16,7 @@ export const createMyProfile = async (req, res) => {
         userId, 
         firstName, 
         lastName, 
-        email: email || '', // Optionnel car pas dans le schéma 
+        email: email || '', 
         weight, 
         height 
       },

@@ -125,7 +125,6 @@ export const deleteUser = async(req, res) => {
   }
 };
 
-// connexion utilisateur 
 const JWT_SECRET = process.env.JWT_SECRET || '123';
 
 export const register = async (req, res) => {
@@ -149,14 +148,12 @@ export const register = async (req, res) => {
       }
     });
 
-    // ✅ AJOUTER CETTE PARTIE : Créer et définir le cookie (comme dans login)
     const token = jwt.sign(
       { userId: newUser.id, role: newUser.role },
       process.env.JWT_SECRET,
       { expiresIn: '4h' }
     );
 
-    // ✅ AJOUTER : Envoyer le token dans un cookie sécurisé
     res.cookie('token', token, {
       httpOnly: true,       // Empêche l'accès JavaScript côté client
       secure: false,        // true en production avec HTTPS
@@ -165,7 +162,6 @@ export const register = async (req, res) => {
       maxAge: 4 * 60 * 60 * 1000, // 4 heures en millisecondes
     });
 
-    // ✅ MODIFIER : Réponse avec les infos utilisateur (comme dans login)
     res.status(201).json({ 
       message: 'Utilisateur créé', 
       userId: newUser.id,

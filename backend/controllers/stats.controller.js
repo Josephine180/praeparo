@@ -3,7 +3,7 @@ import prisma from '../src/index.js';
 export const getUserStats = async (req, res) => {
   const userId = req.user.userId;
   
-  console.log('🔍 getUserStats appelée pour userId:', userId);
+  console.log('getUserStats appelée pour userId:', userId);
 
   try {
     // 1. Plans actifs de l'utilisateur
@@ -11,7 +11,7 @@ export const getUserStats = async (req, res) => {
       where: { user_id: userId }
     });
     
-    console.log('📊 Plans actifs pour userId', userId, ':', activePlans);
+    console.log('Plans actifs pour userId', userId, ':', activePlans);
 
     // 2. Sessions complétées par CET utilisateur (via SessionProgress)
     const completedSessions = await prisma.sessionProgress.count({
@@ -21,7 +21,7 @@ export const getUserStats = async (req, res) => {
       }
     });
     
-    console.log('✅ Sessions complétées pour userId', userId, ':', completedSessions);
+    console.log('Sessions complétées pour userId', userId, ':', completedSessions);
 
     // 3. Sessions totales dans ses plans
     const totalSessions = await prisma.session.count({

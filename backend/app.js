@@ -48,7 +48,7 @@ app.use(cors({
       'http://192.168.1.23:5000',
       'http://localhost:3000',
       'http://127.0.0.1:3000',
-      'https://praeparo-3.onrender.com', // ⭐ Ajout de votre domaine
+      'https://praeparo-3.onrender.com', 
       'http://praeparo-3.onrender.com'
     ];
     
@@ -70,9 +70,9 @@ app.use(cors({
     'X-Requested-With',
     'Accept',
     'Origin'
-  ], // ✅ Ajout des headers manquants
-  exposedHeaders: ['Set-Cookie'], // ✅ Exposer les cookies
-  optionsSuccessStatus: 200 // ✅ Pour les anciens navigateurs
+  ], 
+  exposedHeaders: ['Set-Cookie'], 
+  optionsSuccessStatus: 200 
 }));
 
 app.use(cookieParser());

@@ -125,16 +125,9 @@ export const getTrainingPlanById = async (req, res) => {
 };
 
 export const startTrainingPlan = async (req, res) => {
-  console.log('=== startTrainingPlan APPELÉE ===');
-  console.log('req.body:', JSON.stringify(req.body, null, 2));
-  console.log('req.user:', JSON.stringify(req.user, null, 2));
-  
+
   const userId = req.user?.userId;
   const { training_plan_id } = req.body;
-  
-  console.log('userId extraite:', userId);
-  console.log('training_plan_id reçu:', training_plan_id);
-  console.log('Type de training_plan_id:', typeof training_plan_id);
 
   if (!training_plan_id) {
     console.log('training_plan_id manquant dans req.body');

@@ -11,7 +11,7 @@ router.post('/login', login);
 router.post('/logout', logout);
 
 // Routes CRUD utilisateurs
-router.get('/', getAllUsers);
+router.get('/',authenticate, isAdmin, getAllUsers);
 router.post('/', authenticate, createUser);
 router.get('/:id', authenticate, isAdmin, getUserbyId);
 router.put('/:id', authenticate, isAdmin, modifyUser);

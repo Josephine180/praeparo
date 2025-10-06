@@ -23,8 +23,6 @@ export const getNutritionTipBySessionId = async (req, res) => {
       return res.status(404).json({ error: "Session introuvable." });
     }
 
-    // Selon votre schéma, nutritionTip devrait toujours exister car la relation est obligatoire
-    // Mais on vérifie quand même au cas où
     if (!session.nutritionTip) {
       return res.status(404).json({ 
         error: "Aucun tip nutritionnel associé à cette session.",
