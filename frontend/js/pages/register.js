@@ -9,7 +9,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
   const password = document.getElementById('password').value;
 
   try {
-    console.log('📤 Tentative d\'inscription:', { firstname, name, email });
+    console.log('Tentative d\'inscription:', { firstname, name, email });
     
     const response = await fetch('/users/register', {
       method: 'POST',
@@ -21,7 +21,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     });
 
     const data = await response.json();
-    console.log('📥 Réponse serveur:', data);
+    console.log(' Réponse serveur:', data);
     
     // Debug: Vérifier les headers de la réponse
     console.log('🍪 Headers de la réponse:', response.headers);
@@ -65,12 +65,12 @@ async function debugAuthAndRedirect() {
       credentials: 'include'
     });
     
-    console.log('📥 Statut de la réponse auth:', authResponse.status);
-    console.log('📥 Headers de la réponse auth:', authResponse.headers);
+    console.log('Statut de la réponse auth:', authResponse.status);
+    console.log('Headers de la réponse auth:', authResponse.headers);
     
     if (authResponse.ok) {
       const user = await authResponse.json();
-      console.log('✅ Authentification confirmée:', user);
+      console.log('Authentification confirmée:', user);
       
       // Vider le cache
       if (typeof(Storage) !== "undefined") {
