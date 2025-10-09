@@ -1,338 +1,288 @@
-/* ================================
-   BASE/BUTTONS.CSS
-   ================================
-   Système de boutons unifié
-   Remplace TOUS les styles de boutons
-   ================================ */
-
-/* === BASE BOUTON === */
 .btn,
 .nav-btn,
 .auth-submit,
-.login-btn,
-.register-btn,
-.card-button,
-.details-btn,
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
-  padding: 14px 20px;
-  border: none;
-  border-radius: var(--radius-lg);
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: var(--transition);
-  outline: none;
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  user-select: none;
+.cta-button,
+.toggle-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--space-sm);
+padding: 14px 20px;
+border: none;
+border-radius: var(--radius-lg);
+font-family: inherit;
+font-size: 1rem;
+font-weight: 600;
+text-decoration: none;
+cursor: pointer;
+transition: var(--transition);
+outline: none;
+position: relative;
+overflow: hidden;
+white-space: nowrap;
+user-select: none;
 }
 
 /* États désactivés */
 .btn:disabled,
-.auth-submit:disabled,
-.login-btn:disabled,
-.register-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none !important;
-  box-shadow: none !important;
+.auth-submit:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none !important;
+box-shadow: none !important;
 }
-
-/* === BOUTONS PRIMAIRES (Orange) === */
+/* ========================================
+2. BOUTONS PRIMAIRES (Orange)
+======================================== */
 .btn-primary,
 .btn,
 .nav-btn,
 .auth-submit,
-.login-btn,
-.register-btn,
-.card-button,
-.details-btn {
-  background: var(--orange-gradient);
-  color: var(--text-white);
-  box-shadow: var(--shadow-orange);
+.cta-button {
+background: var(--orange-gradient);
+color: var(--text-white);
+box-shadow: var(--shadow-orange);
 }
-
 .btn-primary:hover:not(:disabled),
 .btn:hover:not(:disabled),
 .nav-btn:hover,
 .auth-submit:hover:not(:disabled),
-.login-btn:hover:not(:disabled),
-.register-btn:hover:not(:disabled),
-.card-button:hover,
-.details-btn:hover {
-  background: var(--orange-gradient-hover);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-orange-hover);
+.cta-button:hover {
+background: var(--orange-gradient-hover);
+color: white !important;
+transform: translateY(-2px);
+box-shadow: var(--shadow-orange-hover);
 }
-
-/* === BOUTONS SECONDAIRES === */
+/* ========================================
+3. BOUTONS SECONDAIRES
+======================================== */
 .btn-secondary {
-  background: var(--bg-glass);
-  color: var(--text-white);
-  border: 1px solid var(--border-medium);
-  box-shadow: none;
+background: var(--bg-glass);
+color: var(--text-white);
+border: 1px solid var(--border-medium);
+box-shadow: none;
 }
-
 .btn-secondary:hover:not(:disabled) {
-  background: var(--bg-glass-hover);
-  border-color: var(--border-orange);
-  transform: translateY(-2px);
+background: var(--bg-glass-hover);
+border-color: var(--border-orange);
+transform: translateY(-2px);
 }
-
-/* === BOUTONS SPÉCIALISÉS === */
-.btn-success,
+/* ========================================
+4. BOUTONS SPÉCIALISÉS (couleurs)
+======================================== */
+/* Bouton Compléter (Vert) */
 .btn-complete {
-  background: linear-gradient(45deg, var(--success), #20c997);
-  color: var(--text-white);
-  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+background: linear-gradient(45deg, var(--success), #20c997);
+color: var(--text-white);
+box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
-
-.btn-success:hover,
 .btn-complete:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
 }
-
-.btn-warning,
+/* Bouton Feedback (Jaune) */
 .btn-feedback {
-  background: linear-gradient(45deg, var(--warning), #fd7e14);
-  color: var(--text-black);
-  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+background: linear-gradient(45deg, var(--warning), #fd7e14);
+color: var(--text-black);
+box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
 }
-
-.btn-warning:hover,
 .btn-feedback:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
 }
-
+/* Boutons Danger/Quitter (Rouge) */
 .btn-danger,
 .btn-quit {
-  background: linear-gradient(45deg, var(--danger), #c82333);
-  color: var(--text-white);
-  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+background: linear-gradient(45deg, var(--danger), #c82333);
+color: var(--text-white);
+box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
 }
-
 .btn-danger:hover,
 .btn-quit:hover {
-  background: linear-gradient(45deg, #c82333, #bd2130);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+background: linear-gradient(45deg, #c82333, #bd2130);
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
 }
-
-.btn-info,
+/* Bouton Nutrition (Bleu) */
 .btn-nutrition {
-  background: linear-gradient(45deg, var(--info), #20c997);
-  color: var(--text-white);
-  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
-  margin: 15px;
+background: linear-gradient(45deg, var(--info), #20c997);
+color: var(--text-white);
+box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+margin: 15px;
 }
-
-.btn-info:hover,
 .btn-nutrition:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(23, 162, 184, 0.4);
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(23, 162, 184, 0.4);
 }
-
+/* Bouton Annuler (Gris) */
 .btn-uncomplete {
-  background: var(--secondary);
-  color: var(--text-white);
-  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+background: var(--secondary);
+color: var(--text-white);
+box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
 }
-
 .btn-uncomplete:hover {
-  background: #6c757d;
-  transform: translateY(-2px);
+background: #6c757d;
+transform: translateY(-2px);
 }
-
-/* === CTA BUTTON SPÉCIAL === */
+/* ========================================
+5. CTA BUTTON (gros bouton d'action)
+======================================== */
 .cta-button {
-  padding: 15px 40px;
-  font-size: 1.1rem;
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-  position: relative;
-  overflow: hidden;
+padding: 15px 40px;
+font-size: 1.1rem;
+border-radius: var(--radius-full);
+text-transform: uppercase;
+letter-spacing: 1px;
+box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
 }
-
+/* Effet de brillance au hover */
 .cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.6s ease;
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.6s ease;
 }
-
 .cta-button:hover::before {
-  left: 100%;
+left: 100%;
 }
-
 .cta-button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+transform: translateY(-3px) scale(1.05);
+box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
 }
-
-/* === TAILLES === */
-.btn-sm {
-  padding: 8px 16px;
-  font-size: 0.875rem;
-}
-
-.btn-lg {
-  padding: 18px 32px;
-  font-size: 1.125rem;
-}
-
-/* === BOUTONS TOGGLE === */
+/* ========================================
+6. TOGGLE BUTTON (boutons programmes)
+======================================== */
 .toggle-btn {
-  background: var(--bg-glass);
-  border: 2px solid var(--border-orange);
-  color: var(--text-white);
-  padding: 16px 32px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition);
-  margin: 0 10px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  position: relative;
-  overflow: hidden;
+background: var(--bg-glass);
+border: 2px solid var(--border-orange);
+color: var(--text-white);
+padding: 16px 32px;
+border-radius: var(--radius-full);
+cursor: pointer;
+transition: var(--transition);
+margin: 0 10px;
+font-weight: 600;
+font-size: 1.1rem;
 }
-
+/* Effet de remplissage au clic */
 .toggle-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--primary-gradient);
-  transition: left 0.3s ease;
-  z-index: -1;
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: var(--primary-gradient);
+transition: left 0.3s ease;
+z-index: -1;
 }
-
 .toggle-btn.active::before {
-  left: 0;
+left: 0;
 }
-
 .toggle-btn.active {
-  color: var(--text-white);
-  border-color: var(--orange);
-  box-shadow: var(--shadow-orange);
-  transform: translateY(-2px);
+color: var(--text-white);
+border-color: var(--orange);
+box-shadow: var(--shadow-orange);
+transform: translateY(-2px);
 }
-
 .toggle-btn:hover:not(.active) {
-  background: rgba(255, 165, 0, 0.15);
-  border-color: rgba(255, 165, 0, 0.5);
-  transform: translateY(-2px);
+background: rgba(255, 165, 0, 0.15);
+border-color: rgba(255, 165, 0, 0.5);
+transform: translateY(-2px);
 }
-
-/* === ÉTATS DE LOADING === */
+/* ========================================
+7. TAILLES
+======================================== */
+.btn-sm {
+padding: 8px 16px;
+font-size: 0.875rem;
+}
+.btn-lg {
+padding: 18px 32px;
+font-size: 1.125rem;
+}
+/* ========================================
+8. ÉTATS DE LOADING
+======================================== */
 .btn.loading,
-.auth-submit.loading,
-.login-btn.loading,
-.register-btn.loading {
-  color: transparent;
-  pointer-events: none;
+.auth-submit.loading {
+color: transparent;
+pointer-events: none;
 }
-
 .btn.loading::after,
-.auth-submit.loading::after,
-.login-btn.loading::after,
-.register-btn.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid transparent;
-  border-top: 2px solid currentColor;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.auth-submit.loading::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 20px;
+height: 20px;
+border: 2px solid transparent;
+border-top: 2px solid currentColor;
+border-radius: 50%;
+animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+0% { transform: translate(-50%, -50%) rotate(0deg); }
+100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
-
-/* === GROUPES DE BOUTONS === */
+/* ========================================
+9. GROUPES DE BOUTONS
+======================================== */
 .btn-group {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
+display: flex;
+gap: var(--space-sm);
+flex-wrap: wrap;
 }
-
 .btn-group .btn {
-  flex: 1;
-  min-width: 0;
+flex: 1;
+min-width: 0;
 }
-
-/* === RESPONSIVE === */
+/* ========================================
+10. RESPONSIVE
+======================================== */
 @media (max-width: 768px) {
-  .btn,
-  .nav-btn,
-  .auth-submit,
-  .login-btn,
-  .register-btn {
-    padding: 12px 16px;
-    font-size: 0.95rem;
-  }
-  
-  .btn-lg {
-    padding: 16px 24px;
-    font-size: 1rem;
-  }
-  
-  .cta-button {
-    padding: 12px 30px;
-    font-size: 1rem;
-  }
-  
-  .toggle-btn {
-    padding: 14px 24px;
-    font-size: 1rem;
-    margin: 5px;
-  }
-  
-  .btn-group {
-    flex-direction: column;
-  }
+.btn,
+.nav-btn,
+.auth-submit {
+padding: 12px 16px;
+font-size: 0.95rem;
 }
-
+.btn-lg {
+padding: 16px 24px;
+font-size: 1rem;
+}
+.cta-button {
+padding: 12px 30px;
+font-size: 1rem;
+}
+.toggle-btn {
+padding: 14px 24px;
+font-size: 1rem;
+margin: 5px;
+}
+.btn-group {
+flex-direction: column;
+}
+}
 @media (max-width: 480px) {
-  .btn,
-  .nav-btn,
-  .auth-submit,
-  .login-btn,
-  .register-btn {
-    padding: 10px 14px;
-    font-size: 0.9rem;
-  }
-  
-  .cta-button {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-  }
-  
-  .toggle-btn {
-    padding: 12px 20px;
-    font-size: 0.9rem;
-  }
+.btn,
+.nav-btn,
+.auth-submit {
+padding: 10px 14px;
+font-size: 0.9rem;
+}
+.cta-button {
+padding: 10px 25px;
+font-size: 0.9rem;
+}
+.toggle-btn {
+padding: 12px 20px;
+font-size: 0.9rem;
+}
 }
