@@ -1,8 +1,4 @@
-// js/dashboard/dashboard-clean.js - JavaScript propre et séparé
-
-// ==========================================
 // 1. GESTION DES DONNÉES (pas d'HTML ici)
-// ==========================================
 
 async function loadUserInfo() {
   try {
@@ -42,9 +38,8 @@ async function loadQuickStats() {
   }
 }
 
-// ==========================================
-// 2. MISE À JOUR DES VALEURS (pas d'HTML)
-// ==========================================
+
+// 2. MISE À JOUR DES VALEURS
 
 function updateStatsValues(stats) {
   // Juste changer le contenu des éléments existants
@@ -59,9 +54,8 @@ function updateStatsValues(stats) {
   if (energyElement) energyElement.textContent = stats.avgEnergy || '0';
 }
 
-// ==========================================
-// 3. GESTION DES PLANS (HTML minimal)
-// ==========================================
+
+// 3. GESTION DES PLANS 
 
 async function loadUserPlans() {
   const loadingState = document.getElementById('loading-state');
@@ -105,9 +99,8 @@ async function loadUserPlans() {
   }
 }
 
-// ==========================================
-// 4. AFFICHAGE DES PLANS (HTML propre)
-// ==========================================
+
+// 4. AFFICHAGE DES PLANS
 
 function displayPlans(plans) {
   const plansContent = document.getElementById('plans-content');
@@ -293,9 +286,8 @@ function generateSessionsHTML(sessions) {
   return html;
 }
 
-// ==========================================
+
 // 5. INTERACTIONS (événements simples)
-// ==========================================
 
 function setupPlanInteractions() {
   // Boutons compléter/annuler session
@@ -319,9 +311,8 @@ function setupPlanInteractions() {
   });
 }
 
-// ==========================================
+
 // 6. GESTIONNAIRES D'ÉVÉNEMENTS
-// ==========================================
 
 async function handleSessionComplete(e) {
   const btn = e.target;
@@ -393,9 +384,7 @@ function toggleWeek(weekId) {
   }
 }
 
-// ==========================================
 // 7. FONCTIONS UTILITAIRES
-// ==========================================
 
 function showError(message) {
   const plansContent = document.getElementById('plans-content');
@@ -432,9 +421,6 @@ function hideWeeklyFocus() {
   if (weeklyFocus) weeklyFocus.style.display = 'none';
 }
 
-// ==========================================
-// 8. DÉCONNEXION
-// ==========================================
 
 async function logout() {
   try {
@@ -451,10 +437,6 @@ async function logout() {
     window.location.href = 'index.html';
   }
 }
-
-// ==========================================
-// 9. INITIALISATION PROPRE
-// ==========================================
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {

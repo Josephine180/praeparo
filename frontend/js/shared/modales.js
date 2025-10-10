@@ -258,6 +258,10 @@ async function submitFeedbackModal(sessionId) {
     
     // Afficher un message de succès
     showSuccessMessage('Feedback enregistré avec succès !');
+
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
     
     // Recharger les feedbacks pour cette session
     if (typeof loadFeedbacks === 'function') {
