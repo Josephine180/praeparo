@@ -311,6 +311,53 @@ function setupPlanInteractions() {
   });
 }
 
+// Charger les feedbacks existants
+async function loadExistingFeedbacks() {
+  const sessions = document.querySelectorAll('.session-item.completed');
+  
+  for (const session of sessions) {
+    const btn = session.querySelector('.btn-feedback');
+    if (!btn) continue;
+    
+    const sessionId = btn.getAttribute('data-session-id');
+    if (!sessionId) continue;
+    
+    try {
+      const res = await fetch(`/sessions/${sessionId}/feedback`, {
+        credentials: 'include'
+      });
+      
+      if (!res.ok || res.status === 404) continue;
+      
+      const feedbacks = await res.json();
+      if (!feedbacks || feedbacks.length === 0) continue;
+      
+      const fb = feedbacks[0]; // Premier feedback
+      const container = document.getElementById(`feedback-${sessionId}`);
+      
+      if (container) {
+        container.style.display = 'block';
+        container.innerHTML = `
+          <div class="feedback-title">💬 Mon feedback</div>
+          <div class="feedback-item">
+            <div class="feedback-stats">
+              <span>⚡ Énergie: ${fb.energy_level}/10</span>
+              <span>💪 Motivation: ${fb.motivation_level}/10</span>
+              <span>😴 Fatigue: ${fb.fatigue_level}/10</span>
+            </div>
+            ${fb.comment ? `<p class="feedback-comment">"${fb.comment}"</p>` : ''}
+          </div>
+        `;
+      }
+      
+      // Désactiver le bouton
+      btn.disabled = true;
+      btn.textContent = 'Feedback donné';
+    } catch (error) {
+      console.error('Erreur chargement feedback:', error);
+    }
+  }
+}
 
 // 6. GESTIONNAIRES D'ÉVÉNEMENTS
 
@@ -444,6 +491,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadUserInfo();
     await loadQuickStats();
     await loadUserPlans();
+    await loadExistingFeedbacks();
     
     // Configuration des événements
     const logoutBtn = document.getElementById('logout-btn');
