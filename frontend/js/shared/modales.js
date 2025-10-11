@@ -39,25 +39,6 @@ function createModal(title, content, buttons = []) {
     overlay.remove();
     currentModalElement = null;
   };
-  
-  overlay.onclick = (e) => {
-    if (e.target === overlay) {
-      overlay.remove();
-      currentModalElement = null;
-    }
-  };
-  
-  // Gérer la touche Escape
-  const handleEscape = (e) => {
-    if (e.key === 'Escape' && currentModalElement === overlay) {
-      overlay.remove();
-      currentModalElement = null;
-      document.removeEventListener('keydown', handleEscape);
-    }
-  };
-  
-  document.addEventListener('keydown', handleEscape);
-  
   return overlay;
 }
 
@@ -75,7 +56,7 @@ function handleNutritionTip(e) {
   
   if (tip && tip.trim() !== '') {
     createModal(
-      '🍎 Conseil Nutritionnel',
+      'Conseil Nutritionnel',
       `<p class="tip-text">${tip}</p>`,
       [{ 
         text: 'Compris !', 
