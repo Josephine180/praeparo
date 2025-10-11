@@ -253,20 +253,32 @@ async function submitFeedbackModal(sessionId) {
     
     console.log('Feedback envoyé avec succès:', result);
     
-    // Fermer la modale
-    closeCurrentModal();
     
-    // Afficher un message de succès
-    showSuccessMessage('Feedback enregistré avec succès !');
-
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
-    
-    // Recharger les feedbacks pour cette session
-    if (typeof loadFeedbacks === 'function') {
-      loadFeedbacks(sessionId);
+    const container = document.getElementById(`feedback-${sessionId}`);
+    if (container) {
+      container.style.display = 'block';
+      container.innerHTML = `
+        <div class="feedback-title">💬 Mon feedback</div>
+        <div class="feedback-item">
+          <div class="feedback-stats">
+            <span>⚡ Énergie: ${data.energy_level}/10</span>
+            <span>💪 Motivation: ${data.motivation_level}/10</span>
+            <span>😴 Fatigue: ${data.fatigue_level}/10</span>
+          </div>
+          ${data.comment ? `<p class="feedback-comment">"${data.comment}"</p>` : ''}
+        </div>
+      `;
     }
+    
+    // Désactiver le bouton
+    const btn = document.querySelector(`.btn-feedback[data-session-id="${sessionId}"]`);
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Feedback donné';
+    }
+    
+    closeCurrentModal();
+    showSuccessMessage('Feedback enregistré avec succès !');
     
   } catch (error) {
     console.error('Erreur lors de l\'envoi du feedback:', error);

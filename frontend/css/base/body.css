@@ -313,7 +313,7 @@
   @media (max-width: 1200px) {
     .main-content {
       margin-left: 0;
-      padding-top: var(--mobile-nav-height);
+      padding-top: 120px;
       padding-left: 20px;
       padding-right: 20px;
       min-height: calc(100vh - var(--mobile-nav-height));
@@ -322,7 +322,7 @@
   
   @media (max-width: 768px) {
     .main-content {
-      padding-top: 140px;
+      padding-top: 120px;
       padding-left: 15px;
       padding-right: 15px;
       min-height: calc(100vh - 140px);
