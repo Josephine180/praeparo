@@ -55,10 +55,10 @@ function renderGrid() {
       <div class="emoji-square">${emojiForGoal(program.goal_type)}</div>
       <h3>${program.goal_type}</h3>
       <p><strong>Durée :</strong> ${program.goal_time || 'Non spécifiée'}</p>
-      <button class="details-btn">Voir détails</button>
+      <button class="btn-primary">Voir détails</button>
     `;
 
-    card.querySelector('.details-btn').addEventListener('click', e => {
+    card.querySelector('.btn-primary').addEventListener('click', e => {
       e.preventDefault();
       goToProgramDetail(program.id);
     });
@@ -80,10 +80,10 @@ function renderCarousel() {
       <div class="emoji-square">${emojiForGoal(program.goal_type)}</div>
       <h3>${program.goal_type}</h3>
       <p><strong>Durée :</strong> ${program.goal_time}</p>
-      <button class="details-btn">Voir détails</button>
+      <button class="btn-primary">Voir détails</button>
     `;
 
-    card.querySelector('.details-btn').addEventListener('click', e => {
+    card.querySelector('.btn-primary').addEventListener('click', e => {
       e.preventDefault();
       goToProgramDetail(program.id);
     });

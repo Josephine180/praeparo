@@ -38,7 +38,7 @@ box-shadow: none !important;
 .btn,
 .nav-btn,
 .auth-submit,
-.cta-button .details-btn {
+.cta-button {
 background: var(--orange-gradient);
 color: var(--text-white);
 box-shadow: var(--shadow-orange);
@@ -47,8 +47,7 @@ box-shadow: var(--shadow-orange);
 .btn:hover:not(:disabled),
 .nav-btn:hover,
 .auth-submit:hover:not(:disabled),
-.cta-button:hover 
-.details-btn:hover {
+.cta-button:hover {
 background: var(--orange-gradient-hover);
 color: white !important;
 transform: translateY(-2px);

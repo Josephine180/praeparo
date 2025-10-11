@@ -99,14 +99,14 @@ function setupStartButton(programId) {
 }
 
 function startPlan(programId) {
-  console.log('🚀 Démarrage du plan:', programId);
+  console.log('Démarrage du plan:', programId);
   
   const startButton = document.getElementById('startButton');
   const resultDiv = document.getElementById('startResult');
   
   // Désactiver le bouton
   startButton.disabled = true;
-  startButton.innerHTML = '<span class="button-icon">🔍</span><span class="button-text">Vérification...</span>';
+  startButton.innerHTML = '<span class="button-text">Vérification...</span>';
   resultDiv.innerHTML = '';
 
   // Vérifier l'authentification
@@ -131,7 +131,7 @@ function startPlan(programId) {
     })
     .finally(() => {
       startButton.disabled = false;
-      startButton.innerHTML = '<span class="button-icon">🚀</span><span class="button-text">Commencer ce programme</span>';
+      startButton.innerHTML = '<span class="button-text">Commencer ce programme</span>';
     });
 }
 
