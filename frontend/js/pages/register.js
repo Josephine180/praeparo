@@ -1,5 +1,3 @@
-// js/pages/register.js - Version debug complète
-
 document.getElementById('register-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -27,10 +25,10 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     console.log('🍪 Headers de la réponse:', response.headers);
     
     // Debug: Vérifier les cookies actuels
-    console.log('🍪 Cookies actuels:', document.cookie);
+    console.log('Cookies actuels:', document.cookie);
 
     if (response.ok) {
-      console.log('✅ Inscription réussie');
+      console.log('Inscription réussie');
       
       alert('Inscription réussie ! Vérification de la connexion...');
       
@@ -38,27 +36,27 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
       await debugAuthAndRedirect();
       
     } else {
-      console.error('❌ Erreur inscription:', data);
+      console.error('Erreur inscription:', data);
       alert(data.error || "Erreur lors de l'inscription");
     }
   } catch (err) {
-    console.error('💥 Erreur réseau:', err);
+    console.error('Erreur réseau:', err);
     alert('Erreur réseau ou serveur. Veuillez réessayer.');
   }
 });
 
 
 async function debugAuthAndRedirect() {
-  console.log('🔍 Début de la vérification auth...');
+  console.log('Début de la vérification auth...');
   
   // Attendre 1 seconde pour que le cookie soit bien défini
   await new Promise(resolve => setTimeout(resolve, 1000));
   
   // Vérifier les cookies après le délai
-  console.log('🍪 Cookies après délai:', document.cookie);
+  console.log('Cookies après délai:', document.cookie);
   
   try {
-    console.log('🔍 Test de l\'endpoint /auth/me...');
+    console.log('Test de l\'endpoint /auth/me...');
     
     const authResponse = await fetch('/auth/me', {
       method: 'GET',
@@ -82,7 +80,7 @@ async function debugAuthAndRedirect() {
       window.location.href = 'dashboard.html?t=' + new Date().getTime();
     } else {
       const errorData = await authResponse.text();
-      console.log('❌ Erreur auth:', errorData);
+      console.log('Erreur auth:', errorData);
       
       // Essayer de lire les cookies manuellement
       const cookies = document.cookie.split(';').reduce((acc, cookie) => {
@@ -91,7 +89,7 @@ async function debugAuthAndRedirect() {
         return acc;
       }, {});
       
-      console.log('🍪 Cookies parsés:', cookies);
+      console.log('Cookies parsés:', cookies);
       
       alert(`Problème de connexion détecté. Statut: ${authResponse.status}. Vérifiez la console pour plus de détails.`);
       
@@ -101,7 +99,7 @@ async function debugAuthAndRedirect() {
       }, 2000);
     }
   } catch (error) {
-    console.error('💥 Erreur lors de la vérification auth:', error);
+    console.error('Erreur lors de la vérification auth:', error);
     alert('Erreur lors de la vérification de l\'authentification');
     
     setTimeout(() => {

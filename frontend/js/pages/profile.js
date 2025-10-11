@@ -160,7 +160,7 @@ async function saveAllFields(profileExists) {
     return;
   }
   
-  console.log('📤 Données envoyées:', profileData);
+  console.log('Données envoyées:', profileData);
   
   try {
     let res;

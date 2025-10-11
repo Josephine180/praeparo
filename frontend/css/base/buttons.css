@@ -32,9 +32,7 @@ cursor: not-allowed;
 transform: none !important;
 box-shadow: none !important;
 }
-/* ========================================
-2. BOUTONS PRIMAIRES (Orange)
-======================================== */
+
 .btn-primary,
 .btn,
 .nav-btn,
@@ -54,9 +52,7 @@ color: white !important;
 transform: translateY(-2px);
 box-shadow: var(--shadow-orange-hover);
 }
-/* ========================================
-3. BOUTONS SECONDAIRES
-======================================== */
+/* 3. BOUTONS SECONDAIRES */
 .btn-secondary {
 background: var(--bg-glass);
 color: var(--text-white);
@@ -68,9 +64,8 @@ background: var(--bg-glass-hover);
 border-color: var(--border-orange);
 transform: translateY(-2px);
 }
-/* ========================================
-4. BOUTONS SPÉCIALISÉS (couleurs)
-======================================== */
+/* BOUTONS SPÉCIALISÉS */
+
 /* Bouton Compléter (Vert) */
 .btn-complete {
 background: linear-gradient(45deg, var(--success), #20c997);
@@ -125,9 +120,8 @@ box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
 background: #6c757d;
 transform: translateY(-2px);
 }
-/* ========================================
-5. CTA BUTTON (gros bouton d'action)
-======================================== */
+/* CTA BUTTON  */
+
 .cta-button {
 padding: 15px 40px;
 font-size: 1.1rem;
@@ -154,9 +148,8 @@ left: 100%;
 transform: translateY(-3px) scale(1.05);
 box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
 }
-/* ========================================
-6. TOGGLE BUTTON (boutons programmes)
-======================================== */
+/* TOGGLE BUTTON  */
+
 .toggle-btn {
 background: var(--bg-glass);
 border: 2px solid var(--border-orange);
@@ -195,9 +188,7 @@ background: rgba(255, 165, 0, 0.15);
 border-color: rgba(255, 165, 0, 0.5);
 transform: translateY(-2px);
 }
-/* ========================================
-7. TAILLES
-======================================== */
+/* tailles */
 .btn-sm {
 padding: 8px 16px;
 font-size: 0.875rem;
@@ -206,9 +197,7 @@ font-size: 0.875rem;
 padding: 18px 32px;
 font-size: 1.125rem;
 }
-/* ========================================
-8. ÉTATS DE LOADING
-======================================== */
+/* loading */
 .btn.loading,
 .auth-submit.loading {
 color: transparent;
@@ -232,9 +221,7 @@ animation: spin 1s linear infinite;
 0% { transform: translate(-50%, -50%) rotate(0deg); }
 100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
-/* ========================================
-9. GROUPES DE BOUTONS
-======================================== */
+/* groupe btn */
 .btn-group {
 display: flex;
 gap: var(--space-sm);
@@ -244,9 +231,8 @@ flex-wrap: wrap;
 flex: 1;
 min-width: 0;
 }
-/* ========================================
-10. RESPONSIVE
-======================================== */
+/* Responsive */
+
 @media (max-width: 768px) {
 .btn,
 .nav-btn,
