@@ -13,7 +13,7 @@ export const getNutritionTipBySessionId = async (req, res) => {
     const session = await prisma.session.findUnique({
       where: { id: sessionId },
       include: { 
-        nutritionTip: true,  // Selon votre schéma
+        nutritionTip: true, 
       },
     });
 

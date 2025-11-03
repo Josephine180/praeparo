@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   try {
-    console.log("🚀 Début de l'import des données...");
+    console.log("Début de l'import des données...");
 
     // 1. Vérifier/créer un utilisateur par défaut
     let defaultUser = await prisma.user.findUnique({
@@ -14,7 +14,7 @@ async function main() {
     });
 
     if (!defaultUser) {
-      console.log("👤 Création de l'utilisateur par défaut...");
+      console.log("création de l'utilisateur par défaut...");
       defaultUser = await prisma.user.create({
         data: {
           email: 'admin@praeparo.com',
@@ -24,7 +24,7 @@ async function main() {
           role: "admin"
         }
       });
-      console.log(`✅ Utilisateur créé avec l'ID: ${defaultUser.id}`);
+      console.log(` Utilisateur créé avec l'ID: ${defaultUser.id}`);
     }
 
     // 2. Récupère tous les fichiers JSON
@@ -37,7 +37,7 @@ async function main() {
       
       // Vérifier que le fichier existe
       if (!fs.existsSync(filePath)) {
-        console.warn(`⚠️  Fichier non trouvé: ${filePath}`);
+        console.warn(`Fichier non trouvé: ${filePath}`);
         continue;
       }
 
@@ -53,11 +53,11 @@ async function main() {
       });
 
       if (existingPlan) {
-        console.log(`⏭️  Plan "${plan.type}" existe déjà, ignoré.`);
+        console.log(`Plan "${plan.type}" existe déjà, ignoré.`);
         continue;
       }
 
-      console.log(`🏗️  Création du plan: ${plan.type}`);
+      console.log(` Création du plan: ${plan.type}`);
 
       // 3. Créer le plan d'entraînement
       const trainingPlan = await prisma.trainingPlan.create({
@@ -68,14 +68,14 @@ async function main() {
         }
       });
 
-      console.log(`✅ Plan créé avec l'ID: ${trainingPlan.id}`);
+      console.log(` Plan créé avec l'ID: ${trainingPlan.id}`);
 
       // 4. Compteur global pour session_number
       let globalSessionCounter = 1;
 
       // 5. Traiter chaque semaine
       for (const weekData of plan.weeks) {
-        console.log(`  📅 Création semaine ${weekData.week_number}...`);
+        console.log(`  Création semaine ${weekData.week_number}...`);
         
         const week = await prisma.week.create({
           data: {
@@ -140,37 +140,36 @@ async function main() {
             data: {
               training_plan_id: trainingPlan.id,
               week_id: week.id,
-              session_number: globalSessionCounter, // ⭐ CHAMP REQUIS manquant dans votre version
+              session_number: globalSessionCounter, 
               session_order: sessionData.session_order,
-              date: sessionDate, // ⭐ CHAMP REQUIS manquant dans votre version
+              date: sessionDate, 
               title: sessionData.title,
-              description: sessionData.description, // ⭐ CHAMP REQUIS manquant dans votre version
-              duree: sessionData.duration, // ⭐ Nom correct selon votre schéma
-              completed: false, // ⭐ Valeur par défaut
-              nutrition_tip_id: nutritionTip.id, // ⭐ CHAMP REQUIS manquant dans votre version
-            }
-          });
+              description: sessionData.description, 
+              duree: sessionData.duration,
+              completed: false, 
+              nutrition_tip_id: nutritionTip.id,
+        }});
 
           globalSessionCounter++;
         }
 
-        console.log(`    ✅ Semaine ${weekData.week_number}: ${weekData.sessions.length} sessions créées`);
+        console.log(` Semaine ${weekData.week_number}: ${weekData.sessions.length} sessions créées`);
       }
 
-      console.log(`🎉 Plan "${plan.type}" importé avec succès!`);
+      console.log(`Plan "${plan.type}" importé avec succès!`);
     }
 
     // 10. Afficher les statistiques finales
-    console.log("\n📊 Import terminé! Statistiques finales:");
+    console.log(" Import terminé! Statistiques finales:");
     const stats = await getStats();
-    console.log(`   👥 Utilisateurs: ${stats.users}`);
-    console.log(`   📋 Plans: ${stats.plans}`);
-    console.log(`   📅 Semaines: ${stats.weeks}`);
-    console.log(`   🏃 Sessions: ${stats.sessions}`);
-    console.log(`   🥗 Tips nutritionnels: ${stats.nutritionTips}`);
+    console.log(`  Utilisateurs: ${stats.users}`);
+    console.log(`  Plans: ${stats.plans}`);
+    console.log(` Semaines: ${stats.weeks}`);
+    console.log(` Sessions: ${stats.sessions}`);
+    console.log(` Tips nutritionnels: ${stats.nutritionTips}`);
 
   } catch (error) {
-    console.error("💥 Erreur lors de l'import:", error);
+    console.error("Erreur lors de l'import:", error);
     throw error;
   }
 }
@@ -189,10 +188,10 @@ async function getStats() {
 
 main()
   .catch(e => {
-    console.error("🚨 Erreur fatale:", e);
+    console.error(" Erreur fatale:", e);
     process.exit(1);
   })
   .finally(() => {
-    console.log("🔌 Déconnexion de la base de données");
+    console.log("Déconnexion de la base de données");
     prisma.$disconnect();
   });

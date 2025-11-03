@@ -22,10 +22,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// ⭐ 1. SERVIR LES FICHIERS STATIQUES EN PREMIER
+// fichiers statics
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
-// ⭐ 2. Configuration des types MIME explicites
+// configurations explicites
 app.use((req, res, next) => {
   if (req.path.endsWith('.css')) {
     res.type('text/css');
@@ -37,11 +37,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// 3. Configuration CORS corrigée
+// 3. Configuration CORS 
 app.use(cors({
   origin: (origin, callback) => {
     // Autoriser toutes les origines en développement
-    // En production, vous devriez être plus restrictif
     const allowedOrigins = [
       'http://localhost:5000',
       'http://127.0.0.1:5000',
@@ -52,13 +51,13 @@ app.use(cors({
       'http://praeparo-3.onrender.com'
     ];
     
-    // Autoriser les requêtes sans origine (ex: Postman, applications natives)
+    // 
     if (!origin) return callback(null, true);
     
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      console.log('🚫 CORS: Origin not allowed:', origin);
+      console.log(' CORS: Origin not allowed:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -78,9 +77,9 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  console.log('🍪 Cookies reçus:', req.cookies);
-  console.log('📝 Headers:', req.headers);
-  console.log('🌐 URL:', req.method, req.url);
+  console.log('Cookies reçus:', req.cookies);
+  console.log('Headers:', req.headers);
+  console.log('URL:', req.method, req.url);
   next();
 });
 
@@ -96,7 +95,7 @@ app.use('/sessions', sessionRoutes);
 app.use('/nutrition', nutritionRoutes);
 app.use('/weeks', weekRoutes);
 
-// ⭐ Routes pour servir index.html aux routes spécifiques
+//  Routes pour servir index.html aux routes spécifiques
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
